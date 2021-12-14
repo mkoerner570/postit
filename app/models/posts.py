@@ -6,11 +6,14 @@ class Posts(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    image_url = db.Column(db.String(255))
+    body = db.Column(db.String(255))
     votes = db.Column(db.Integer)
 
+    sub_id = db.Column(db.Integer, db.ForeignKey("subs.id"))
+    subs = db.relationship("Subs",back_populates="posts")
+
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    users = db.relationship("User", back_populates="songs")
+    users = db.relationship("User", back_populates="posts")
     comments = db.relationship('Comments', back_populates='songs',cascade="all, delete")
 
     def to_dict(self):
@@ -41,3 +44,9 @@ class Comments(db.Model):
             'post_id': self.song_id,
             'content': self.content,
         }
+
+class Subs(db.Model):
+    __tablename__ = 'subs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
