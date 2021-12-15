@@ -13,7 +13,7 @@ def get_comments(id):
     return {'allComments':postComments.to_dict()}
 
 # Posts a new comment
-@comment_routes.route('/add',methods=["POST"])
+@comment_routes.route('/comment',methods=["POST"])
 @login_required
 def post_comment():
     form = CommentForm()
@@ -34,7 +34,7 @@ def post_comment():
 
 
 # Delete's a comment made by the user
-@comment_routes.route('/destroy/<int:id>',methods=["DELETE"])
+@comment_routes.route('/delete/<int:id>',methods=["DELETE"])
 @login_required
 def delete_comment(id):
     comment = Comments.query.get(id)

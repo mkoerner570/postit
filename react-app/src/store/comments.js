@@ -51,7 +51,7 @@ export const AddAComment = (form) => async (dispatch) => {
     formData.append('content', form.content)
     formData.append("post_id",form.postId)
 
-    const response = await fetch(`/api/add`, {
+    const response = await fetch(`/api/comment`, {
       method: "POST",
       body: formData,
     });
@@ -63,7 +63,7 @@ export const AddAComment = (form) => async (dispatch) => {
 }
 
 export const GetAllComments = (id) => async (dispatch) => {
-    const response = await fetch(`/api/get/${id}`);
+    const response = await fetch(`/api/posts/${id}`);
 
     if (response.ok) {
       const comments = await response.json();
@@ -72,7 +72,7 @@ export const GetAllComments = (id) => async (dispatch) => {
 };
 
 export const DeleteAComment = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/destroy/${id}`, {
+    const response = await csrfFetch(`/api/delete/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
