@@ -41,8 +41,57 @@ const DeletePost = () => {
     };
 };
 
+export const GetAllPosts = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/posts`);
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(GetPosts(data));
+    }
+};
 
+export const GetOnePost = (id) => async (dispatch) =>{
+    const response = await fetch(`/api/posts/${id}`);
 
+    if (response.ok) {
+      const post = await response.json();
+      dispatch(GetAPost(post));
+    }
+}
+
+export const AddAPost = (form, image) => async (dispatch) => {
+    const formData = new FormData()
+    formData.append("image", image)
+    formData.append('title', form.title)
+    const response = await fetch(`/api/add`, {
+        method: "POST",
+        body: formData
+    });
+    if (response.ok) {
+      const songs = await response.json()
+      dispatch(PostPost(songs))
+    }
+}
+
+export const EditAPost = (input, id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/${id}/edit`, {
+      method: "PUT",
+      body: JSON.stringify(input),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      const { NewPost } = await response.json();
+      dispatch(EditPost(NewPost));
+    }
+};
+
+export const DeleteAPost = (id) => async (dispatch) => {
+    const response = await fetch(`/api/destroy/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(DeletePost());
+    }
+};
 
 const initialState = { posts: [],singlePost:[] };
 const PostReducer = (state = initialState, action) => {

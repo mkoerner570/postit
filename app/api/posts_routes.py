@@ -9,12 +9,12 @@ post_routes = Blueprint('posts', __name__)
 # Get all Posts from the database
 @post_routes.route('/posts')
 def all_posts():
-	posts = Posts.query.all()
+    posts = Posts.query.all()
     return {'post':[posts.to_dict() for post in posts ]}
 
 
 # Get all songs from the database
-@Post_routes.route("/posts/<int:id>")
+@post_routes.route("/posts/<int:id>")
 def single_post(id):
     singlePost = Posts.query.filter(Post.id == id).first()
     return {'singlePost':singlePost.to_dict()}
@@ -42,7 +42,7 @@ def post_post():
 
 
 # Edit post made by the user
-@comment_routes.route('/<int:id>/edit',methods=["PUT"])
+@post_routes.route('/<int:id>/edit',methods=["PUT"])
 @login_required
 def edit_post(id):
     current_post = Posts.query.get(id)
