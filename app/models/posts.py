@@ -21,7 +21,7 @@ class Posts(db.Model):
             'id': self.id,
             'title': self.title,
             'image_url': self.image_url,
-            'user_id': self.user_id.
+            'user_id': self.user_id,
             'votes': self.votes
         }
 

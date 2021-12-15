@@ -6,13 +6,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 comment_routes = Blueprint('comments', __name__)
 
-# Get all songs from the database
+# Get all comments from the database
 @comment_routes.route("/posts/<int:id>")
-def single_songs(id):
-    singlePost = Posts.query.filter(Posts.id == id).first()
-    return {'singlePost':singlePost.to_dict()}
+def get_comments(id):
+    postComments = Posts.query.filter(Comments.post_id == id).all()
+    return {'allComments':postComments.to_dict()}
 
-# Posts a new comment to the song
+# Posts a new comment
 @comment_routes.route('/add',methods=["POST"])
 @login_required
 def post_comment():
