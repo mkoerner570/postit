@@ -1,9 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import session from './session'
+import reducer from './session';
+import session from './session';
+import PostReducer from './posts';
+import CommentReducer from './comments';
 
 const rootReducer = combineReducers({
-  session,
+  session:reducer,
+  posts:PostReducer,
+  comments:CommentReducer,
 });
 
 
