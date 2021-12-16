@@ -34,6 +34,7 @@ class Comments(db.Model):
     users = db.relationship("User", back_populates="comments")
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
     posts = db.relationship('Song', back_populates='comments')
+    votes = db.Column(db.Integer)
 
     content = db.Column(db.String)
 
@@ -50,3 +51,9 @@ class Subs(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'name':self.name,
+        }

@@ -24,21 +24,38 @@ def single_post(id):
 @post_routes.route('/add',methods=["POST"])
 @login_required
 def post_post():
+    s3 = boto3.client('s3')
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    post = request.files["image"]
+
+    post.filename = get_unique_postname(image.filename)
+    s3.upload_fileobj(post, 'soundcloudclone', post.filename,
+                                ExtraArgs={
+                                    'ACL': 'public-read',
+                                    'ContentType': post.content_type
+                                })
+    response = s3.generate_presigned_url('get_object',
+                                                Params={'Bucket': 'soundcloudclone',
+                                                        'Key': post.filename})
+    index = response.index("?")
+    url_image = response[0:index]
+
     user = current_user.id
     if form.validate_on_submit():
         data = form.data
-        new_comment = Posts(
+        new_post = Posts(
             user_id = user,
-            body = data["body"],
+            body = url_image,
             post_id = data["post_id"]
         )
-        db.session.add(new_comment)
+        db.session.add(new_post)
         db.session.commit()
-        return new_comment.to_dict()
+        return new_post.to_dict()
     else:
-        return "Bad Data"
+        return "Unable to Upload"
+
 
 
 # Edit post made by the user

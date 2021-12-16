@@ -112,7 +112,7 @@ const PostReducer = (state = initialState, action) => {
     case POST_A_POST:
       newState={...state}
       const PostList = newState.posts.map(post => newState[post])
-      songList.push(action.posts)
+      PostList.push(action.posts)
       return newState;
     default:
       return state;

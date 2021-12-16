@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector} from "react-redux";
 import { GetAllPosts } from "../store/posts";
 import { useHistory } from "react-router";
 
@@ -7,6 +8,7 @@ function Main(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const posts = useSelector((state) => state.posts.posts);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(GetAllPosts());
@@ -16,7 +18,7 @@ function Main(){
         <div>
             <div>
                 {
-                    data.posts.map(post =>{
+                    posts.map(post =>{
                         return <div className="postContainer">
                             <div className="votes">
                                 <div className="plusOne">
