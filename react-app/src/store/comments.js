@@ -81,7 +81,7 @@ export const DeleteAComment = (id) => async (dispatch) => {
 };
 
 
-const initialState = { comments: [] };
+export const initialState = { comments: [] };
 const CommentReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
