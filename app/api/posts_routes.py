@@ -3,6 +3,9 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.api.aws_images import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+import boto3
 
 post_routes = Blueprint('posts', __name__)
 
