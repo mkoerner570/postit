@@ -1,36 +1,47 @@
-const upVoteHandler = (post_id) => {
+import { PlusVoteComment,MinusVoteComment,PlusVoteOneComment,MinusVoteOneComment } from "../store/votecomment"
+import { PlusVotePost,MinusVotePost,PlusVoteOnePost,MinusVoteOnePost } from "../store/votepost"
+import { useDispatch } from "react-redux";
+
+const dispatch = useDispatch()
+
+const PlusPostHandler = (post_id) => {
     if (checkLoggedIn()) {
         props.upVoteSinglePost(post_id)
         props.upVotePost(post_id)
-        axios.put(`/api/post/upvote/${post_id}`)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
-    }
+        dispatch(PlusVoteOnePost(post_id))}
     else
         history.push(`/login`)
 
 }
 
-const downVoteHandler = (post_id, post_likes) => {
+const MinusPostHandler = (post_id, post_likes) => {
     if (checkLoggedIn()) {
         if (post_likes <= 0)
             return
         props.downVoteSinglePost(post_id)
-        axios.put(`/api/post/downvote/${post_id}`)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        dispatch(MinusVoteOnePost(post_id))
     }
     else
         history.push(`/login`)
 }
 
-const deletePostHandler = (post_id) => {
-    axiosWithAuth().delete(`/api/post/${post_id}`)
-        .then(res => {
-            props.deletePost(post_id)
-            history.push('/')
-        })
-        .catch(err => {
-            console.log(err)
-        })
+const PlusCommentHandler = (post_id) => {
+    if (checkLoggedIn()) {
+        props.upVoteSinglePost(post_id)
+        props.upVotePost(post_id)
+        dispatch(PlusVoteComment(post_id))}
+    else
+        history.push(`/login`)
+
+}
+
+const MinusCommentHandler = (post_id, post_likes) => {
+    if (checkLoggedIn()) {
+        if (post_likes <= 0)
+            return
+        props.downVoteSinglePost(post_id)
+        dispatch(MinusVoteComment(post_id))
+    }
+    else
+        history.push(`/login`)
 }
