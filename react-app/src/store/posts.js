@@ -9,6 +9,7 @@ const PLUS_VOTE_POST = 'session/PlusVotePost'
 const MINUS_VOTE_POST = 'session/MinusVotePost'
 const PLUS_VOTE_ONE_POST = 'session/PlusVoteOnePost'
 const MINUS_VOTE_POST = 'session/MinusVoteOnePost'
+const SEARCH_POSTS = 'session/SearchPosts'
 
 const GetPosts = (data) => {
     return {
@@ -125,6 +126,12 @@ export const MinusVoteOnePost = (id) => {
   }
 }
 
+export const searchPosts = (string) => {
+  return {
+      type: SEARCH_POSTS,
+      payload: string
+  }
+}
 
 export const initialState = { posts: [],singlePost:{} };
 const PostReducer = (state = initialState, action) => {
@@ -172,6 +179,13 @@ const PostReducer = (state = initialState, action) => {
     case MINUS_VOTE_ONE_POST:
         return {
             ...state, post: { ...state.post, votes: --state.post.votes }
+        }
+    case SEARCH_POSTS:
+        return {
+          ...state, posts: state.posts.filter(post => {
+              if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
+                  return post
+          })
         }
     default:
       return state;

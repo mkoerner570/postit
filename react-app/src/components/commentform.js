@@ -45,10 +45,10 @@ function CommentForm({post_id}) {
                             return <div className="comments">
                                 <div>
                                     <div className="plusOne">
-                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-up"onClick={() => {PlusCommentHandler(postId)}}></i>
                                     </div>
                                     <div className="minusOne">
-                                        <i class="fa fa-angle-down"></i>
+                                        <i class="fa fa-angle-down"onClick={() => {MinusCommentHandler(postId)}}></i>
                                     </div>
                                 </div>
 
