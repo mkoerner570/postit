@@ -5,6 +5,10 @@ const GET_A_POST = 'session/GetAPost'
 const POST_A_POST = 'session/PostPost'
 const EDIT_POST = 'session/EditPost'
 const DELETE_POST = 'session/DeletePost'
+const PLUS_VOTE_POST = 'session/PlusVotePost'
+const MINUS_VOTE_POST = 'session/MinusVotePost'
+const PLUS_VOTE_ONE_POST = 'session/PlusVoteOnePost'
+const MINUS_VOTE_POST = 'session/MinusVoteOnePost'
 
 const GetPosts = (data) => {
     return {
@@ -93,6 +97,35 @@ export const DeleteAPost = (id) => async (dispatch) => {
     }
 };
 
+export const PlusVotePost = (id) => {
+  return {
+      type: PLUS_VOTE_POST,
+      payload: id
+  }
+}
+
+export const MinusVotePost = (id) => {
+  return {
+      type: MINUS_VOTE_POST,
+      payload: id
+  }
+}
+
+export const PlusVoteOnePost = (id) => {
+  return {
+      type: PLUS_VOTE_ONE_POST,
+      payload: id
+  }
+}
+
+export const MinusVoteOnePost = (id) => {
+  return {
+      type: MINUS_VOTE_ONE_POST,
+      payload: id
+  }
+}
+
+
 export const initialState = { posts: [],singlePost:{} };
 const PostReducer = (state = initialState, action) => {
   let newState;
@@ -114,6 +147,32 @@ const PostReducer = (state = initialState, action) => {
       const PostList = newState.posts.map(post => newState[post])
       PostList.push(action.posts)
       return newState;
+      case PLUS_VOTE_POST:
+        return {
+            ...state,
+            posts: state.posts.map(post => {
+                if (action.payload === post.id)
+                    return { ...post, votes: ++post.votes }
+                else return { ...post }
+            })
+        }
+    case MINUS_VOTE_POST:
+        return {
+            ...state,
+            posts: state.posts.map(post => {
+                if (action.payload === post.id)
+                    return { ...post, votes: --post.votes }
+                else return { ...post }
+            })
+        }
+    case PLUS_VOTE_ONE_POST:
+        return {
+            ...state, post: { ...state.post, votes: ++state.post.votes }
+        }
+    case MINUS_VOTE_ONE_POST:
+        return {
+            ...state, post: { ...state.post, votes: --state.post.votes }
+        }
     default:
       return state;
   }

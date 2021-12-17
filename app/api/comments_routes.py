@@ -24,7 +24,8 @@ def post_comment():
         new_comment = Comments(
             user_id = user,
             body = data["body"],
-            post_id = data["post_id"]
+            post_id = data["post_id"],
+            votes = 0
         )
         db.session.add(new_comment)
         db.session.commit()

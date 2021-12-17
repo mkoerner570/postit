@@ -51,7 +51,8 @@ def post_post():
         new_post = Posts(
             user_id = user,
             body = url_image,
-            post_id = data["post_id"]
+            post_id = data["post_id"],
+            votes = 0
         )
         db.session.add(new_post)
         db.session.commit()

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { AddAComment, GetAllComments } from "../store/Comments";
-import { EditDelete2 } from "./edit-delete";
+import {PlusCommentHandler, MinusCommentHandler} from "../utils/utilities"
 
 
 function CommentForm({post_id}) {
