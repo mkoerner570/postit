@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { GetAllPosts } from "../store/posts";
 import { useHistory } from "react-router";
+import Search from "./search";
 
 
 function Main(){
@@ -49,7 +50,11 @@ function Main(){
                     })
                 }
             </div>
+            <div className="topBar">
+                <Search />
+            </div>
         </div>
+
     )
 }
 
