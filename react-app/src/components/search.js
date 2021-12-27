@@ -7,17 +7,16 @@ function Search(){
     const [searchTitle,setSearchTitle] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
-    
+
     const searchHandler = (e) => {
         setSearchTitle(e.target.value)
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
 
-        const search = dispatch(searchPosts(searchTitle))
+        const search = await dispatch(searchPosts(searchTitle))
         history.push(`/post/${search.post_id}`)
-
     }
 
     return (
@@ -26,9 +25,9 @@ function Search(){
                 <input
                     type="text"
                     name="searchString"
-                    value={searchString}
+                    value={searchTitle}
                     placeholder="Search Posts"
-                    onChange={changeHandler}
+                    onChange={searchHandler}
                 />
                 <button onClick={submitHandler} className="search-button">
                     <i class="fa fa-search"></i>

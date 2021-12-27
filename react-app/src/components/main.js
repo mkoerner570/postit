@@ -8,8 +8,10 @@ import Search from "./search";
 function Main(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
-    const posts = useSelector((state) => state.posts.posts);
+    const posts = useSelector((state) => Object.values(state.posts));
     const dispatch = useDispatch()
+
+    console.log("+++++++++", posts)
 
     useEffect(() => {
         dispatch(GetAllPosts());
@@ -19,7 +21,7 @@ function Main(){
         <div>
             <div>
                 {
-                    posts.map(post =>{
+                    posts?.map(post =>{
                         return <div className="postContainer">
                             <div className="votes">
                                 <div className="plusOne">

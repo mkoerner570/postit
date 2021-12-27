@@ -7,7 +7,9 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import Main from './components/main'
+import Main from './components/main';
+import Post from './components/post';
+import Postform from './components/postform'
 import { authenticate } from './store/session';
 
 function App() {
@@ -42,9 +44,15 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <Route path='/' exact={true} >
           <Main />
-        </ProtectedRoute>
+        </Route>
+        <Route path='/post/:id' exact={true}>
+          <Post />
+        </Route>
+        <Route path='/postform' exact={true}>
+          <Postform />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

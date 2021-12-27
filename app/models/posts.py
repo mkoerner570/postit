@@ -10,17 +10,17 @@ class Posts(db.Model):
     votes = db.Column(db.Integer)
 
     sub_id = db.Column(db.Integer, db.ForeignKey("subs.id"))
-    subs = db.relationship("Subs",back_populates="posts")
+    # subs = db.relationship("Subs",back_populates="posts")
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     users = db.relationship("User", back_populates="posts")
-    comments = db.relationship('Comments', back_populates='songs',cascade="all, delete")
+    comments = db.relationship('Comments', back_populates='posts',cascade="all, delete")
 
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
-            'image_url': self.image_url,
+            'body': self.body,
             'user_id': self.user_id,
             'votes': self.votes
         }
@@ -33,7 +33,7 @@ class Comments(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     users = db.relationship("User", back_populates="comments")
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
-    posts = db.relationship('Song', back_populates='comments')
+    posts = db.relationship('Posts', back_populates='comments')
     votes = db.Column(db.Integer)
 
     content = db.Column(db.String)
@@ -51,6 +51,8 @@ class Subs(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+
+    # posts = db.relationship('Posts', back_populates='subs')
 
     def to_dict(self):
         return {

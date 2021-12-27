@@ -4,7 +4,7 @@ const POST_COMMENT = "session/PostComments"
 const PUT_COMMENT = "session/PutComments";
 const GET_COMMENTS = "session/GetComments";
 const DELETE_COMMENT = "session/DeleteComments";
-const PlUS_COMMENT = 'session/PlusVoteComment'
+const PLUS_COMMENT = 'session/PlusVoteComment'
 const MINUS_COMMENT = 'session/MinusVoteComment'
 
 const GetComments = (comments) => {

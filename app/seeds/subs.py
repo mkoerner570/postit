@@ -1,4 +1,4 @@
-from app.models import db, Subs
+from app.models.posts import db, Subs
 
 def seed_subs():
     sub1 = Subs(

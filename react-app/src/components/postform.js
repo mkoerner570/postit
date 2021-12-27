@@ -42,7 +42,7 @@ function PostForm({}){
                 /><br></br>
                 <label className='upload-labs'> Select file you wish to Upload<br></br></label>
                 <input type="file" name="image" onChange={changeHandler} />
-			    {isFilePicked ? (
+			    {isPostPicked ? (
 				    <p>Image selected</p>
 			    ) : (
 				    <p></p>
@@ -54,3 +54,4 @@ function PostForm({}){
         </div>
     )
 }
+export default PostForm

@@ -8,7 +8,7 @@ const DELETE_POST = 'session/DeletePost'
 const PLUS_VOTE_POST = 'session/PlusVotePost'
 const MINUS_VOTE_POST = 'session/MinusVotePost'
 const PLUS_VOTE_ONE_POST = 'session/PlusVoteOnePost'
-const MINUS_VOTE_POST = 'session/MinusVoteOnePost'
+const MINUS_VOTE_ONE_POST = 'session/MinusVoteOnePost'
 const SEARCH_POSTS = 'session/SearchPosts'
 
 const GetPosts = (data) => {
@@ -50,6 +50,7 @@ export const GetAllPosts = () => async (dispatch) => {
     const response = await csrfFetch(`/api/posts`);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       dispatch(GetPosts(data));
     }
 };
@@ -72,8 +73,8 @@ export const AddAPost = (form, image) => async (dispatch) => {
         body: formData
     });
     if (response.ok) {
-      const songs = await response.json()
-      dispatch(PostPost(songs))
+      const post = await response.json()
+      dispatch(PostPost(post))
     }
 }
 
@@ -139,9 +140,14 @@ const PostReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS:
       newState = Object.assign({}, state);
-      newState.posts = action.payload.posts;
+      console.log("things....", action.payload.post)
+      // newState.posts = action.payload.post;
+      // return newState;
+      Object.values(action.payload.post).forEach(obj => {
+        newState[obj.id] = obj;
+      })
       return newState;
-      case GET_A_POST:
+    case GET_A_POST:
       newState = Object.assign({}, state);
       newState.singlePost = action.payload.singlePost;
       return newState;

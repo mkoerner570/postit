@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { AddAComment, GetAllComments } from "../store/Comments";
+import { AddAComment, GetAllComments } from "../store/comments"
 import {PlusCommentHandler, MinusCommentHandler} from "../utils/utilities"
 
 
 function CommentForm({post_id}) {
     const dispatch = useDispatch()
+    const postId = useParams()
     const [content, setContent] = useState("")
     const history = useHistory()
-    const [postId,setPostId] = useState(post_id)
+    // const [postId,setPostId] = useState(post_id)
+    const comments = useSelector((state) => state.comments.comments);
 
     useEffect(()=>{
         dispatch(GetAllComments(postId))
@@ -21,7 +24,7 @@ function CommentForm({post_id}) {
         let payload = {content, postId}
         dispatch(AddAComment(payload))
 
-        history.push(`/post/${post_Id}`)
+        history.push(`/post/${postId}`)
     }
 
     return (
@@ -41,7 +44,7 @@ function CommentForm({post_id}) {
 
         <div>
         {
-                        props.comments.map(comment => {
+                        comments.map(comment => {
                             return <div className="comments">
                                 <div>
                                     <div className="plusOne">
