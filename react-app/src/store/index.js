@@ -4,11 +4,14 @@ import reducer from './session';
 import session from './session';
 import PostReducer from './posts';
 import CommentReducer from './comments';
+import subReducer from './subs';
+
 
 const rootReducer = combineReducers({
   session:reducer,
   posts:PostReducer,
   comments:CommentReducer,
+  subs:subReducer,
 });
 
 

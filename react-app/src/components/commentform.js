@@ -14,6 +14,7 @@ function CommentForm({post_id}) {
     const history = useHistory()
     // const [postId,setPostId] = useState(post_id)
     const comments = useSelector((state) => state.comments.comments);
+    let id = postId.id
 
     useEffect(()=>{
         dispatch(GetAllComments(postId))
@@ -21,10 +22,10 @@ function CommentForm({post_id}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let payload = {content, postId}
-        dispatch(AddAComment(payload))
+        let payload = {content}
+        dispatch(AddAComment(payload,id))
 
-        history.push(`/post/${postId}`)
+        history.push(`/post/${id}`)
     }
 
     return (
@@ -56,7 +57,7 @@ function CommentForm({post_id}) {
                                 </div>
 
                                 <div>
-                                    <div>{comment.body}</div>
+                                    <div>{comment.content}</div>
                                     <div className="comment-info">Votes{comment.votes}</div>
                                     <div className="comment-info">By: {comment.username}</div>
                                 </div>

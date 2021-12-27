@@ -50,7 +50,6 @@ export const GetAllPosts = () => async (dispatch) => {
     const response = await csrfFetch(`/api/posts`);
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       dispatch(GetPosts(data));
     }
 };
@@ -64,10 +63,13 @@ export const GetOnePost = (id) => async (dispatch) =>{
     }
 }
 
-export const AddAPost = (form, image) => async (dispatch) => {
+export const AddAPost = (form, body) => async (dispatch) => {
     const formData = new FormData()
-    formData.append("image", image)
+    console.log("this is the form.....", form)
+    console.log("this is the body", body)
+    formData.append("body", body)
     formData.append('title', form.title)
+    formData.append('sub_id', form.sub_id)
     const response = await fetch(`/api/add`, {
         method: "POST",
         body: formData
@@ -140,7 +142,6 @@ const PostReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS:
       newState = Object.assign({}, state);
-      console.log("things....", action.payload.post)
       // newState.posts = action.payload.post;
       // return newState;
       Object.values(action.payload.post).forEach(obj => {

@@ -8,15 +8,17 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function GetPost(){
-    const postId = useParams()
+    const Id = useParams()
     // const [postId,setPostId] = useState(post_id);
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.posts.posts);
 
+    console.log("this is the id", Id.id)
+
     useEffect(()=>{
-        dispatch(GetOnePost(postId))
+        dispatch(GetOnePost(Id.id))
     },[dispatch])
 
 
@@ -27,10 +29,10 @@ function GetPost(){
             <div className="details">
                 <div className="Post-V">
                     <div className="votes">
-                        <div className="plusOne" onClick={() => {PlusPostHandler(postId)}}>
+                        <div className="plusOne" onClick={() => {PlusPostHandler(Id)}}>
                             <i class="fa fa-angle-up"></i>
                         </div>
-                        <div className="minusOne" onClick={() => {MinusPostHandler(postId)}}>
+                        <div className="minusOne" onClick={() => {MinusPostHandler(Id)}}>
                             <i class="fa fa-angle-down"></i>
                         </div>
                     </div>

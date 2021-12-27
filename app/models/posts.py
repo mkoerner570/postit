@@ -22,7 +22,8 @@ class Posts(db.Model):
             'title': self.title,
             'body': self.body,
             'user_id': self.user_id,
-            'votes': self.votes
+            'votes': self.votes,
+            'sub_id': self.sub_id
         }
 
 
@@ -42,7 +43,7 @@ class Comments(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'post_id': self.song_id,
+            'post_id': self.post_id,
             'content': self.content,
         }
 

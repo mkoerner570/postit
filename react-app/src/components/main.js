@@ -1,42 +1,55 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { GetAllPosts } from "../store/posts";
+import {GetAllSubs} from "../store/subs"
 import { useHistory } from "react-router";
 import Search from "./search";
+import {NavLink} from "react-router-dom"
 
 
 function Main(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const posts = useSelector((state) => Object.values(state.posts));
+    const users = useSelector((state) => state)
+    const subs = useSelector((state) => state.subs);
     const dispatch = useDispatch()
-
-    console.log("+++++++++", posts)
 
     useEffect(() => {
         dispatch(GetAllPosts());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(GetAllSubs());
+    }, [dispatch]);
+
 
     return(
         <div>
             <div>
                 {
                     posts?.map(post =>{
+                        {console.log(post.id)}
                         return <div className="postContainer">
                             <div className="votes">
                                 <div className="plusOne">
-                                    <i class="fa fa-angle-up"></i>
+                                    <i class="fa fa-angle-up">up</i>
                                 </div>
                                 <div className="minusOne">
-                                    <i class="fa fa-angle-down"></i>
+                                    <i class="fa fa-angle-down">down</i>
                                 </div>
                             </div>
 
                             <div>
-                                <div>{post.title}</div>
+                                <NavLink to={`/post/${post.id}`}>{post.title}</NavLink>
+                                <div>
+                                    <image src={post.body}></image>
+                                </div>
                                 <div className="info">
                                     Posted By:
-                                <span>{post.username}</span> on sub: <span >/r/{post.sub_id}</span>
+                                <span >/r/{
+                                post.sub_id
+                                }</span>
                                 </div>
                                 <div className="info">{post.votes}
                                     {localStorage.user_id == post.user_id ?

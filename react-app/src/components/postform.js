@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { AddAPost } from "../store/posts";
+import {GetAllSubs} from "../store/subs"
 
 
 function PostForm({}){
@@ -10,6 +11,8 @@ function PostForm({}){
     const [title,setTitle] = useState("");
     const [post, setPost] = useState();
     const [isPostPicked, setIsPostPicked] = useState(false);
+    const [selectedSub, setSelectedSub] = useState(0)
+    const subs = useSelector((state) => state.subs);
     const history = useHistory()
 
     const changeHandler = (event) => {
@@ -19,10 +22,16 @@ function PostForm({}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let payload = { title }
+        let payload = { title, selectedSub }
         dispatch(AddAPost(payload, post))
         history.push(`/`)
     }
+
+    useEffect(() => {
+        dispatch(GetAllSubs());
+    }, [dispatch]);
+
+
 
     return(
         <div className='upload'>
@@ -47,6 +56,24 @@ function PostForm({}){
 			    ) : (
 				    <p></p>
 			    )}
+                <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}>
+                    {Object.keys(subs).map(function(keyname,keyindex) {
+                        return(
+                            <option value={keyindex}>
+                                {subs[keyindex]}
+                            </option>
+                        )
+                    })}
+                </select>
+                {/* <select value={selectedSub} onChange={setSelectedSub()}>
+                    {Object.keys(subs).map(function(keyname,keyindex) {
+                        return(
+                            <option value={keyindex}>
+                                {keyname}
+                            </option>
+                        )
+                    })}
+                </select> */}
             </label>
             <button id="submit" type="submit" >Submit</button>
             </div>

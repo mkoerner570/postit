@@ -58,13 +58,13 @@ const NavBar = () => {
   let profileButton;
   if(sessionUser){
     profileButton =  <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active' className='links'>
-    Profile
+    {sessionUser.username}
   </NavLink>
   }
   let uploadButton;
   if(sessionUser){
-    uploadButton =  <NavLink to={'/upload'} activeClassName='active' className='links'>
-    Upload
+    uploadButton =  <NavLink to={'/postform'} activeClassName='active' className='links'>
+    Create a new Post
   </NavLink>
   }
 
@@ -74,7 +74,7 @@ const NavBar = () => {
       <div className="the-logo">
         <Link to="/" className="homie">
           <img src='https://res.cloudinary.com/dzjkwepju/image/upload/v1635992335/Styckr/1-Angry-cloud_xxckko.png' alt='logo'/>
-           AngryCloud
+           PostIt
         </Link>
       </div>
       <ul>

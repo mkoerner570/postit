@@ -30,7 +30,7 @@ function Search(){
                     onChange={searchHandler}
                 />
                 <button onClick={submitHandler} className="search-button">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search">Search</i>
                 </button>
             </form>
         </div>

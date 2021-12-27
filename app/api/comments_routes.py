@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, Comments, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import CommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 comment_routes = Blueprint('comments', __name__)
@@ -23,7 +24,7 @@ def post_comment():
         data = form.data
         new_comment = Comments(
             user_id = user,
-            body = data["body"],
+            content = data["content"],
             post_id = data["post_id"],
             votes = 0
         )

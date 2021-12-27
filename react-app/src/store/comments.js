@@ -63,10 +63,11 @@ export const UpdateAComment = (input, id) => async (dispatch) => {
     }
 }
 
-export const AddAComment = (form) => async (dispatch) => {
+export const AddAComment = (form,id) => async (dispatch) => {
     const formData = new FormData()
+    console.log(id)
     formData.append('content', form.content)
-    formData.append("post_id",form.postId)
+    formData.append("post_id",id)
 
     const response = await fetch(`/api/comment`, {
       method: "POST",
