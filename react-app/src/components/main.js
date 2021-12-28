@@ -45,7 +45,7 @@ function Main(){
             <div>
                 {
                     posts?.map(post =>{
-                        {console.log(post.id)}
+                        {console.log(post.body)}
                         return <div className="postContainer">
                             <div className="votes">
                                 <button className="plusOne"onClick={() => {PlusPostHandler(post.id,sessionUser)}}>
@@ -58,9 +58,9 @@ function Main(){
 
                             <div>
                                 <NavLink to={`/post/${post.id}`}>{post.title}</NavLink>
-                                <div>
-                                    <image src={post.body}></image>
-                                </div>
+
+                                {/* <img src={`${post.body}`}>Image</img> */}
+
                                 <div className="info">
                                     Posted By:
                                 <span >/r/{

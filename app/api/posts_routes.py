@@ -24,8 +24,15 @@ def all_posts():
 @post_routes.route("/posts/<int:id>/one")
 def single_post(id):
     singlePost = Posts.query.filter(Posts.id == id).first()
+    print("the post..........",singlePost)
     return {'singlePost':singlePost.to_dict()}
 
+
+# Get all posts from the database
+# @post_routes.route("/posts/<str:title>/search")
+# def single_post(title):
+#     singlePost = Posts.query.filter(Posts.title == title).first()
+#     return {'singlePost':singlePost.to_dict()}
 
 # Creates a new Post
 @post_routes.route('/add',methods=["POST"])
@@ -46,14 +53,14 @@ def post_post():
 
     post.filename = get_unique_filename(post.filename)
     print("THE FILENAME!!!!!!", post.filename)
-    s3.upload_fileobj(post, 'redditimageclone', post.filename,
+    s3.upload_fileobj(post, 'imagesclone', post.filename,
                                 # ExtraArgs={
                                 #     'ACL': 'public-read',
                                 #     'ContentType': post.content_type
                                 # }
                                 )
     response = s3.generate_presigned_url('get_object',
-                                                Params={'Bucket': 'redditimageclone',
+                                                Params={'Bucket': 'imagesclone',
                                                         'Key': post.filename})
     index = response.index("?")
     print("THE RESPONSE!!!!!!!!!",response)
@@ -65,7 +72,8 @@ def post_post():
         new_post = Posts(
             user_id = user,
             body = url_image,
-            post_id = data["post_id"],
+            title = data["title"],
+            # post_id = data["post_id"],
             sub_id = data["sub_id"],
             votes = 0
         )

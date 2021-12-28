@@ -27,14 +27,16 @@ function CommentForm({post_id}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         let payload = {content}
+        console.log("the payload",payload)
+        console.log("the id",id)
         dispatch(AddAComment(payload,id))
         history.push(`/post/${id}`)
     }
 
     const handleDelete = (e)=> {
-        // e.preventDefault();
+        e.preventDefault();
         dispatch(DeleteAComment(id))
-          history.push(`/post/${id}`)
+        history.push(`/`)
     }
 
     let userCheck;
@@ -53,7 +55,7 @@ function CommentForm({post_id}) {
       otherCheck = true
     }
 
-    console.log(postComments)
+    // console.log(postComments[0])
     return (
         <div>
             {userCheck}
@@ -72,10 +74,10 @@ function CommentForm({post_id}) {
 
         <div>
         {
-                        postComments.map(comment => {
-                            console.log("in the map",comment[0].content)
-                            let index = -1
-                            index++
+                        postComments[0]?.map(comment => {
+                            // console.log("in the map",comment)
+                            // let index = -1
+                            // index++
                             return <div className="comments">
                                 <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
@@ -87,7 +89,7 @@ function CommentForm({post_id}) {
                                 </div>
 
                                 <div>
-                                    <div>{comment[index].content}</div>
+                                    <div>{comment.content}</div>
                                     <div className="comment-info">Votes: {comment.votes}</div>
                                     <button onClick={() => {
                                         dispatch(DeleteAComment(comment.id))

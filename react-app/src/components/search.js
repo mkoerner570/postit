@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import { GetAllPosts,searchPosts } from "../store/posts";
+import { GetAllPosts,GetSearchPost } from "../store/posts";
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom';
 
@@ -15,7 +15,8 @@ function Search(){
     const submitHandler = async (e) => {
         e.preventDefault()
 
-        const search = await dispatch(searchPosts(searchTitle))
+        const search = await dispatch(GetSearchPost(searchTitle))
+        console.log("the search",search)
         history.push(`/post/${search.post_id}`)
     }
 

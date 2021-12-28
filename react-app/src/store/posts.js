@@ -63,13 +63,12 @@ export const GetOnePost = (id) => async (dispatch) =>{
     }
 }
 
-export const AddAPost = (form, body) => async (dispatch) => {
+export const AddAPost = (form, body, sub) => async (dispatch) => {
     const formData = new FormData()
-    console.log("this is the form.....", form)
-    console.log("this is the body", body)
+    const sub_id = parseInt(sub)
     formData.append("body", body)
     formData.append('title', form.title)
-    formData.append('sub_id', form.sub_id)
+    formData.append('sub_id', sub_id)
     const response = await fetch(`/api/add`, {
         method: "POST",
         body: formData
@@ -136,6 +135,15 @@ export const searchPosts = (string) => {
   }
 }
 
+export const GetSearchPost = (str) => async (dispatch) =>{
+  const response = await fetch(`/api/posts/${str}/search`);
+
+  if (response.ok) {
+    const post = await response.json();
+    dispatch(GetAPost(post));
+  }
+}
+
 export const initialState = { posts: [],singlePost:{} };
 const PostReducer = (state = initialState, action) => {
   let newState;
@@ -189,10 +197,14 @@ const PostReducer = (state = initialState, action) => {
             ...state, post: { ...state.post, votes: --state.post.votes }
         }
     case SEARCH_POSTS:
+      console.log("the store")
         return {
           ...state, posts: state.posts.filter(post => {
+            console.log("the store",post)
               if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
-                  return post
+              console.log("the store",post)
+
+              return post
           })
         }
     default:

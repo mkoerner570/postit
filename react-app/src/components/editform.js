@@ -10,12 +10,13 @@ function EditForm({id}){
     const ids = useParams();
     const [content, setContent] = useState("")
     console.log("post ID________",ids)
+    console.log(id)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = { content}
         dispatch(UpdateAComment(payload, id))
-        console.log(id)
+        console.log("handle submit",id)
 
         history.push(`/post/${ids.id}`);
     }

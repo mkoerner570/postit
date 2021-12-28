@@ -51,6 +51,7 @@ export const MinusVoteComment = (id) => {
 }
 
 export const UpdateAComment = (input, id) => async (dispatch) => {
+    console.log("This is the put id", id)
     const response = await fetch(`/api/${id}/comment/edit`, {
       method:"PUT",
       body: JSON.stringify(input),
@@ -82,7 +83,7 @@ export const AddAComment = (form,id) => async (dispatch) => {
 
 export const GetAllComments = (id) => async (dispatch) => {
     const int = id.id;
-    console.log(id)
+    console.log("this is the id get",id)
     const response = await fetch(`/api/posts/${id}/comments`);
 
     if (response.ok) {
@@ -111,7 +112,7 @@ const CommentReducer = (state = initialState, action) => {
       return newState;
     case DELETE_COMMENT:
       newState = Object.assign({}, state);
-      newState.comments = state.comments.filter(({ id }) => id !== action.comments);
+      // newState.comments = state.comments.filter(({ id }) => id !== action.comments);
       return newState;
     case PUT_COMMENT:
     newState = Object.assign({}, state);
@@ -119,7 +120,8 @@ const CommentReducer = (state = initialState, action) => {
     newState.comments = [...state.comments.slice(0, index), action.comment, ...state.comments.slice(index + 1)];
     return newState;
     case POST_COMMENT:
-        return { ...state, comments: [...state.comments, action.comment] };
+      console.log("the post",state.comments)
+        return { ...state, comments: [state.comments, action.comment] };
     case PLUS_COMMENT:
         return {
               ...state, comments: state.comments.map(comment => {

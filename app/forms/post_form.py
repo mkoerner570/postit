@@ -17,6 +17,7 @@ from app.models import User
 class PostForm(FlaskForm):
     title=StringField("Title")
     body=FileField("Body")
+    sub_id=IntegerField("Sub")
     submit=SubmitField("Submit")
 
 class EditPostForm(FlaskForm):

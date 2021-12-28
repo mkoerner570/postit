@@ -22,8 +22,10 @@ function PostForm({}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let payload = { title, selectedSub }
-        dispatch(AddAPost(payload, post))
+        console.log("=======", selectedSub)
+        let payload = { title }
+        console.log("++++++",payload)
+        dispatch(AddAPost(payload, post, selectedSub))
         history.push(`/`)
     }
 
@@ -58,6 +60,7 @@ function PostForm({}){
 			    )}
                 <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}>
                     {Object.keys(subs).map(function(keyname,keyindex) {
+                        // console.log("...........",keyindex)
                         return(
                             <option value={keyindex}>
                                 {subs[keyindex]}
