@@ -55,7 +55,7 @@ export const GetAllPosts = () => async (dispatch) => {
 };
 
 export const GetOnePost = (id) => async (dispatch) =>{
-    const response = await fetch(`/api/posts/${id}`);
+    const response = await fetch(`/api/posts/${id}/one`);
 
     if (response.ok) {
       const post = await response.json();

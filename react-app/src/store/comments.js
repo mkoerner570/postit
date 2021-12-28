@@ -51,7 +51,7 @@ export const MinusVoteComment = (id) => {
 }
 
 export const UpdateAComment = (input, id) => async (dispatch) => {
-    const response = await fetch(`/api/${id}/edit`, {
+    const response = await fetch(`/api/${id}/comment/edit`, {
       method:"PUT",
       body: JSON.stringify(input),
       headers: { "Content-Type": "application/json" },
@@ -81,7 +81,9 @@ export const AddAComment = (form,id) => async (dispatch) => {
 }
 
 export const GetAllComments = (id) => async (dispatch) => {
-    const response = await fetch(`/api/posts/${id}`);
+    const int = id.id;
+    console.log(id)
+    const response = await fetch(`/api/posts/${id}/comments`);
 
     if (response.ok) {
       const comments = await response.json();

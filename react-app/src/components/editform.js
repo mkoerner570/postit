@@ -7,16 +7,17 @@ import {UpdateAComment} from "../store/comments"
 function EditForm({id}){
     const dispatch = useDispatch();
     const history = useHistory();
-    // const id = useParams();
+    const ids = useParams();
     const [content, setContent] = useState("")
-    console.log(id)
+    console.log("post ID________",ids)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = { content}
         dispatch(UpdateAComment(payload, id))
+        console.log(id)
 
-        history.push(`/posts/${id}`);
+        history.push(`/post/${ids.id}`);
     }
 
     return (

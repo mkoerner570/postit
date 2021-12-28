@@ -1,17 +1,18 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Comments, db
+from app.models import User, Comments, Posts, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
-from app.forms import CommentForm
+from app.forms import CommentForm, EditCommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 comment_routes = Blueprint('comments', __name__)
 
 # Get all comments from the database
-@comment_routes.route("/posts/<int:id>")
+@comment_routes.route("/posts/<int:id>/comments")
 def get_comments(id):
-    postComments = Posts.query.filter(Comments.post_id == id).all()
-    return {'allComments':postComments.to_dict()}
+    postComments = Comments.query.filter(Comments.post_id == id).all()
+    print(postComments)
+    return {'allComments':[comment.to_dict() for comment in postComments]}
 
 # Posts a new comment
 @comment_routes.route('/comment',methods=["POST"])
@@ -46,7 +47,7 @@ def delete_comment(id):
 
 
 # Edit comment made by the user
-@comment_routes.route('/<int:id>/edit',methods=["PUT"])
+@comment_routes.route('/<int:id>/comment/edit',methods=["PUT"])
 @login_required
 def edit_comment(id):
     current_comment = Comments.query.get(id)

@@ -17,24 +17,24 @@ function CommentForm({post_id}) {
     // const [postId,setPostId] = useState(post_id)
     const comments = useSelector((state) => state.comments.comments);
     const sessionUser = useSelector((state) => state.session.user);
-    let id = postId.id
+    const postComments = Object.values(comments)
+    let id = parseInt(postId.id)
 
     useEffect(()=>{
-        dispatch(GetAllComments(postId))
+        dispatch(GetAllComments(id))
     },[dispatch])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let payload = {content}
         dispatch(AddAComment(payload,id))
-
         history.push(`/post/${id}`)
     }
 
     const handleDelete = (e)=> {
         // e.preventDefault();
         dispatch(DeleteAComment(id))
-          history.push(`/discover`)
+          history.push(`/post/${id}`)
     }
 
     let userCheck;
@@ -48,11 +48,12 @@ function CommentForm({post_id}) {
       Delete comment
     </button>
     }
-    let otherCheck;
+    let otherCheck = false;
     if (sessionUser.id === comments?.user_id) {
-      otherCheck = <EditForm id={id}/>
+      otherCheck = true
     }
 
+    console.log(postComments)
     return (
         <div>
             {userCheck}
@@ -71,7 +72,10 @@ function CommentForm({post_id}) {
 
         <div>
         {
-                        comments.map(comment => {
+                        postComments.map(comment => {
+                            console.log("in the map",comment[0].content)
+                            let index = -1
+                            index++
                             return <div className="comments">
                                 <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
@@ -83,7 +87,7 @@ function CommentForm({post_id}) {
                                 </div>
 
                                 <div>
-                                    <div>{comment.content}</div>
+                                    <div>{comment[index].content}</div>
                                     <div className="comment-info">Votes: {comment.votes}</div>
                                     <button onClick={() => {
                                         dispatch(DeleteAComment(comment.id))
@@ -91,19 +95,14 @@ function CommentForm({post_id}) {
                                         }}>
                                         Delete
                                     </button>
-                                    <button onClick={() =>{
-                                        if(showForm === false){
-                                            setShowForm(true)
-                                        } else{
-                                            setShowForm(false)
-                                        }
-                                        }}>
+                                    <button onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                                         Edit
                                     </button>
-                                    {otherCheck}
+                                    {showForm && ( <EditForm id={comment.id}/>)}
                                 </div>
                             </div>
-                        })
+                        },
+                        )
                     }
         </div>
         </div>

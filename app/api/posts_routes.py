@@ -6,7 +6,7 @@ from app.forms import SignUpForm
 from app.forms import PostForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_images import (
-    upload_file_to_s3, allowed_file, get_unique_filename)
+    allowed_file, get_unique_filename)
 import boto3
 import os
 
@@ -21,7 +21,7 @@ def all_posts():
 
 
 # Get all posts from the database
-@post_routes.route("/posts/<int:id>")
+@post_routes.route("/posts/<int:id>/one")
 def single_post(id):
     singlePost = Posts.query.filter(Posts.id == id).first()
     return {'singlePost':singlePost.to_dict()}
@@ -47,10 +47,11 @@ def post_post():
     post.filename = get_unique_filename(post.filename)
     print("THE FILENAME!!!!!!", post.filename)
     s3.upload_fileobj(post, 'redditimageclone', post.filename,
-                                ExtraArgs={
-                                    'ACL': 'public-read',
-                                    'ContentType': post.content_type
-                                })
+                                # ExtraArgs={
+                                #     'ACL': 'public-read',
+                                #     'ContentType': post.content_type
+                                # }
+                                )
     response = s3.generate_presigned_url('get_object',
                                                 Params={'Bucket': 'redditimageclone',
                                                         'Key': post.filename})
