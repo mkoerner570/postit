@@ -8,6 +8,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_images import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 import boto3
+import os
 
 post_routes = Blueprint('posts', __name__)
 
@@ -31,7 +32,11 @@ def single_post(id):
 @login_required
 def post_post():
     print("HIT ME !!!!!!!!!!!")
-    s3 = boto3.client('s3')
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("S3_KEY"),
+        aws_secret_access_key=os.environ.get("S3_SECRET")
+    )
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

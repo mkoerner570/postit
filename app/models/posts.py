@@ -45,6 +45,7 @@ class Comments(db.Model):
             'user_id': self.user_id,
             'post_id': self.post_id,
             'content': self.content,
+            'votes':self.votes
         }
 
 class Subs(db.Model):

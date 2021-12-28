@@ -165,6 +165,7 @@ const PostReducer = (state = initialState, action) => {
         return {
             ...state,
             posts: state.posts.map(post => {
+                console.log("this is the upvote",action.payload)
                 if (action.payload === post.id)
                     return { ...post, votes: ++post.votes }
                 else return { ...post }

@@ -5,6 +5,7 @@ import {GetAllSubs} from "../store/subs"
 import { useHistory } from "react-router";
 import Search from "./search";
 import {NavLink} from "react-router-dom"
+import { PlusVotePost,MinusVotePost,PlusVoteOnePost,MinusVoteOnePost } from "../store/posts"
 
 
 function Main(){
@@ -23,6 +24,21 @@ function Main(){
         dispatch(GetAllSubs());
     }, [dispatch]);
 
+    const PlusPostHandler = (post_id,sessionUser) => {
+        if (sessionUser) {
+            dispatch(PlusVoteOnePost(post_id))}
+        else
+            history.push(`/login`)
+    }
+
+    const MinusPostHandler = (post_id,sessionUser) => {
+        if (sessionUser) {
+            console.log(dispatch(MinusVoteOnePost(post_id)))
+        }
+        else
+            history.push(`/login`)
+    }
+
 
     return(
         <div>
@@ -32,12 +48,12 @@ function Main(){
                         {console.log(post.id)}
                         return <div className="postContainer">
                             <div className="votes">
-                                <div className="plusOne">
+                                <button className="plusOne"onClick={() => {PlusPostHandler(post.id,sessionUser)}}>
                                     <i class="fa fa-angle-up">up</i>
-                                </div>
-                                <div className="minusOne">
+                                </button>
+                                <button className="minusOne"onClick={() => {MinusPostHandler(post.id,sessionUser)}}>
                                     <i class="fa fa-angle-down">down</i>
-                                </div>
+                                </button>
                             </div>
 
                             <div>

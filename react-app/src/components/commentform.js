@@ -3,19 +3,20 @@ import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { AddAComment, GetAllComments,DeleteAComment } from "../store/comments"
+import { AddAComment, GetAllComments, DeleteAComment } from "../store/comments"
 import {PlusCommentHandler, MinusCommentHandler} from "../utils/utilities"
+import EditForm from "./editform.js"
 
 
 function CommentForm({post_id}) {
-    const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
     const postId = useParams()
     const [content, setContent] = useState("")
     const history = useHistory()
+    const [showForm, setShowForm] = useState(false);
     // const [postId,setPostId] = useState(post_id)
-    const singlcomment = useSelector((state) => state.comments.comments);
     const comments = useSelector((state) => state.comments.comments);
+    const sessionUser = useSelector((state) => state.session.user);
     let id = postId.id
 
     useEffect(()=>{
@@ -34,7 +35,7 @@ function CommentForm({post_id}) {
         // e.preventDefault();
         dispatch(DeleteAComment(id))
           history.push(`/discover`)
-      }
+    }
 
     let userCheck;
     if (sessionUser.id === comments?.user_id) {
@@ -44,18 +45,17 @@ function CommentForm({post_id}) {
         handleDelete()
       }}
     >
-      Delete Song
+      Delete comment
     </button>
     }
     let otherCheck;
     if (sessionUser.id === comments?.user_id) {
-      otherCheck = <UpdateForm id={comments.id}/>
+      otherCheck = <EditForm id={id}/>
     }
-
-    const [showForm, setShowForm] = useState(false);
 
     return (
         <div>
+            {userCheck}
         <form className="CommentForm" onSubmit={handleSubmit}>
             <label className="noteForms">
             <textarea
@@ -74,28 +74,33 @@ function CommentForm({post_id}) {
                         comments.map(comment => {
                             return <div className="comments">
                                 <div>
-                                    <div className="plusOne">
-                                        <i class="fa fa-angle-up"onClick={() => {PlusCommentHandler(postId)}}></i>
+                                    <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
+                                        <i class="fa fa-angle-up">up</i>
                                     </div>
-                                    <div className="minusOne">
-                                        <i class="fa fa-angle-down"onClick={() => {MinusCommentHandler(postId)}}></i>
+                                    <div className="minusOne"onClick={() => {MinusCommentHandler(postId)}}>
+                                        <i class="fa fa-angle-down">down</i>
                                     </div>
                                 </div>
 
                                 <div>
                                     <div>{comment.content}</div>
-                                    <div className="comment-info">Votes{comment.votes}</div>
-                                    <div className="comment-info">By: {comment.username}</div>
-                                    <button className='x'
-                                    id="splashlinkbuttons"
-                                    onClick={() => {dispatch(DeleteAComment(comment.id))
-                                    history.push(`/song-page/${comments.id}`)
-                                    }}>
-                                        X
+                                    <div className="comment-info">Votes: {comment.votes}</div>
+                                    <button onClick={() => {
+                                        dispatch(DeleteAComment(comment.id))
+                                        history.push(`/post/${id}`)
+                                        }}>
+                                        Delete
                                     </button>
-                                    <button className='e' onClick={() => showForm === false ? setShowForm(true) : setShowForm(false)} id="splashlinkbuttons">
+                                    <button onClick={() =>{
+                                        if(showForm === false){
+                                            setShowForm(true)
+                                        } else{
+                                            setShowForm(false)
+                                        }
+                                        }}>
                                         Edit
                                     </button>
+                                    {otherCheck}
                                 </div>
                             </div>
                         })
