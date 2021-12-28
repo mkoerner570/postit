@@ -20,22 +20,25 @@ function CommentForm({post_id}) {
     const postComments = Object.values(comments)
     let id = parseInt(postId.id)
 
+    // useEffect(()=>{
+    //     dispatch(GetAllComments(id))
+    // },[dispatch])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let payload = {content}
+        await dispatch(AddAComment(payload,id))
+        history.push(`/post/${id}`)
+    }
+
     useEffect(()=>{
         dispatch(GetAllComments(id))
     },[dispatch])
 
-    const handleSubmit = (e) => {
+    const handleDelete = async (e)=> {
         e.preventDefault();
-        let payload = {content}
-        console.log("the payload",payload)
-        console.log("the id",id)
-        dispatch(AddAComment(payload,id))
-        history.push(`/post/${id}`)
-    }
-
-    const handleDelete = (e)=> {
-        e.preventDefault();
-        dispatch(DeleteAComment(id))
+        console.log("delete")
+        await dispatch(DeleteAComment(id))
         history.push(`/`)
     }
 
@@ -55,7 +58,8 @@ function CommentForm({post_id}) {
       otherCheck = true
     }
 
-    // console.log(postComments[0])
+    console.log(".......................",postComments[0])
+    if(postComments){
     return (
         <div>
             {userCheck}
@@ -104,11 +108,12 @@ function CommentForm({post_id}) {
                                 </div>
                             </div>
                         },
-                        )
-                    }
+                        )}
+
         </div>
         </div>
     )
+                    }
 }
 
 

@@ -19,7 +19,8 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-# @user_routes.route('/all')
-# def users():
-#     users = User.query.all()
-#     return {'users': [user.to_dict() for user in users]}
+@user_routes.route('/all')
+def usersgot():
+    allUsers = User.query.all()
+    print("starting",{'users': [user.to_dict() for user in allUsers]})
+    return {'users': [user.to_dict() for user in allUsers]}

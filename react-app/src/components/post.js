@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import CommentForm from "./commentform";
-import { GetOnePost, PlusVoteOnePost } from "../store/posts";
+import { GetOnePost, PlusVoteOnePost, DeleteAPost } from "../store/posts";
 import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,16 +13,24 @@ function GetPost(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts.posts);
-
-    console.log("this is the id", Id.id)
+    const posts = useSelector((state) => state.posts.singlePost);
+    console.log(sessionUser)
+    console.log("this is the id", parseInt(Id.id))
 
     useEffect(()=>{
-        dispatch(GetOnePost(Id.id))
+        dispatch(GetOnePost(parseInt(Id.id)))
     },[dispatch])
 
+    const handleDelete =(e)=> {
+        // e.preventDefault();
+        // console.log("delete")
+        dispatch(DeleteAPost(Id.id))
+        history.push(`/`)
+    }
 
+    console.log("this is the post", posts)
     return(
+
         <div className="postPage-container">
 
         <div className="post">
@@ -42,14 +50,20 @@ function GetPost(){
                 </div>
 
                 <div>
-                    <div className="post-body"> {posts.body} </div>
+                    {/* <div className="post-body"> {posts.body} </div> */}
+                    <img alt="" src={posts.body}/>
                     <div className="post-info">
-                        Posted By: {posts.username} on subreadit:
+                        Posted By: {posts.user_id} on subreadit:
                         <span style={{ color: "#007BFD", cursor: "pointer" }}>
                             <Link to={`/r/${posts.subreadit}`}>
-                                /r/{posts.subreadit}
+                                /r/{posts.sub_id}
                             </Link>
                         </span>
+                        {sessionUser.id == posts.user_id ?
+                                        <button onClick={()=>{handleDelete(posts.id)}}>
+                                            delete
+                                              </button> : null
+                                    }
                     </div>
                     <div className="post-info">
                         Votes: {posts.votes}

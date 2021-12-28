@@ -29,10 +29,11 @@ def single_post(id):
 
 
 # Get all posts from the database
-# @post_routes.route("/posts/<str:title>/search")
-# def single_post(title):
-#     singlePost = Posts.query.filter(Posts.title == title).first()
-#     return {'singlePost':singlePost.to_dict()}
+@post_routes.route("/posts/<title>/search")
+def search_post(title):
+    print("this is the title", title)
+    singlePost = Posts.query.filter(Posts.title == title).first()
+    return {'singlePost':singlePost.to_dict()}
 
 # Creates a new Post
 @post_routes.route('/add',methods=["POST"])

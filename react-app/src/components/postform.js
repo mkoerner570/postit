@@ -22,9 +22,7 @@ function PostForm({}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("=======", selectedSub)
         let payload = { title }
-        console.log("++++++",payload)
         dispatch(AddAPost(payload, post, selectedSub))
         history.push(`/`)
     }

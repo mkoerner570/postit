@@ -1,17 +1,22 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const ALL_USERS = 'session/ALL-USERS'
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
 
+const getUsers = () => ({
+  type:ALL_USERS
+})
+
 const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+const initialState = { user: [] };
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -24,7 +29,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +45,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -69,6 +74,15 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+export const GetTheUsers = () => async (dispatch) =>{
+  const response = await fetch('/api/users/all')
+  if (response.ok) {
+    const allUsers = await response.json()
+    console.log(allUsers)
+    dispatch(getUsers(allUsers));
+  }
+}
+
 
 export const signUp = (username, email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
@@ -82,7 +96,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -96,13 +110,18 @@ export const signUp = (username, email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
-
+// export const initialState = { users: [] };
 export default function reducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case ALL_USERS:
+      newState = Object.assign({}, state);
+      newState.comments = action.comments;
+      return newState;
     default:
       return state;
   }

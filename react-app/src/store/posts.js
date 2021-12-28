@@ -92,11 +92,12 @@ export const EditAPost = (input, id) => async (dispatch) => {
 };
 
 export const DeleteAPost = (id) => async (dispatch) => {
+    console.log("the delete,", id)
     const response = await fetch(`/api/destroy/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
-      dispatch(DeletePost());
+      dispatch(DeletePost(id));
     }
 };
 
@@ -136,11 +137,13 @@ export const searchPosts = (string) => {
 }
 
 export const GetSearchPost = (str) => async (dispatch) =>{
+  console.log("this is the str", str)
   const response = await fetch(`/api/posts/${str}/search`);
 
   if (response.ok) {
     const post = await response.json();
-    dispatch(GetAPost(post));
+    console.log("from get search", post)
+    dispatch(searchPosts(post));
   }
 }
 
@@ -162,6 +165,7 @@ const PostReducer = (state = initialState, action) => {
       return newState;
     case DELETE_POST:
       newState = Object.assign({}, state);
+      console.log("in the store", newState[action.posts])
       delete newState[action.posts];
       return newState;
     case POST_A_POST:
@@ -169,33 +173,32 @@ const PostReducer = (state = initialState, action) => {
       const PostList = newState.posts.map(post => newState[post])
       PostList.push(action.posts)
       return newState;
-      case PLUS_VOTE_POST:
-        return {
-            ...state,
-            posts: state.posts.map(post => {
-                console.log("this is the upvote",action.payload)
-                if (action.payload === post.id)
-                    return { ...post, votes: ++post.votes }
-                else return { ...post }
-            })
-        }
-    case MINUS_VOTE_POST:
-        return {
-            ...state,
-            posts: state.posts.map(post => {
-                if (action.payload === post.id)
-                    return { ...post, votes: --post.votes }
-                else return { ...post }
-            })
-        }
-    case PLUS_VOTE_ONE_POST:
-        return {
-            ...state, post: { ...state.post, votes: ++state.post.votes }
-        }
-    case MINUS_VOTE_ONE_POST:
-        return {
-            ...state, post: { ...state.post, votes: --state.post.votes }
-        }
+    //   case PLUS_VOTE_POST:
+    //     return {
+    //         ...state,
+    //         posts: state.posts.map(post => {
+    //             if (action.payload === post.id)
+    //                 return { ...post, votes: ++post.votes }
+    //             else return { ...post }
+    //         })
+    //     }
+    // case MINUS_VOTE_POST:
+    //     return {
+    //         ...state,
+    //         posts: state.posts.map(post => {
+    //             if (action.payload === post.id)
+    //                 return { ...post, votes: --post.votes }
+    //             else return { ...post }
+    //         })
+    //     }
+    // case PLUS_VOTE_ONE_POST:
+    //     return {
+    //         ...state, post: { ...state.post, votes: ++state.post.votes }
+    //     }
+    // case MINUS_VOTE_ONE_POST:
+    //     return {
+    //         ...state, post: { ...state.post, votes: --state.post.votes }
+    //     }
     case SEARCH_POSTS:
       console.log("the store")
         return {
@@ -204,7 +207,7 @@ const PostReducer = (state = initialState, action) => {
               if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
               console.log("the store",post)
 
-              return post
+              return state
           })
         }
     default:
