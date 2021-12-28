@@ -40,9 +40,10 @@ const EditPost = (post) => {
     };
 };
 
-const DeletePost = () => {
+const DeletePost = (id) => {
     return {
       type: DELETE_POST,
+      id
     };
 };
 
@@ -137,17 +138,16 @@ export const searchPosts = (string) => {
 }
 
 export const GetSearchPost = (str) => async (dispatch) =>{
-  console.log("this is the str", str)
   const response = await fetch(`/api/posts/${str}/search`);
 
   if (response.ok) {
     const post = await response.json();
-    console.log("from get search", post)
     dispatch(searchPosts(post));
   }
 }
 
-export const initialState = { posts: [],singlePost:{} };
+// export const initialState = { posts: [],singlePost:[] };
+export const initialState = {};
 const PostReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -158,15 +158,17 @@ const PostReducer = (state = initialState, action) => {
       Object.values(action.payload.post).forEach(obj => {
         newState[obj.id] = obj;
       })
+      // console.log("+++++++",newState)
       return newState;
     case GET_A_POST:
       newState = Object.assign({}, state);
       newState.singlePost = action.payload.singlePost;
       return newState;
     case DELETE_POST:
+      console.log("++++++++",newState)
       newState = Object.assign({}, state);
-      console.log("in the store", newState[action.posts])
-      delete newState[action.posts];
+      console.log("---------",newState.singlePost)
+      delete newState.singlePost;
       return newState;
     case POST_A_POST:
       newState={...state}

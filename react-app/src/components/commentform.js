@@ -58,7 +58,7 @@ function CommentForm({post_id}) {
       otherCheck = true
     }
 
-    console.log(".......................",postComments[0])
+    // console.log(".......................",postComments[0])
     if(postComments){
     return (
         <div>

@@ -20,10 +20,10 @@ function PostForm({}){
         setIsPostPicked(true)
 	};
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let payload = { title }
-        dispatch(AddAPost(payload, post, selectedSub))
+        await dispatch(AddAPost(payload, post, selectedSub))
         history.push(`/`)
     }
 

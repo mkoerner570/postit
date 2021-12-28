@@ -18,7 +18,7 @@ function Main(){
     const subs = useSelector((state) => state.subs);
     const dispatch = useDispatch()
 
-    // console.log("the users", users)
+    // console.log("the users", posts)
     useEffect(() => {
         dispatch(GetAllPosts());
     }, [dispatch]);

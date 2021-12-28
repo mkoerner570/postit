@@ -24,7 +24,6 @@ def all_posts():
 @post_routes.route("/posts/<int:id>/one")
 def single_post(id):
     singlePost = Posts.query.filter(Posts.id == id).first()
-    print("the post..........",singlePost)
     return {'singlePost':singlePost.to_dict()}
 
 

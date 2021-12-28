@@ -11,7 +11,7 @@ function Search(){
     const post = useSelector((state) => Object.values(state.posts));
     const history = useHistory()
 
-    console.log("singlePost",post)
+
 
     const searchHandler = (e) => {
         setSearchTitle(e.target.value)
@@ -22,7 +22,6 @@ function Search(){
         let posts = Object.values(post)
         // const search = await dispatch(GetSearchPost(searchTitle))
 
-        console.log("the search....",post)
         for( let i = 0; i<posts.length; i++ ){
             if(searchTitle === posts[i].title){
                 history.push(`/post/${post[i].id}`)
