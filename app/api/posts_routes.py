@@ -46,7 +46,7 @@ def post_post():
     )
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print("+++++++++,",PostForm())
     post = request.files["body"]
 
     post.filename = get_unique_filename(post.filename)

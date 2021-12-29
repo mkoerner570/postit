@@ -23,8 +23,8 @@ function PostForm({}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let payload = { title }
-        await dispatch(AddAPost(payload, post, selectedSub))
+        let payload = { title,post }
+        await dispatch(AddAPost(payload, selectedSub))
         history.push(`/`)
     }
 

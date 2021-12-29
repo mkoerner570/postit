@@ -64,14 +64,14 @@ export const GetOnePost = (id) => async (dispatch) =>{
     }
 }
 
-export const AddAPost = (form, body, sub) => async (dispatch) => {
+export const AddAPost = (form, sub) => async (dispatch) => {
 
     const formData = new FormData()
     const sub_id = parseInt(sub)
-    formData["body"]=body
-    formData['title']=form.title
-    formData['sub_id']=sub_id
-    console.log("the formData",formData)
+    formData.append("body", form.body)
+    formData.append('title', form.title)
+    formData.append('sub_id', sub_id)
+    console.log("the form data,",formData)
     const response = await fetch(`/api/add`, {
         method: "POST",
         body: formData
@@ -175,7 +175,7 @@ const PostReducer = (state = initialState, action) => {
       return newState;
     case POST_A_POST:
       newState={...state}
-      console.log("+++++++++",action.data.post)
+      // console.log("+++++++++",action.data.post)
       newState[action.data.id] = action.data.id
 
       // const PostList = newState.posts.map(post => newState[post])
