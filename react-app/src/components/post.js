@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import CommentForm from "./commentform";
-import { GetOnePost, PlusVoteOnePost, DeleteAPost } from "../store/posts";
+import { GetOnePost, PlusVoteOnePost, DeleteAPost, GetAllPosts } from "../store/posts";
 import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -20,8 +20,16 @@ function GetPost(){
     // console.log("this is the id", Id)
     // console.log("the single post",posts)
 
-    useEffect(()=>{
-        dispatch(GetOnePost(parseInt(Id.id)))
+    // if(!posts){
+    //     return null
+    // }
+
+    useEffect(async () => {
+       await dispatch(GetAllPosts());
+    }, [dispatch]);
+
+    useEffect(async ()=>{
+        await dispatch(GetOnePost(parseInt(Id.id)))
     },[dispatch])
 
     const handleDelete =async (e)=> {
@@ -33,6 +41,10 @@ function GetPost(){
     let userCheck;
     if (sessionUser.id === posts?.user_id) {
       userCheck = <EditPost id={posts?.id} />;
+    }
+
+    if(!posts){
+        return null
     }
 
     // console.log("this is the post", posts)
