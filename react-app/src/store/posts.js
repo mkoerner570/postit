@@ -70,7 +70,7 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
     const sub_id = parseInt(sub)
     formData["body"]=body
     formData['title']=form.title
-    formData.append['sub_id']=sub_id
+    formData['sub_id']=sub_id
     console.log("the formData",formData)
     const response = await fetch(`/api/add`, {
         method: "POST",
