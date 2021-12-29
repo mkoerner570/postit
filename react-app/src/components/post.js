@@ -60,23 +60,23 @@ function GetPost(){
                                 /r/{posts?.sub_id}
                             </Link>
                         </span>
-                        {sessionUser.id == posts.user_id ?
+                        {/* {sessionUser.id === */}
                                         <button onClick={()=>{handleDelete(posts.id)}}>
                                             delete
-                                              </button> : null
-                                    }
-                        {sessionUser.id == posts?.user_id ?
+                                              </button>
+                        {/* } */}
+                        {/* {sessionUser.id === posts?.user_id ? */}
                                         <button onClick={()=>{handleDelete(posts.id)}}>
                                             Edit
                                               </button> : null
-                        }
+
                     </div>
                     <div className="post-info">
                         Votes: {posts?.votes}
                     </div>
                 </div>
             </div>
-            <CommentForm />
+            <CommentForm id={posts.id}/>
         </div>
     )
 }

@@ -28,10 +28,10 @@ const UpdateComment = (comment) => {
   };
 };
 
-const DeleteComment = (comments) => {
+const DeleteComment = (id) => {
   return {
     type: DELETE_COMMENT,
-    comments
+    id
   };
 };
 
@@ -97,6 +97,7 @@ export const DeleteAComment = (id) => async (dispatch) => {
       method: "DELETE",
     });
     if (response.ok) {
+      console.log("KKKKKKKKKKKKK",id)
       dispatch(DeleteComment(id));
     }
 };
@@ -112,7 +113,11 @@ const CommentReducer = (state = initialState, action) => {
       return newState;
     case DELETE_COMMENT:
       newState = Object.assign({}, state);
-      // newState.comments = state.comments.filter(({ id }) => id !== action.comments);
+      newState.comments.singleComment = action.id;
+      console.log("lllllllllllll",newState.comments.singleComment)
+      delete newState.comments.singleComment
+      delete action.id
+      console.log("xxxxxxx",newState.comments)
       return newState;
     case PUT_COMMENT:
     newState = Object.assign({}, state);
@@ -120,7 +125,6 @@ const CommentReducer = (state = initialState, action) => {
     newState.comments = [...state.comments.slice(0, index), action.comment, ...state.comments.slice(index + 1)];
     return newState;
     case POST_COMMENT:
-      console.log("the post",...state.comments.allComments)
         return { comments: [...state.comments.allComments, ...[action.comment]] };
     // case PLUS_COMMENT:
     //     return {

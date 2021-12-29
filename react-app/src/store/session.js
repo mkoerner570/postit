@@ -1,15 +1,16 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const ALL_USERS = 'session/ALL-USERS'
+const ALL_USERS = 'session/ALL_USERS'
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
 
-const getUsers = () => ({
-  type:ALL_USERS
+const getUsers = (users) => ({
+  type:ALL_USERS,
+  payload:users
 })
 
 const removeUser = () => ({
@@ -120,7 +121,8 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     case ALL_USERS:
       newState = Object.assign({}, state);
-      newState.comments = action.comments;
+      console.log("_______",newState)
+      newState.users = action.users;
       return newState;
     default:
       return state;

@@ -28,7 +28,7 @@ function CommentForm({post_id}) {
         e.preventDefault();
         let payload = {content}
         await dispatch(AddAComment(payload,id))
-        history.push(`/post/${id}`)
+        history.push(`/`)
     }
 
     useEffect(()=>{

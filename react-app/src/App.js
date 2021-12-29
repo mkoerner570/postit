@@ -45,7 +45,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <Main />
+          <Main loaded={loaded}/>
         </Route>
         <Route path='/post/:id' exact={true}>
           <Post />

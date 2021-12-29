@@ -94,11 +94,12 @@ export const EditAPost = (input, id) => async (dispatch) => {
 
 export const DeleteAPost = (id) => async (dispatch) => {
     console.log("the delete,", id)
-    const response = await fetch(`/api/destroy/${id}`, {
+    let newID = parseInt(id)
+    const response = await fetch(`/api/destroy/${newID}`, {
       method: "DELETE",
     });
     if (response.ok) {
-      dispatch(DeletePost(id));
+      dispatch(DeletePost(newID));
     }
 };
 
@@ -165,15 +166,17 @@ const PostReducer = (state = initialState, action) => {
       newState.singlePost = action.payload.singlePost;
       return newState;
     case DELETE_POST:
-      console.log("++++++++",newState)
       newState = Object.assign({}, state);
-      console.log("---------",newState.singlePost)
-      delete newState.singlePost;
+      delete newState[action.id];
+      delete newState.singlePost
       return newState;
     case POST_A_POST:
       newState={...state}
-      const PostList = newState.posts.map(post => newState[post])
-      PostList.push(action.posts)
+      console.log("+++++++++",action.data.post)
+      newState[action.data.id] = action.data.id
+
+      // const PostList = newState.posts.map(post => newState[post])
+      // PostList.push(action.posts)
       return newState;
     //   case PLUS_VOTE_POST:
     //     return {
