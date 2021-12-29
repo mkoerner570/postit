@@ -10,7 +10,7 @@ const setUser = (user) => ({
 
 const getUsers = (users) => ({
   type:ALL_USERS,
-  payload:users
+  users
 })
 
 const removeUser = () => ({
@@ -79,7 +79,7 @@ export const GetTheUsers = () => async (dispatch) =>{
   const response = await fetch('/api/users/all')
   if (response.ok) {
     const allUsers = await response.json()
-    // console.log(allUsers)
+    // console.log("+++++++++",allUsers)
     dispatch(getUsers(allUsers));
   }
 }
@@ -121,8 +121,9 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     case ALL_USERS:
       newState = Object.assign({}, state);
-      console.log("_______",newState)
-      newState.users = action.users;
+      // console.log("------", action.users)
+      // console.log("_______",newState)
+      // action.users.forEach( user => newState.users[action.user.id] = action.user);
       return newState;
     default:
       return state;

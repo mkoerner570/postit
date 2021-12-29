@@ -6,6 +6,7 @@ import { GetOnePost, PlusVoteOnePost, DeleteAPost } from "../store/posts";
 import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import EditPost  from "./editpost"
 
 function GetPost(){
     const Id = useParams()
@@ -13,10 +14,10 @@ function GetPost(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts);
-    console.log(sessionUser)
-    console.log("this is the id", Id.id)
-    console.log(posts.singlePost)
+    const posts = useSelector((state) => state.posts.singlePost);
+    // console.log(sessionUser)
+    console.log("this is the id", Id)
+    console.log("the single post",posts)
 
     useEffect(()=>{
         dispatch(GetOnePost(parseInt(Id.id)))
@@ -27,6 +28,10 @@ function GetPost(){
         // console.log("delete")
         await dispatch(DeleteAPost(Id.id))
         history.push(`/`)
+    }
+    let userCheck;
+    if (sessionUser.id === posts?.user_id) {
+      userCheck = <EditPost id={posts?.id} />;
     }
 
     // console.log("this is the post", posts)
@@ -51,7 +56,7 @@ function GetPost(){
                 </div>
 
                 <div>
-                    <div className="post-body"> {posts.body} </div>
+                    <div className="post-body"> </div>
                     <img alt="" src={posts.body}/>
                     <div className="post-info">
                         Posted By: {posts.user_id} on subreadit:
@@ -66,9 +71,10 @@ function GetPost(){
                                               </button>
                         {/* } */}
                         {/* {sessionUser.id === posts?.user_id ? */}
-                                        <button onClick={()=>{handleDelete(posts.id)}}>
+                                        {/* <button onClick={()=>{handleDelete(posts.id)}}>
                                             Edit
-                                              </button> : null
+                                        </button> */}
+                        {userCheck}
 
                     </div>
                     <div className="post-info">

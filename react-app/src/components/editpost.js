@@ -8,14 +8,16 @@ import {EditAPost} from "../store/posts"
 function EditPost({Id}){
     const dispatch = useDispatch();
     const history = useHistory();
+    const [title,setTitle] = useState("")
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = { content}
-        dispatch(UpdateAPost(payload, id))
-        console.log("handle submit",id)
+        const payload = { title }
+        dispatch(EditAPost(payload, Id))
+        console.log("handle submit",Id)
 
-        history.push(`/post/${ids.id}`);
+        history.push(`/post/${Id}`);
     }
 
     return(
@@ -28,7 +30,6 @@ function EditPost({Id}){
                 <input
                     className='input'
                     id='title'
-                    type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"

@@ -94,7 +94,7 @@ def edit_post(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Posts.query.get(id)
-        post.content = form.data["body"]
+        post.title = form.data["title"]
         db.session.commit()
         return post.to_dict()
     else:

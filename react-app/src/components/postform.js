@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { AddAPost } from "../store/posts";
-import {GetAllSubs} from "../store/subs"
+import {GetAllSubs} from "../store/subs";
+
 
 
 function PostForm({}){

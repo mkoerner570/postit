@@ -15,7 +15,7 @@ function CommentForm({post_id}) {
     const history = useHistory()
     const [showForm, setShowForm] = useState(false);
     // const [postId,setPostId] = useState(post_id)
-    const comments = useSelector((state) => state.comments.comments);
+    const comments = useSelector((state) => Object.values(state.comments));
     const sessionUser = useSelector((state) => state.session.user);
     const postComments = Object.values(comments)
     let id = parseInt(postId.id)
@@ -28,7 +28,7 @@ function CommentForm({post_id}) {
         e.preventDefault();
         let payload = {content}
         await dispatch(AddAComment(payload,id))
-        history.push(`/`)
+        history.push(`/post/${id}`)
     }
 
     useEffect(()=>{
@@ -39,7 +39,7 @@ function CommentForm({post_id}) {
         e.preventDefault();
         console.log("delete")
         await dispatch(DeleteAComment(id))
-        history.push(`/`)
+        history.push(`/post/${id}`)
     }
 
     let userCheck;
@@ -78,7 +78,7 @@ function CommentForm({post_id}) {
 
         <div>
         {
-                        postComments[0]?.map(comment => {
+                        comments?.map(comment => {
                             // console.log("in the map",comment)
                             // let index = -1
                             // index++

@@ -51,7 +51,6 @@ export const MinusVoteComment = (id) => {
 }
 
 export const UpdateAComment = (input, id) => async (dispatch) => {
-    console.log("This is the put id", id)
     const response = await fetch(`/api/${id}/comment/edit`, {
       method:"PUT",
       body: JSON.stringify(input),
@@ -76,14 +75,12 @@ export const AddAComment = (form,id) => async (dispatch) => {
 
     if (response.ok) {
       const NewComment  = await response.json();
-      console.log("the new comment", NewComment)
       dispatch(AddComments(NewComment));
     }
 }
 
 export const GetAllComments = (id) => async (dispatch) => {
     const int = id.id;
-    console.log("this is the id get",id)
     const response = await fetch(`/api/posts/${id}/comments`);
 
     if (response.ok) {
@@ -97,35 +94,31 @@ export const DeleteAComment = (id) => async (dispatch) => {
       method: "DELETE",
     });
     if (response.ok) {
-      console.log("KKKKKKKKKKKKK",id)
       dispatch(DeleteComment(id));
     }
 };
 
 
-export const initialState = { comments: [] };
+export const initialState = {  };
 const CommentReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_COMMENTS:
       newState = Object.assign({}, state);
-      newState.comments = action.comments;
+      action.comments.allComments.forEach( comment => newState[comment.id] = comment)
       return newState;
     case DELETE_COMMENT:
       newState = Object.assign({}, state);
-      newState.comments.singleComment = action.id;
-      console.log("lllllllllllll",newState.comments.singleComment)
-      delete newState.comments.singleComment
-      delete action.id
-      console.log("xxxxxxx",newState.comments)
+      delete newState[action.id]
       return newState;
     case PUT_COMMENT:
     newState = Object.assign({}, state);
-    const index = state.comments.findIndex(c => c.id === action.comment.id);
-    newState.comments = [...state.comments.slice(0, index), action.comment, ...state.comments.slice(index + 1)];
+    newState[action.comment.id] = action.comment;
     return newState;
     case POST_COMMENT:
-        return { comments: [...state.comments.allComments, ...[action.comment]] };
+      newState = Object.assign({},state)
+      newState[action.comment.id] = action.comment
+      return newState
     // case PLUS_COMMENT:
     //     return {
     //           ...state, comments: state.comments.map(comment => {
