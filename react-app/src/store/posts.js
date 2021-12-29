@@ -65,6 +65,9 @@ export const GetOnePost = (id) => async (dispatch) =>{
 }
 
 export const AddAPost = (form, body, sub) => async (dispatch) => {
+    console.log("the form", form)
+    console.log("the body", body)
+    console.log("the sub", sub)
     const formData = new FormData()
     const sub_id = parseInt(sub)
     formData.append("body", body)

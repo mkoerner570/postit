@@ -39,7 +39,6 @@ def search_post(title):
 @post_routes.route('/add',methods=["POST"])
 @login_required
 def post_post():
-    print("HIT ME !!!!!!!!!!!")
     s3 = boto3.client(
         "s3",
         aws_access_key_id=os.environ.get("S3_KEY"),
@@ -50,10 +49,7 @@ def post_post():
 
     post = request.files["body"]
 
-    print("THE POST!!!!!!", post)
-
     post.filename = get_unique_filename(post.filename)
-    print("THE FILENAME!!!!!!", post.filename)
     s3.upload_fileobj(post, 'imagesclone', post.filename,
                                 # ExtraArgs={
                                 #     'ACL': 'public-read',
@@ -64,7 +60,6 @@ def post_post():
                                                 Params={'Bucket': 'imagesclone',
                                                         'Key': post.filename})
     index = response.index("?")
-    print("THE RESPONSE!!!!!!!!!",response)
     url_image = response[0:index]
 
     user = current_user.id

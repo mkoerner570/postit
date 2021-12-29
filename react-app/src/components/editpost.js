@@ -11,14 +11,14 @@ function EditPost({Id}){
     const history = useHistory();
     const [title,setTitle] = useState("")
 
-    console.log("edit id....",id)
+    // console.log("edit id....",id)
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = { title }
         dispatch(EditAPost(payload, parseInt(id.id)))
-        console.log("handle submit",id)
+        // console.log("handle submit",id)
 
         history.push(`/post/${id.id}`);
     }
