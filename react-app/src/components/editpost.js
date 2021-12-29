@@ -6,23 +6,25 @@ import {EditAPost} from "../store/posts"
 
 
 function EditPost({Id}){
+    const id = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
     const [title,setTitle] = useState("")
+
+    console.log("edit id....",id)
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = { title }
-        dispatch(EditAPost(payload, Id))
-        console.log("handle submit",Id)
+        dispatch(EditAPost(payload, parseInt(id.id)))
+        console.log("handle submit",id)
 
-        history.push(`/post/${Id}`);
+        history.push(`/post/${id.id}`);
     }
 
     return(
         <div className='upload'>
-            <h1 className='upload-labs1'>What would you like to post?</h1>
         <form className="PostForm" onSubmit={handleSubmit}>
             <div className='inner'>
 

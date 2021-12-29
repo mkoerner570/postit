@@ -16,8 +16,9 @@ function GetPost(){
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.posts.singlePost);
     // console.log(sessionUser)
-    console.log("this is the id", Id)
-    console.log("the single post",posts)
+    const [showForm,setShowForm] = useState(false)
+    // console.log("this is the id", Id)
+    // console.log("the single post",posts)
 
     useEffect(()=>{
         dispatch(GetOnePost(parseInt(Id.id)))
@@ -65,16 +66,20 @@ function GetPost(){
                                 /r/{posts?.sub_id}
                             </Link>
                         </span>
-                        {/* {sessionUser.id === */}
+                            {sessionUser.id === posts?.id}
                                         <button onClick={()=>{handleDelete(posts.id)}}>
                                             delete
                                               </button>
-                        {/* } */}
-                        {/* {sessionUser.id === posts?.user_id ? */}
+
+                        {sessionUser.id === posts?.user_id}
                                         {/* <button onClick={()=>{handleDelete(posts.id)}}>
                                             Edit
                                         </button> */}
-                        {userCheck}
+                        <button onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+                            Edit
+                        </button>
+                        {showForm && ( <EditPost id={posts.id}/>)}
+
 
                     </div>
                     <div className="post-info">
