@@ -52,7 +52,7 @@ function GetPost(){
 
         <div className="postPage-container">
 
-        <div className="post">
+        <div className="the-post">
             <div className="details">
                 <div className="Post-V">
                     <div className="votes">
@@ -65,21 +65,20 @@ function GetPost(){
                     </div>
 
                 </div>
-                    <div>{posts?.title} </div>
+                    <div className="post-title">{posts?.title} </div>
                 </div>
 
                 <div>
-                    <div className="post-body"> </div>
-                    <img alt="" src={posts.body}/>
+                    <img className="post-body" alt="" src={posts.body}/>
                     <div className="post-info">
-                        Posted By: {posts.user_id} on subreadit:
+                        {/* Posted By: {posts.user_id} on subreadit:
                         <span style={{ color: "#007BFD", cursor: "pointer" }}>
                             <Link to={`/r/${posts?.sub_id}`}>
                                 /r/{posts?.sub_id}
                             </Link>
-                        </span>
+                        </span> */}
                             {sessionUser.id === posts?.id}
-                                        <button onClick={()=>{handleDelete(posts.id)}}>
+                                        <button className="comment-delete" onClick={()=>{handleDelete(posts.id)}}>
                                             delete
                                               </button>
 
@@ -87,16 +86,16 @@ function GetPost(){
                                         {/* <button onClick={()=>{handleDelete(posts.id)}}>
                                             Edit
                                         </button> */}
-                        <button onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+                        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                             Edit
                         </button>
                         {showForm && ( <EditPost id={posts.id}/>)}
 
 
                     </div>
-                    <div className="post-info">
+                    {/* <div className="post-info">
                         Votes: {posts?.votes}
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <CommentForm id={posts.id}/>

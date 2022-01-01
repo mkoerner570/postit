@@ -90,7 +90,8 @@ export const EditAPost = (input, id) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      const { NewPost } = await response.json();
+      const NewPost = await response.json();
+      console.log()
       dispatch(EditPost(NewPost));
     }
 };
@@ -175,12 +176,15 @@ const PostReducer = (state = initialState, action) => {
       return newState;
     case POST_A_POST:
       newState={...state}
-      // console.log("+++++++++",action.data.post)
       newState[action.data.id] = action.data.id
-
       // const PostList = newState.posts.map(post => newState[post])
       // PostList.push(action.posts)
       return newState;
+    case EDIT_POST:
+      console.log("+++++++",action)
+      newState = Object.assign({},state)
+      newState[action.post.id] = action.post
+      return newState
     //   case PLUS_VOTE_POST:
     //     return {
     //         ...state,
@@ -207,17 +211,17 @@ const PostReducer = (state = initialState, action) => {
     //     return {
     //         ...state, post: { ...state.post, votes: --state.post.votes }
     //     }
-    case SEARCH_POSTS:
-      console.log("the store")
-        return {
-          ...state, posts: state.posts.filter(post => {
-            console.log("the store",post)
-              if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
-              console.log("the store",post)
+    // case SEARCH_POSTS:
+    //   console.log("the store")
+    //     return {
+    //       ...state, posts: state.posts.filter(post => {
+    //         console.log("the store",post)
+    //           if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
+    //           console.log("the store",post)
 
-              return state
-          })
-        }
+    //           return state
+    //       })
+    //     }
     default:
       return state;
   }

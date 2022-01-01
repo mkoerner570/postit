@@ -20,7 +20,7 @@ function EditPost({Id}){
         dispatch(EditAPost(payload, parseInt(id.id)))
         // console.log("handle submit",id)
 
-        history.push(`/post/${id.id}`);
+        history.push(`/`);
     }
 
     return(

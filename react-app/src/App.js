@@ -11,6 +11,8 @@ import Main from './components/main';
 import Post from './components/post';
 import Postform from './components/postform'
 import { authenticate } from './store/session';
+import Footer from './components/footer';
+import './App.css'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +56,7 @@ function App() {
           <Postform />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -12,6 +12,7 @@ function CommentForm({post_id}) {
     const dispatch = useDispatch()
     const postId = useParams()
     const [content, setContent] = useState("")
+    const [errors, setErrors] = useState([]);
     const history = useHistory()
     const [showForm, setShowForm] = useState(false);
     // const [postId,setPostId] = useState(post_id)
@@ -19,10 +20,6 @@ function CommentForm({post_id}) {
     const sessionUser = useSelector((state) => state.session.user);
     const postComments = Object.values(comments)
     let id = parseInt(postId.id)
-
-    // useEffect(()=>{
-    //     dispatch(GetAllComments(id))
-    // },[dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +34,6 @@ function CommentForm({post_id}) {
 
     const handleDelete = async (e)=> {
         e.preventDefault();
-        console.log("delete")
         await dispatch(DeleteAComment(id))
         history.push(`/post/${id}`)
     }
@@ -58,50 +54,62 @@ function CommentForm({post_id}) {
       otherCheck = true
     }
 
-    // console.log(".......................",postComments[0])
+    let AllComments = []
+    for(let i = 0; i < postComments.length; i++){
+        if(postComments[i].post_id === id){
+            AllComments.push(postComments[i])
+        }
+    }
+
     if(postComments){
     return (
         <div>
             {userCheck}
         <form className="CommentForm" onSubmit={handleSubmit}>
+            <div>
+                {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+                ))}
+            </div>
             <label className="noteForms">
             <textarea
-                    id='comment'
+                    className='comment'
                     type="textarea"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Your Comment here"
+                    required={true}
             />
             </label>
-            <button id="submit" type="submit">Submit</button>
+            <button className="comment-submit"id="submit" type="submit">Submit</button>
         </form>
 
         <div>
         {
-                        comments?.map(comment => {
+                        AllComments?.map(comment => {
                             // console.log("in the map",comment)
                             // let index = -1
                             // index++
                             return <div className="comments">
-                                <div>
+                                {/* <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
                                         <i class="fa fa-angle-up">up</i>
                                     </div>
                                     <div className="minusOne"onClick={() => {MinusCommentHandler(postId)}}>
                                         <i class="fa fa-angle-down">down</i>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div>
                                     <div>{comment.content}</div>
-                                    <div className="comment-info">Votes: {comment.votes}</div>
-                                    <button onClick={() => {
+                                    {/* <div className="comment-info">Votes: {comment.votes}</div> */}
+                                    <button className="comment-delete" onClick={() => {
                                         dispatch(DeleteAComment(comment.id))
                                         history.push(`/post/${id}`)
                                         }}>
                                         Delete
                                     </button>
-                                    <button onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+                                    <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                                         Edit
                                     </button>
                                     {showForm && ( <EditForm id={comment.id}/>)}

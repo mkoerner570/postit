@@ -11,6 +11,7 @@ function PostForm({}){
     const dispatch = useDispatch()
     const [title,setTitle] = useState("");
     const [post, setPost] = useState();
+    const [errors, setErrors] = useState([]);
     const [isPostPicked, setIsPostPicked] = useState(false);
     const [selectedSub, setSelectedSub] = useState(0)
     const subs = useSelector((state) => state.subs);
@@ -38,6 +39,11 @@ function PostForm({}){
         <div className='upload'>
             <h1 className='upload-labs1'>What would you like to post?</h1>
         <form className="PostForm" onSubmit={handleSubmit}>
+            <div>
+                {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+                ))}
+            </div>
             <div className='inner'>
 
             <label className="noteForms">
@@ -48,16 +54,16 @@ function PostForm({}){
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
-                    required
+                    required={true}
                 /><br></br>
                 <label className='upload-labs'> Select file you wish to Upload<br></br></label>
-                <input type="file" name="image" onChange={changeHandler} />
+                <input type="file" name="image" onChange={changeHandler} required={true}/>
 			    {isPostPicked ? (
 				    <p>Image selected</p>
 			    ) : (
 				    <p></p>
 			    )}
-                <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}>
+                {/* <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}required={true}>
                     {Object.keys(subs).map(function(keyname,keyindex) {
                         // console.log("...........",keyindex)
                         return(
@@ -66,7 +72,7 @@ function PostForm({}){
                             </option>
                         )
                     })}
-                </select>
+                </select> */}
                 {/* <select value={selectedSub} onChange={setSelectedSub()}>
                     {Object.keys(subs).map(function(keyname,keyindex) {
                         return(

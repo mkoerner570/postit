@@ -1,0 +1,277 @@
+body{
+    background-color: black;
+    color:white;
+    font: 1em sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+li{
+    float: left;
+}
+
+.demo{
+    border-top-color: white;
+    color: rgb(255, 208, 0);
+    /* font-family: 'Special Elite', cursive; */
+    font-size: 14px;
+}
+
+.nav{
+    background-color: rgb(37, 37, 37);
+    height: 59px;
+    width: 100%;
+    display: flex;
+    border-color: rgb(255, 255, 255);
+    border-style: none none groove;
+    flex-direction:column;
+    align-items: flex-end;
+}
+
+.links{
+    /* font-family: 'Special Elite', cursive; */
+
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.link-signin{
+    /* font-family: 'Special Elite', cursive; */
+
+    color: rgb(255, 255, 255);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 8px;
+    padding-left: 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.homie{
+    font-size: 24px;
+    background-color: rgb(37, 37, 37);
+    height: 59px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    left: 30px;
+    text-decoration: none;
+    width: 180px;
+    color: rgb(255, 255, 255);
+}
+
+.the-logo{
+    /* font-family: 'Permanent Marker', cursive; */
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+
+
+
+.footer{
+    color: white;
+    background-color: rgb(37, 37, 37);
+    border-color: rgb(255, 255, 255);
+    border-style: groove none none;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+}
+
+.©{
+    color: rgb(255, 208, 0);
+}
+
+.cont{
+    margin-left: 10px;
+}
+
+.max{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.g-hub{
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.linked{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.postContainer{
+    border-radius:5px;
+    border-color: white;
+    background-color: rgb(81, 81, 81);
+    width: 85%;
+    margin: 1px;
+    /* padding : 5px; */
+    /* font-size: 2rem; 20px */
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+}
+.PostForm {
+
+	/* background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%); */
+    background-color: rgb(81, 81, 81);
+	color:#ffffff;
+    border-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 40px 10px;
+    width: 80%;
+}
+.posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position:fixed; */
+}
+.title{
+    color: white;
+    size: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 10px;
+    padding: 10px;
+}
+.the-photos{
+    width: 150px;
+    margin-top: 10px;
+}
+
+.search{
+    /* margin: 10px; */
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+}
+.input{
+    background-color: rgb(81, 81, 81);
+    color:white;
+    /* border: 1px solid grey;
+    display: flex;
+    margin-bottom: 10px; */
+    border-color:rgba(255, 255, 255, 0)
+}
+.search-button{
+    background-color: rgb(81, 81, 81);
+    border-color: rgba(255, 255, 255, 0);
+    color: rgb(132, 132, 132);
+}
+
+.CommentForm{
+    background-color:rgb(81, 81, 81);
+	border-radius:5px;
+	border: 2px solid white;
+    color:#ffffff;
+    width: 80%;
+    margin: 40px 10px;
+    margin-left: 50px;
+    padding : 10px;
+    display: flex;
+    flex-direction: column;
+}
+.comment-submit{
+    width:60px;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+    color: rgb(37, 37, 37);
+}
+.comment{
+    background-color:rgb(140, 140, 140);
+    width:50%;
+    height:100px;
+    border-color: rgba(255, 255, 255, 0);
+    border-radius: 5px;
+}
+.comments{
+	/* background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%); */
+	background-color:rgb(81, 81, 81);
+	border-radius:5px;
+	border: 2px solid white;
+    color:#ffffff;
+    width: 80%;
+    margin: 40px 1px;
+    margin-left: 75px;
+    padding : 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-edit{
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+    color: rgb(37, 37, 37);
+    margin: 5px;
+}
+.comment-delete{
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+    color: rgb(37, 37, 37);
+    margin: 5px;
+    padding-bottom: 5px;
+}
+
+.logout{
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.user-posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.the-post{
+    background-color:rgb(81, 81, 81);
+	border-radius:5px;
+	border: 1px solid white;
+    color:#ffffff;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin:5px;
+    margin-top: 10px;
+}
+.post-body{
+    width: 50%;
+    padding:10px;
+}
+.post-title{
+    padding:5px;
+    margin: 5px;
+}

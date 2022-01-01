@@ -3,6 +3,7 @@ import React,{useState, useEffect} from 'react';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import LogoutButton from './auth/LogoutButton';
+import Search from './search';
  // test
 const NavBar = () => {
   const [credential, setCredential] = useState('');
@@ -73,11 +74,14 @@ const NavBar = () => {
       <div className="nav">
       <div className="the-logo">
         <Link to="/" className="homie">
-          <img src='https://imgur.com/6Z5U47z' alt=''/>
+          <img src='https://imagesclone.s3.amazonaws.com/35b42199b9f1499e97cc654557958d7f.png' alt=''/>
            PostIt
         </Link>
       </div>
       <ul>
+        <li className="search">
+          <Search/>
+        </li>
         <li>
           {demo}
         </li>
