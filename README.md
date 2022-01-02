@@ -1,13 +1,14 @@
-# Flask React Project
+# PostIt
+https://postits-app.herokuapp.com/
 
-This is the starter for the Flask React project.
+PostIt is a clone of the popular website Reddit. It is a fullstack app for people to share and comment on photos they have taken. It is a simple way to upload your photos with a title and allows them and others to post comments on them.
 
 ## Getting started
 
 1. Clone this repository (only this branch)
 
    ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
+   git clone https://github.com/mkoerner570/postit
    ```
 
 2. Install dependencies
@@ -132,3 +133,13 @@ of your Heroku app in the url and tag name:
    ```bash=3
    docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
    ```
+
+   ## Technologies Implemented
+   * Python
+   * Flask
+   * PostgresSQL
+   * PsycoPG
+   * Alembic
+   * Javascript
+   * React
+   * Redux

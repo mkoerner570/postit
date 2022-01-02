@@ -71,7 +71,7 @@ def post_post():
             body = url_image,
             title = data["title"],
             # post_id = data["post_id"],
-            sub_id = data["sub_id"],
+            # sub_id = data["sub_id"],
             votes = 0
         )
         db.session.add(new_post)
