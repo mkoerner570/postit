@@ -61,13 +61,10 @@ function User() {
       user_comments.push(comments[i])
     }
   }
-  const handleDelete = async (e)=> {
-    // e.preventDefault();
-    // console.log("delete")
-    console.log("the delete",id)
-    // await dispatch(DeleteAPost(post.id))
-    history.push(`/users/${currentId}`)
-  }
+  // const handleDelete = async (e)=> {
+  //   console.log("the delete",id)
+  //   history.push(`/users/${currentId}`)
+  // }
 
   let post_check;
 
