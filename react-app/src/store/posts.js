@@ -99,9 +99,11 @@ export const EditAPost = (input, id) => async (dispatch) => {
 export const DeleteAPost = (id) => async (dispatch) => {
     console.log("the delete,", id)
     let newID = parseInt(id)
+    console.log(newID)
     const response = await fetch(`/api/destroy/${newID}`, {
       method: "DELETE",
     });
+    console.log("the response",response)
     if (response.ok) {
       dispatch(DeletePost(newID));
     }

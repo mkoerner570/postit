@@ -57,7 +57,7 @@ function CommentForm({post_id}) {
     let AllComments = []
     for(let i = 0; i < postComments.length; i++){
         if(postComments[i].post_id === id){
-            AllComments.push(postComments[i])
+            AllComments.unshift(postComments[i])
         }
     }
 

@@ -17,8 +17,8 @@ function GetPost(){
     const posts = useSelector((state) => state.posts.singlePost);
     // console.log(sessionUser)
     const [showForm,setShowForm] = useState(false)
-    // console.log("this is the id", Id)
-    // console.log("the single post",posts)
+    console.log("this is the id", sessionUser)
+    console.log("the single post",posts)
 
     // if(!posts){
     //     return null
@@ -35,12 +35,19 @@ function GetPost(){
     const handleDelete =async (e)=> {
         // e.preventDefault();
         // console.log("delete")
-        await dispatch(DeleteAPost(Id.id))
-        history.push(`/`)
+        if(posts.user_id === sessionUser.id){
+            await dispatch(DeleteAPost(Id.id))
+            history.push(`/`)
+        }
+        // await dispatch(DeleteAPost(Id.id))
+        // history.push(`/`)
     }
     let userCheck;
     if (sessionUser.id === posts?.user_id) {
-      userCheck = <EditPost id={posts?.id} />;
+      userCheck = <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+          Edit
+        </button>
+        {showForm && ( <EditPost id={posts.id}/>)};
     }
 
     if(!posts){

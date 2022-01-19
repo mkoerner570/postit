@@ -16,6 +16,7 @@ post_routes = Blueprint('posts', __name__)
 # Get all Posts from the database
 @post_routes.route('/posts')
 def all_posts():
+    print("this is the multi-post post")
     posts = Posts.query.all()
     return {'post': [post.to_dict() for post in posts ]}
 
@@ -24,6 +25,7 @@ def all_posts():
 # Get all posts from the database
 @post_routes.route("/posts/<int:id>/one")
 def single_post(id):
+    print("this is the single post")
     singlePost = Posts.query.filter(Posts.id == id).first()
     return {'singlePost':singlePost.to_dict()}
 
@@ -102,6 +104,7 @@ def edit_post(id):
 @post_routes.route('/destroy/<int:id>',methods=["DELETE"])
 @login_required
 def delete_post(id):
+    print("the id+++++++++++++",id)
     post = Posts.query.get(id)
     db.session.delete(post)
     db.session.commit()

@@ -4,6 +4,10 @@ body{
     font: 1em sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 ul {
     list-style-type: none;
     display: flex;
@@ -209,7 +213,7 @@ li{
     width:60px;
     background-color: rgba(255, 255, 255, 0);
     border-color: rgba(255, 255, 255, 0);
-    color: rgb(37, 37, 37);
+    color: rgb(255, 213, 0);
 }
 .comment{
     background-color:rgb(140, 140, 140);

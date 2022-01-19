@@ -16,7 +16,7 @@ function Main(){
     const posts = useSelector((state) => Object.values(state.posts));
     const users = useSelector((state) => state.users)
     const subs = useSelector((state) => state.subs);
-    
+
     const dispatch = useDispatch()
 
     // console.log("the users", posts)
@@ -47,13 +47,18 @@ function Main(){
     //     else
     //         history.push(`/login`)
     // }
+    let allPosts = []
+    for(let i = 0; i < posts.length-1; i++){
+        allPosts.unshift(posts[i])
+    }
 
 
     return(
         <div>
+            <p>Testing</p>
             <div className="posts" >
                 {
-                    posts?.map(post =>{
+                    allPosts?.map(post =>{
                         // {console.log(post)}
                         return <div className="postContainer">
                             {/* <div className="votes">
