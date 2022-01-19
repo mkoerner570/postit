@@ -18,11 +18,7 @@ function GetPost(){
     // console.log(sessionUser)
     const [showForm,setShowForm] = useState(false)
     console.log("this is the id", sessionUser)
-    console.log("the single post",posts)
-
-    // if(!posts){
-    //     return null
-    // }
+    // console.log("the single post",posts)
 
     useEffect(async () => {
        await dispatch(GetAllPosts());
@@ -31,6 +27,11 @@ function GetPost(){
     useEffect(async ()=>{
         await dispatch(GetOnePost(parseInt(Id.id)))
     },[dispatch])
+
+    if(!posts){
+        return null
+    }
+
 
     const handleDelete =async (e)=> {
         // e.preventDefault();
@@ -43,11 +44,22 @@ function GetPost(){
         // history.push(`/`)
     }
     let userCheck;
-    if (sessionUser.id === posts?.user_id) {
-      userCheck = <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
-          Edit
+    if(!sessionUser){
+        history.push('/login')
+    } else {
+        if (sessionUser.id === posts?.user_id) {
+      userCheck =
+    <div>
+        <button className="comment-delete" onClick={()=>{handleDelete(posts.id)}}>
+            Delete
         </button>
-        {showForm && ( <EditPost id={posts.id}/>)};
+        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+            Edit
+        </button>
+        {showForm && ( <EditPost id={posts.id}/>)}
+    </div>
+        }
+
     }
 
     if(!posts){
@@ -84,20 +96,20 @@ function GetPost(){
                                 /r/{posts?.sub_id}
                             </Link>
                         </span> */}
-                            {sessionUser.id === posts?.id}
+                            {/* {sessionUser.id === posts?.id}
                                         <button className="comment-delete" onClick={()=>{handleDelete(posts.id)}}>
                                             delete
                                               </button>
 
-                        {sessionUser.id === posts?.user_id}
+                        {sessionUser.id === posts?.user_id} */}
                                         {/* <button onClick={()=>{handleDelete(posts.id)}}>
                                             Edit
                                         </button> */}
-                        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+                        {/* <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                             Edit
                         </button>
-                        {showForm && ( <EditPost id={posts.id}/>)}
-
+                        {showForm && ( <EditPost id={posts.id}/>)} */}
+                        {userCheck}
 
                     </div>
                     {/* <div className="post-info">

@@ -9,16 +9,14 @@ function EditPost({Id}){
     const id = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
-    const [title,setTitle] = useState("")
-
-    // console.log("edit id....",id)
+    const posts = useSelector((state) => state.posts.singlePost);
+    const [editedTitle,setEditedTitle] = useState(posts.title)
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = { title }
+        const payload = { editedTitle }
         dispatch(EditAPost(payload, parseInt(id.id)))
-        // console.log("handle submit",id)
 
         history.push(`/`);
     }
@@ -32,9 +30,8 @@ function EditPost({Id}){
                 <input
                     className='input'
                     id='title'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Title"
+                    value={editedTitle}
+                    onChange={(e) => setEditedTitle(e.target.value)}
                     required
                 /><br></br>
                 </label>

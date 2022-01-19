@@ -25,6 +25,7 @@ function CommentForm({post_id}) {
         e.preventDefault();
         let payload = {content}
         await dispatch(AddAComment(payload,id))
+        setContent("")
         history.push(`/post/${id}`)
     }
 
@@ -38,28 +39,41 @@ function CommentForm({post_id}) {
         history.push(`/post/${id}`)
     }
 
-    let userCheck;
-    if (sessionUser.id === comments?.user_id) {
-      userCheck = <button
-      id="splashlinkbuttons"
-      onClick={() => {
-        handleDelete()
-      }}
-    >
-      Delete comment
-    </button>
-    }
-    let otherCheck = false;
-    if (sessionUser.id === comments?.user_id) {
-      otherCheck = true
-    }
-
     let AllComments = []
     for(let i = 0; i < postComments.length; i++){
         if(postComments[i].post_id === id){
             AllComments.unshift(postComments[i])
         }
     }
+
+    let userCheck;
+    if(!sessionUser){
+        history.push('/login')
+    } else {
+    if (sessionUser.id === AllComments?.user_id) {
+      userCheck =
+    <div>
+        <button
+        id="splashlinkbuttons"
+        onClick={() => {
+        handleDelete()
+        }}
+        >
+            Delete comment
+        </button>
+        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+            Edit
+        </button>
+        {showForm && ( <EditForm id={id}/>)}
+    </div>
+    }
+}
+    // let otherCheck = false;
+    // if (sessionUser.id === comments?.user_id) {
+    //   otherCheck = true
+    // }
+
+
 
     if(postComments){
     return (
@@ -103,7 +117,7 @@ function CommentForm({post_id}) {
                                 <div>
                                     <div>{comment.content}</div>
                                     {/* <div className="comment-info">Votes: {comment.votes}</div> */}
-                                    <button className="comment-delete" onClick={() => {
+                                    {/* <button className="comment-delete" onClick={() => {
                                         dispatch(DeleteAComment(comment.id))
                                         history.push(`/post/${id}`)
                                         }}>
@@ -112,7 +126,8 @@ function CommentForm({post_id}) {
                                     <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                                         Edit
                                     </button>
-                                    {showForm && ( <EditForm id={comment.id}/>)}
+                                    {showForm && ( <EditForm id={comment.id}/>)} */}
+                                    {userCheck}
                                 </div>
                             </div>
                         },

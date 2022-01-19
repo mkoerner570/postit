@@ -13,6 +13,7 @@ import Postform from './components/postform'
 import { authenticate } from './store/session';
 import Footer from './components/footer';
 import './App.css'
+import NoPage from './components/noresults';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +55,9 @@ function App() {
         </Route>
         <Route path='/postform' exact={true}>
           <Postform />
+        </Route>
+        <Route path='/noresults'>
+          <NoPage />
         </Route>
       </Switch>
       <Footer />

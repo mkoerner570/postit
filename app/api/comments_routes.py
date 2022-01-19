@@ -14,6 +14,13 @@ def get_comments(id):
     print(postComments)
     return {'allComments':[comment.to_dict() for comment in postComments]}
 
+# Get one comment from the database
+@comment_routes.route("/comments/<int:id>/single")
+def single_comment(id):
+    print("this is the single post")
+    singleComment = Comments.query.filter(Comments.id == id).first()
+    return {'singleComment':singleComment.to_dict()}
+
 # Posts a new comment
 @comment_routes.route('/comment',methods=["POST"])
 @login_required

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { Link, NavLink, useParams } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
@@ -95,6 +96,9 @@ const SignUpForm = () => {
       </div>
       <div className='required'>* indicates a required field</div>
       <button type='submit' className='logon'>Sign Up</button>
+      <NavLink to='/login' exact={true} activeClassName='active' className='logon'>
+      Already have an account? Sign in!
+      </NavLink>
     </form>
   );
 };

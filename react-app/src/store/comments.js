@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf.js";
 const POST_COMMENT = "session/PostComments"
 const PUT_COMMENT = "session/PutComments";
 const GET_COMMENTS = "session/GetComments";
+const GET_A_COMMENT = "session/GetAComment"
 const DELETE_COMMENT = "session/DeleteComments";
 const PLUS_COMMENT = 'session/PlusVoteComment'
 const MINUS_COMMENT = 'session/MinusVoteComment'
@@ -11,6 +12,13 @@ const GetComments = (comments) => {
   return {
     type: GET_COMMENTS,
     comments,
+  };
+};
+
+const GetAComment = (comment) => {
+  return {
+    type:GET_A_COMMENT,
+    payload: comment,
   };
 };
 
@@ -89,6 +97,15 @@ export const GetAllComments = (id) => async (dispatch) => {
     }
 };
 
+export const GetOneComment = (id) => async (dispatch) =>{
+  const response = await fetch(`/api/comments/${id}/single`);
+
+  if (response.ok) {
+    const comment = await response.json();
+    dispatch(GetAComment(comment));
+  }
+}
+
 export const DeleteAComment = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/delete/${id}`, {
       method: "DELETE",
@@ -106,6 +123,10 @@ const CommentReducer = (state = initialState, action) => {
     case GET_COMMENTS:
       newState = Object.assign({}, state);
       action.comments.allComments.forEach( comment => newState[comment.id] = comment)
+      return newState;
+    case GET_A_COMMENT:
+      newState = Object.assign({}, state);
+      newState.singleComment = action.payload.singleComment;
       return newState;
     case DELETE_COMMENT:
       newState = Object.assign({}, state);

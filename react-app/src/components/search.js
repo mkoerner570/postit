@@ -28,10 +28,12 @@ function Search(){
 
         for( let i = 0; i<posts.length; i++ ){
             if(searchTitle === posts[i].title.toLowerCase()){
+                setSearchTitle("")
                 history.push(`/post/${post[i].id}`)
             }
             else{
-                errors.push("Sorry, your title is not correct. Please make sure your spelling is correct")
+                setSearchTitle("")
+                history.push('/noresults')
             }
         }
         // history.push(`/post/${post.id}`)
