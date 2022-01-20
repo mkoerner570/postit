@@ -109,7 +109,7 @@ function CommentForm({post_id}) {
                             // console.log("in the map",comment)
                             let index = 0
                             index++
-                            return <div key={index} className="comments">
+                            return <div key={index}className="comments">
                                 {/* <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
                                         <i class="fa fa-angle-up">up</i>
