@@ -85,6 +85,7 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
 }
 
 export const EditAPost = (input, id) => async (dispatch) => {
+
     const response = await csrfFetch(`/api/${id}/edit`, {
       method: "PUT",
       body: JSON.stringify(input),
@@ -92,7 +93,6 @@ export const EditAPost = (input, id) => async (dispatch) => {
     });
     if (response.ok) {
       const NewPost = await response.json();
-      console.log()
       dispatch(EditPost(NewPost));
     }
 };
@@ -184,7 +184,7 @@ const PostReducer = (state = initialState, action) => {
       // PostList.push(action.posts)
       return newState;
     case EDIT_POST:
-      console.log("+++++++",action)
+      // console.log("+++++++",action)
       newState = Object.assign({},state)
       newState[action.post.id] = action.post
       return newState

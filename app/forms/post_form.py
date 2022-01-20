@@ -22,5 +22,5 @@ class PostForm(FlaskForm):
 
 class EditPostForm(FlaskForm):
     title=StringField("Title")
-    body=FileField("Body")
+    # body=FileField("Body")
     submit=SubmitField("Submit")

@@ -23,7 +23,7 @@ function EditForm({id}){
         e.preventDefault();
         const payload = { content}
         dispatch(UpdateAComment(payload, id))
-        console.log("handle submit",id)
+    
 
         history.push(`/post/${ids.id}`);
     }

@@ -17,7 +17,7 @@ function GetPost(){
     const posts = useSelector((state) => state.posts.singlePost);
     // console.log(sessionUser)
     const [showForm,setShowForm] = useState(false)
-    console.log("this is the id", sessionUser)
+    // console.log("this is the id", sessionUser)
     // console.log("the single post",posts)
 
     useEffect(async () => {
@@ -56,7 +56,7 @@ function GetPost(){
         <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
             Edit
         </button>
-        {showForm && ( <EditPost id={posts.id}/>)}
+        {showForm && ( <EditPost id={posts.id} form={showForm}/>)}
     </div>
         }
 
