@@ -17,15 +17,16 @@ export const GetAllSubs = () => async (dispatch) => {
     }
 };
 
-export const initialState = { subs:[] }
+export const initialState = { }
 const subReducer = (state = initialState, action) => {
-    let newState = {};
+    let newState;
     switch(action.type){
         case GET_SUBS:
+            newState = Object.assign({},state)
             Object.values(action.payload.sub).forEach(obj => {
-                let index = 1;
-                newState[obj.id] = obj.name;
-                index++
+                // let index = 1;
+                newState[obj.id] = obj;
+                // index++
             })
             return  newState;
         default: return state

@@ -55,13 +55,16 @@ function CommentForm({post_id}) {
     <div>
         <button
         id="splashlinkbuttons"
-        onClick={() => {
-        handleDelete()
+        onClick={(e) => {
+            e.preventDefault()
+    handleDelete()
         }}
         >
             Delete comment
         </button>
-        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+        <button className="comment-edit" onClick={() =>
+            showForm === false ? setShowForm(true) : setShowForm(false)
+            }>
             Edit
         </button>
         {showForm && ( <EditForm id={id}/>)}

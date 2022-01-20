@@ -4,6 +4,8 @@ import { Link, NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import LogoutButton from './auth/LogoutButton';
 import Search from './search';
+import SubsBar from './subsbar';
+
  // test
 const NavBar = () => {
   const [credential, setCredential] = useState('');
@@ -12,6 +14,10 @@ const NavBar = () => {
   const [user, setUser] = useState({});
   const { userId }  = useParams();
   const sessionUser = useSelector((state) => state.session.user);
+  const allSubs = useSelector((state) => state.subs)
+  const subs = Object.values(allSubs)
+
+  // console.log(subs)
 
   const demoLogin = async () => {
     setCredential('demo@aa.io');
@@ -98,9 +104,14 @@ const NavBar = () => {
         <li>
           {logOut}
         </li>
+        <li>
+          <SubsBar/>
+        </li>
       </ul>
+
       </div>
     </nav>
+
   );
 }
 

@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom"
 // import { PlusVotePost,MinusVotePost,PlusVoteOnePost,MinusVoteOnePost } from "../store/posts"
 import {DeleteAPost} from "../store/posts"
 import {GetTheUsers} from "../store/session"
+import SubsBar from './subsbar';
 
 function Main(){
     const history = useHistory()
@@ -15,7 +16,9 @@ function Main(){
     const sessionUser = useSelector((state) => state.session.user);
     const posts = useSelector((state) => Object.values(state.posts));
     const users = useSelector((state) => state.users)
-    const subs = useSelector((state) => state.subs);
+    // const subs = useSelector((state) => state.subs);
+    const allSubs = useSelector((state) => state.subs)
+    const subs = Object.values(allSubs)
 
     const dispatch = useDispatch()
 
@@ -55,7 +58,16 @@ function Main(){
 
     return(
         <div>
-            <p>Testing</p>
+            <SubsBar/>
+            <div>
+                {subs?.map( sub => {
+                <div>
+                <NavLink to={`/sub/${sub.id}`} exact={true} activeClassName='active' className='links'>{sub.name}</NavLink>
+                <p>{sub.name}</p>
+                </div>
+            }
+            )}
+            </div>
             <div className="posts" >
                 {
                     allPosts?.map(post =>{
