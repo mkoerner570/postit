@@ -23,7 +23,7 @@ function EditForm({id}){
         e.preventDefault();
         const payload = { content}
         dispatch(UpdateAComment(payload, id))
-    
+
 
         history.push(`/post/${ids.id}`);
     }
@@ -34,7 +34,7 @@ function EditForm({id}){
             <textarea
                     id='comment'
                     type="textarea"
-                    value={comment.content}
+                    // value={comment.content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Your New Comment here"
             />

@@ -76,7 +76,7 @@ function CommentForm({post_id}) {
     //   otherCheck = true
     // }
 
-
+    console.log("+++++++++++++++",AllComments)
 
     if(postComments){
     return (
@@ -102,12 +102,14 @@ function CommentForm({post_id}) {
         </form>
 
         <div>
+            <h1>Hello!</h1>
         {
                         AllComments?.map(comment => {
+
                             // console.log("in the map",comment)
-                            // let index = -1
-                            // index++
-                            return <div className="comments">
+                            let index = 0
+                            index++
+                            return <div key={index} className="comments">
                                 {/* <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
                                         <i class="fa fa-angle-up">up</i>
@@ -120,7 +122,7 @@ function CommentForm({post_id}) {
                                 <div>
                                     <div>{comment.content}</div>
                                     {/* <div className="comment-info">Votes: {comment.votes}</div> */}
-                                    {/* <button className="comment-delete" onClick={() => {
+                                    <button className="comment-delete" onClick={() => {
                                         dispatch(DeleteAComment(comment.id))
                                         history.push(`/post/${id}`)
                                         }}>
@@ -129,7 +131,7 @@ function CommentForm({post_id}) {
                                     <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                                         Edit
                                     </button>
-                                    {showForm && ( <EditForm id={comment.id}/>)} */}
+                                    {showForm && ( <EditForm id={comment.id}/>)}
                                     {userCheck}
                                 </div>
                             </div>

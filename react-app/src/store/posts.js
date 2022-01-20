@@ -145,8 +145,8 @@ export const searchPosts = (string) => {
   }
 }
 
-export const GetSearchPost = (str) => async (dispatch) =>{
-  const response = await fetch(`/api/posts/${str}/search`);
+export const GetSearchPost = (title) => async (dispatch) =>{
+  const response = await fetch(`/api/posts/search/${title}`);
 
   if (response.ok) {
     const post = await response.json();
@@ -214,17 +214,12 @@ const PostReducer = (state = initialState, action) => {
     //     return {
     //         ...state, post: { ...state.post, votes: --state.post.votes }
     //     }
-    // case SEARCH_POSTS:
-    //   console.log("the store")
-    //     return {
-    //       ...state, posts: state.posts.filter(post => {
-    //         console.log("the store",post)
-    //           if (post.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1)
-    //           console.log("the store",post)
-
-    //           return state
-    //       })
-    //     }
+    case SEARCH_POSTS:
+      console.log("the store",state)
+      newState = Object.assign({}, state);
+      console.log("the newState",newState)
+      newState.searchPost = action.payload.searchPost;
+      return newState;
     default:
       return state;
   }
