@@ -7,14 +7,11 @@ function SubsBar(){
     const allSubs = useSelector((state) => state.subs)
     const subs = Object.values(allSubs)
 
-    console.log(subs)
-
     return(
-        <div>
-            <p>placeholder</p>
+        <div className='subs'>
             {subs.map( sub => {
                 return(
-                <li>{sub.name}</li>
+                <NavLink to={`/sub/${sub.id}/${sub.name}`} exact={true} activeClassName='active' className='links'>{sub.name}</NavLink>
                 )
             })}
         </div>

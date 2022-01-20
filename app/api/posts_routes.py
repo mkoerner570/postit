@@ -48,7 +48,7 @@ def post_post():
     )
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print("+++++++++,",PostForm())
+    print("+++++++++,",PostForm())
     post = request.files["body"]
 
     post.filename = get_unique_filename(post.filename)
@@ -66,14 +66,14 @@ def post_post():
 
     user = current_user.id
     if form.validate_on_submit():
-        # print("++++++++++++++++", form.data)
+        print("++++++++++++++++", form.data)
         data = form.data
         new_post = Posts(
             user_id = user,
             body = url_image,
             title = data["title"],
             # post_id = data["post_id"],
-            # sub_id = data["sub_id"],
+            sub_id = data["sub_id"],
             votes = 0
         )
         db.session.add(new_post)

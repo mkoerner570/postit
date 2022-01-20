@@ -14,7 +14,8 @@ function PostForm({}){
     const [errors, setErrors] = useState([]);
     const [isPostPicked, setIsPostPicked] = useState(false);
     const [selectedSub, setSelectedSub] = useState(0)
-    const subs = useSelector((state) => state.subs);
+    const allsubs = useSelector((state) => state.subs);
+    const subs = Object.values(allsubs)
     const history = useHistory()
 
     const changeHandler = (event) => {
@@ -25,13 +26,17 @@ function PostForm({}){
     const handleSubmit = async (e) => {
         e.preventDefault();
         let payload = { title }
-        await dispatch(AddAPost(payload, post, selectedSub))
+        console.log("payload",payload)
+        console.log("post",post)
+        console.log("the sub",selectedSub)
+        await dispatch(AddAPost(payload, post, parseInt(selectedSub)))
         history.push(`/`)
     }
 
     useEffect(() => {
         dispatch(GetAllSubs());
     }, [dispatch]);
+
 
 
 
@@ -63,6 +68,15 @@ function PostForm({}){
 			    ) : (
 				    <p></p>
 			    )}
+                <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)} required={true}>
+                    {Object.keys(subs).map(function(sub,keyname,keyindex){
+                        return(
+                            <option value={subs[keyname].id}>
+                                {subs[keyname].name}
+                            </option>
+                        )
+                    })}
+                </select>
                 {/* <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}required={true}>
                     {Object.keys(subs).map(function(keyname,keyindex) {
                         // console.log("...........",keyindex)

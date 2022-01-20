@@ -10,6 +10,7 @@ import User from './components/User';
 import Main from './components/main';
 import Post from './components/post';
 import Postform from './components/postform'
+import Sub from "./components/subpage"
 import { authenticate } from './store/session';
 import Footer from './components/footer';
 import './App.css'
@@ -58,6 +59,9 @@ function App() {
         </Route>
         <Route path='/noresults'>
           <NoPage />
+        </Route>
+        <Route path='/sub/:id/:name'>
+          <Sub />
         </Route>
       </Switch>
       <Footer />

@@ -59,7 +59,7 @@ function Main(){
     return(
         <div>
             <SubsBar/>
-            <div>
+            {/* <div>
                 {subs?.map( sub => {
                 <div>
                 <NavLink to={`/sub/${sub.id}`} exact={true} activeClassName='active' className='links'>{sub.name}</NavLink>
@@ -67,7 +67,7 @@ function Main(){
                 </div>
             }
             )}
-            </div>
+            </div> */}
             <div className="posts" >
                 {
                     allPosts?.map(post =>{

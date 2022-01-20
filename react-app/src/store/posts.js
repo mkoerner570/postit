@@ -68,10 +68,11 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
 
     const formData = new FormData()
     const sub_id = parseInt(sub)
+    console.log("the sub", sub_id)
     formData.append("body", body)
     formData.append('title', form.title)
     formData.append('sub_id', sub_id)
-    // console.log("the form data,",JSON.stringify(formData))
+    console.log("the form data,",formData)
     const response = await fetch(`/api/add`, {
         method: "POST",
         body: formData,

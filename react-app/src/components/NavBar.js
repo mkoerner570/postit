@@ -104,9 +104,9 @@ const NavBar = () => {
         <li>
           {logOut}
         </li>
-        <li>
+        {/* <li>
           <SubsBar/>
-        </li>
+        </li> */}
       </ul>
 
       </div>
