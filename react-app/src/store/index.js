@@ -5,6 +5,7 @@ import session from './session';
 import PostReducer from './posts';
 import CommentReducer from './comments';
 import subReducer from './subs';
+import SingleReducer from './single';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   posts:PostReducer,
   comments:CommentReducer,
   subs:subReducer,
+  single:SingleReducer,
 });
 
 

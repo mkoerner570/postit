@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf.js";
 
 const GET_POSTS = 'session/GetPosts'
-const GET_A_POST = 'session/GetAPost'
+// const GET_A_POST = 'session/GetAPost'
 const POST_A_POST = 'session/PostPost'
 const EDIT_POST = 'session/EditPost'
 const DELETE_POST = 'session/DeletePost'
@@ -18,12 +18,12 @@ const GetPosts = (data) => {
     };
 };
 
-const GetAPost = (post) => {
-    return {
-      type:GET_A_POST,
-      payload: post,
-    };
-};
+// const GetAPost = (post) => {
+//     return {
+//       type:GET_A_POST,
+//       payload: post,
+//     };
+// };
 
 
 const PostPost = (data) => {
@@ -55,17 +55,16 @@ export const GetAllPosts = () => async (dispatch) => {
     }
 };
 
-export const GetOnePost = (id) => async (dispatch) =>{
-    const response = await fetch(`/api/posts/${id}/one`);
+// export const GetOnePost = (id) => async (dispatch) =>{
+//     const response = await fetch(`/api/posts/${id}/one`);
 
-    if (response.ok) {
-      const post = await response.json();
-      dispatch(GetAPost(post));
-    }
-}
+//     if (response.ok) {
+//       const post = await response.json();
+//       dispatch(GetAPost(post));
+//     }
+// }
 
 export const AddAPost = (form, body, sub) => async (dispatch) => {
-
     const formData = new FormData()
     const sub_id = parseInt(sub)
     console.log("the sub", sub_id)
@@ -168,10 +167,10 @@ const PostReducer = (state = initialState, action) => {
       })
       // console.log("+++++++",newState)
       return newState;
-    case GET_A_POST:
-      newState = Object.assign({}, state);
-      newState.singlePost = action.payload.singlePost;
-      return newState;
+    // case GET_A_POST:
+    //   newState = Object.assign({}, state);
+    //   newState.singlePost = action.payload.singlePost;
+    //   return newState;
     case DELETE_POST:
       newState = Object.assign({}, state);
       delete newState[action.id];

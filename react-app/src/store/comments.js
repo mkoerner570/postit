@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf.js";
 const POST_COMMENT = "session/PostComments"
 const PUT_COMMENT = "session/PutComments";
 const GET_COMMENTS = "session/GetComments";
-const GET_A_COMMENT = "session/GetAComment"
+// const GET_A_COMMENT = "session/GetAComment"
 const DELETE_COMMENT = "session/DeleteComments";
 const PLUS_COMMENT = 'session/PlusVoteComment'
 const MINUS_COMMENT = 'session/MinusVoteComment'
@@ -15,12 +15,12 @@ const GetComments = (comments) => {
   };
 };
 
-const GetAComment = (comment) => {
-  return {
-    type:GET_A_COMMENT,
-    payload: comment,
-  };
-};
+// const GetAComment = (comment) => {
+//   return {
+//     type:GET_A_COMMENT,
+//     payload: comment,
+//   };
+// };
 
 const AddComments = (comment) => {
   return {
@@ -59,7 +59,9 @@ export const MinusVoteComment = (id) => {
 }
 
 export const UpdateAComment = (input, id) => async (dispatch) => {
-    const response = await fetch(`/api/${id}/comment/edit`, {
+    console.log("store id", id)
+    const actualId = parseInt(id.id)
+    const response = await fetch(`/api/${actualId}/comment/edit`, {
       method:"PUT",
       body: JSON.stringify(input),
       headers: { "Content-Type": "application/json" },
@@ -97,14 +99,15 @@ export const GetAllComments = (id) => async (dispatch) => {
     }
 };
 
-export const GetOneComment = (id) => async (dispatch) =>{
-  const response = await fetch(`/api/comments/${id}/single`);
+// export const GetOneComment = (id) => async (dispatch) =>{
+//   console.log("the singlecomment ID", id)
+//   const response = await fetch(`/api/comments/${id}/single`);
 
-  if (response.ok) {
-    const comment = await response.json();
-    dispatch(GetAComment(comment));
-  }
-}
+//   if (response.ok) {
+//     const comment = await response.json();
+//     dispatch(GetAComment(comment));
+//   }
+// }
 
 export const DeleteAComment = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/delete/${id}`, {
@@ -124,10 +127,10 @@ const CommentReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       action.comments.allComments.forEach( comment => newState[comment.id] = comment)
       return newState;
-    case GET_A_COMMENT:
-      newState = Object.assign({}, state);
-      newState.singleComment = action.payload.singleComment;
-      return newState;
+    // case GET_A_COMMENT:
+    //   newState = Object.assign({}, state);
+    //   newState.singleComment = action.payload.singleComment;
+    //   return newState;
     case DELETE_COMMENT:
       newState = Object.assign({}, state);
       delete newState[action.id]
