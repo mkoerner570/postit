@@ -51,7 +51,7 @@ function Main(){
     //         history.push(`/login`)
     // }
     let allPosts = []
-    for(let i = 0; i < posts.length-1; i++){
+    for(let i = 0; i < posts.length; i++){
         allPosts.unshift(posts[i])
     }
 

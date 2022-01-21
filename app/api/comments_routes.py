@@ -17,7 +17,7 @@ def get_comments(id):
 # Get one comment from the database
 @comment_routes.route("/comments/<int:id>/single")
 def single_comment(id):
-    print("this is the single post")
+    print("this is the single post", id)
     singleComment = Comments.query.filter(Comments.id == id).first()
     return {'singleComment':singleComment.to_dict()}
 

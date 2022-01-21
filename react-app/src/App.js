@@ -15,6 +15,7 @@ import { authenticate } from './store/session';
 import Footer from './components/footer';
 import './App.css'
 import NoPage from './components/noresults';
+import EditForm from './components/editform';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +63,9 @@ function App() {
         </Route>
         <Route path='/sub/:id/:name'>
           <Sub />
+        </Route>
+        <Route path='/post/:id/comment/:id/edit'>
+          <EditForm />
         </Route>
       </Switch>
       <Footer />

@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import CommentForm from "./commentform";
-import { GetOnePost, PlusVoteOnePost, DeleteAPost, GetAllPosts } from "../store/posts";
+import { PlusVoteOnePost, DeleteAPost, GetAllPosts } from "../store/posts";
+import {GetOnePost} from "../store/single"
 import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -14,7 +15,7 @@ function GetPost(){
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts.singlePost);
+    const posts = useSelector((state) => state.single.singlePost);
     // console.log(sessionUser)
     const [showForm,setShowForm] = useState(false)
     // console.log("this is the id", sessionUser)

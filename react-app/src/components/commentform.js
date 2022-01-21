@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { AddAComment, GetAllComments, DeleteAComment } from "../store/comments"
@@ -46,37 +46,61 @@ function CommentForm({post_id}) {
         }
     }
 
-    let userCheck;
+    function userCheck(userId,commentID,id,content){
+        // console.log(sessionUser.id === userId)
+        if(sessionUser.id === userId){
+        return(
+        <div>
+            <button
+            id="splashlinkbuttons"
+            onClick={(e) => {
+                e.preventDefault()
+                handleDelete()
+            }}
+            >
+                Delete comment
+            </button>
+            {/* <button className="comment-edit" onClick={() =>
+                showForm === false ? setShowForm(true) : setShowForm(false)
+                }>
+                Edit
+            </button>
+            {showForm && ( <EditForm id={commentID}/>)} */}
+            <NavLink to={`/post/${id}/comment/${commentID}/edit`}exact={true} content={content}> Edit </NavLink>
+        </div>
+        )
+        }
+    };
+
     if(!sessionUser){
         history.push('/login')
-    } else {
-    if (sessionUser.id === AllComments?.user_id) {
-      userCheck =
-    <div>
-        <button
-        id="splashlinkbuttons"
-        onClick={(e) => {
-            e.preventDefault()
-    handleDelete()
-        }}
-        >
-            Delete comment
-        </button>
-        <button className="comment-edit" onClick={() =>
-            showForm === false ? setShowForm(true) : setShowForm(false)
-            }>
-            Edit
-        </button>
-        {showForm && ( <EditForm id={id}/>)}
-    </div>
     }
-}
+    // else {
+    // if (sessionUser.id === AllComments?.user_id) {
+    //   userCheck =
+    // <div>
+    //     <button
+    //     id="splashlinkbuttons"
+    //     onClick={(e) => {
+    //         e.preventDefault()
+    //         handleDelete()
+    //     }}
+    //     >
+    //         Delete comment
+    //     </button>
+    //     <button className="comment-edit" onClick={() =>
+    //         showForm === false ? setShowForm(true) : setShowForm(false)
+    //         }>
+    //         Edit
+    //     </button>
+    //     {showForm && ( <EditForm id={id}/>)}
+    // </div>
+    // }
+    // }
     // let otherCheck = false;
     // if (sessionUser.id === comments?.user_id) {
     //   otherCheck = true
     // }
-
-    console.log("+++++++++++++++",AllComments)
 
     if(postComments){
     return (
@@ -105,11 +129,11 @@ function CommentForm({post_id}) {
             <h1>Hello!</h1>
         {
                         AllComments?.map(comment => {
-
+                            return(
                             // console.log("in the map",comment)
-                            let index = 0
-                            index++
-                            return <div key={index}className="comments">
+                            // let index = 0
+                            // index++
+                             <div className="comments">
                                 {/* <div>
                                     <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
                                         <i class="fa fa-angle-up">up</i>
@@ -122,7 +146,7 @@ function CommentForm({post_id}) {
                                 <div>
                                     <div>{comment.content}</div>
                                     {/* <div className="comment-info">Votes: {comment.votes}</div> */}
-                                    <button className="comment-delete" onClick={() => {
+                                    {/* <button className="comment-delete" onClick={() => {
                                         dispatch(DeleteAComment(comment.id))
                                         history.push(`/post/${id}`)
                                         }}>
@@ -131,11 +155,12 @@ function CommentForm({post_id}) {
                                     <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
                                         Edit
                                     </button>
-                                    {showForm && ( <EditForm id={comment.id}/>)}
-                                    {userCheck}
+                                    {showForm && ( <EditForm id={comment.id}/>)} */}
+                                    {comment.id}
+                                    {userCheck(comment.user_id, comment.id,id,comment.content)}
                                 </div>
                             </div>
-                        },
+                            )}
                         )}
 
         </div>

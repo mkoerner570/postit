@@ -66,10 +66,11 @@ function PostForm({}){
 				    <p></p>
 			    )}
                 <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)} required={true}>
+                    <option>Select a sub</option>
                     {Object.keys(subs).map(function(sub,keyname,keyindex){
                         return(
                             <option value={subs[keyname].id}>
-                                {subs[keyname].name}
+                                {subs[keyname].name}, {subs[keyname].id}
                             </option>
                         )
                     })}

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import {GetOnePost,EditAPost} from "../store/posts"
+import EditAPost from "../store/posts";
+import GetOnePost from "../store/single"
 
 
 function EditPost({Id},form){
