@@ -6,29 +6,34 @@ import {UpdateAComment} from "../store/comments"
 import { GetOneComment } from "../store/single"
 import {GetOnePost} from "../store/single"
 
-function EditForm({ids,content}){
+function EditForm(){
     const dispatch = useDispatch();
     const history = useHistory();
     const id = useParams();
     const comment = useSelector((state) =>state.single.singleComment)
     const post = useSelector((state) => state.single.singlePost)
-    // const [contents, setContents] = useState(comment?.content)
-        const [contents, setContents] = useState("")
+    const [content, setContent] = useState(comment?.content)
+    // const [content, setContent] = useState("")
+    console.log(comment)
+
+    useEffect(async ()=>{
+        await dispatch(GetOnePost(post?.id))
+        // setContent(comment?.contents)
+    },[dispatch])
 
     useEffect( async() => {
         await dispatch(GetOneComment(parseInt(id.id)))
-        setContents(comment.contents)
+        // setContent(comment?.contents)
     }, [dispatch])
 
-    useEffect(async ()=>{
-        await dispatch(GetOnePost(comment?.post_id))
-    },[dispatch])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = { content}
+        console.log("the payload", content)
+        const payload = { content }
         dispatch(UpdateAComment(payload, id))
-        setContents("")
+        setContent("")
         history.push(`/post/${comment.post_id}`);
     }
 
@@ -79,11 +84,11 @@ function EditForm({ids,content}){
             <textarea
                     id='comment'
                     type="textarea"
-                    value={comment?.content}
-                    // value={contents}
-                    onChange={(e) => setContents(e.target.value)}
+                    // value={comment?.content}
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                     // placeholder={comment?.content}
-            />
+            >{comment?.content}</textarea>
             </label>
             <button id="submit" type="submit">Submit</button>
         </form>
