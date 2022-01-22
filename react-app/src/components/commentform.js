@@ -66,7 +66,7 @@ function CommentForm({post_id}) {
                 Edit
             </button>
             {showForm && ( <EditForm id={commentID}/>)} */}
-            <NavLink to={`/post/${id}/comment/${commentID}/edit`}exact={true} content={content}> Edit </NavLink>
+            <NavLink to={`/post/${id}/comment/${commentID}/edit`}exact={true} contents={content}> Edit </NavLink>
         </div>
         )
         }

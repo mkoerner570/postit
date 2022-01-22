@@ -14,7 +14,7 @@ function EditForm(){
     const post = useSelector((state) => state.single.singlePost)
     const [content, setContent] = useState(comment?.content)
     // const [content, setContent] = useState("")
-    console.log(comment)
+    console.log(comment?.content)
 
     useEffect(async ()=>{
         await dispatch(GetOnePost(post?.id))
@@ -26,11 +26,14 @@ function EditForm(){
         // setContent(comment?.contents)
     }, [dispatch])
 
+    useEffect(async()=>{
+        console.log("++++++",comment?.content)
+        setContent(comment?.content)
+    },[dispatch,comment])
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("the payload", content)
         const payload = { content }
         dispatch(UpdateAComment(payload, id))
         setContent("")
