@@ -144,14 +144,14 @@ export const MinusVoteOnePost = (id) => {
 //   }
 // }
 
-export const GetSearchPost = (title) => async (dispatch) =>{
-  const response = await fetch(`/api/posts/search/${title}`);
+// export const GetSearchPost = (title) => async (dispatch) =>{
+//   const response = await fetch(`/api/posts/search/${title}`);
 
-  if (response.ok) {
-    const post = await response.json();
-    dispatch(searchPosts(post));
-  }
-}
+//   if (response.ok) {
+//     const post = await response.json();
+//     dispatch(searchPosts(post));
+//   }
+// }
 
 // export const initialState = { posts: [],singlePost:[] };
 export const initialState = {};
