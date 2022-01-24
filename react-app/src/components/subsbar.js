@@ -9,11 +9,13 @@ function SubsBar(){
 
     return(
         <div className='subs'>
+        <ul className='subs'>
             {subs.map( sub => {
                 return(
-                <NavLink to={`/sub/${sub.id}/${sub.name}`} exact={true} activeClassName='active' className='links'>{sub.name}</NavLink>
+                <NavLink to={`/sub/${sub.id}/${sub.name}`} exact={true} activeClassName='active' className='links'>-{sub.name}-</NavLink>
                 )
             })}
+        </ul>
         </div>
     )
 }

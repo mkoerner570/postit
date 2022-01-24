@@ -137,12 +137,12 @@ export const MinusVoteOnePost = (id) => {
   }
 }
 
-export const searchPosts = (string) => {
-  return {
-      type: SEARCH_POSTS,
-      payload: string
-  }
-}
+// export const searchPosts = (string) => {
+//   return {
+//       type: SEARCH_POSTS,
+//       payload: string
+//   }
+// }
 
 export const GetSearchPost = (title) => async (dispatch) =>{
   const response = await fetch(`/api/posts/search/${title}`);

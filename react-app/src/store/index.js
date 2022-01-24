@@ -6,6 +6,7 @@ import PostReducer from './posts';
 import CommentReducer from './comments';
 import subReducer from './subs';
 import SingleReducer from './single';
+import SearcReducer from './search';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   comments:CommentReducer,
   subs:subReducer,
   single:SingleReducer,
+  search:SearcReducer
 });
 
 

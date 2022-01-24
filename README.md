@@ -3,6 +3,37 @@ https://postits-app.herokuapp.com/
 
 PostIt is a clone of the popular website Reddit. It is a fullstack app for people to share and comment on photos they have taken. It is a simple way to upload your photos with a title and allows them and others to post comments on them.
 
+## Frontend Technologies Implemented
+   * React
+   * Redux
+
+## Backend Technologies Implemented
+   * Flask
+   * PostgresSQL
+   * PsycoPG
+   * Alembic
+   * AWS S3
+
+
+## Frontend
+### React
+Postit is an application that uses React to display it's logic.
+### Redux
+To manage its state, Postit uses Redux. All calls made to the backend are done using Redux thunks.
+
+
+## Backend
+### Flask
+Since the Backend of Postit is Python, to structure the application Flask was used to set up and manage all the routes.
+### PostgresSQL
+To store and help manage data for python, PostgresSQL was used.
+### PsycoPG
+For Postit's python backend, PsycoPG is used to translate the data from the database for python to understand it.
+### Alembic
+Alembic is used in Postit to help data migrate data.
+### AWS S3
+To handle uploading images to Postit, Amazon Web Services S3 was used.
+
 ## Getting started
 
 1. Clone this repository (only this branch)
@@ -133,13 +164,3 @@ of your Heroku app in the url and tag name:
    ```bash=3
    docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
    ```
-
-   ## Technologies Implemented
-   * Python
-   * Flask
-   * PostgresSQL
-   * PsycoPG
-   * Alembic
-   * Javascript
-   * React
-   * Redux

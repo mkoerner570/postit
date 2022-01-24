@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import {UpdateAComment} from "../store/comments"
 import { GetOneComment } from "../store/single"
 import {GetOnePost} from "../store/single"
+import SubsBar from "./subsbar";
 
 function EditForm(){
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function EditForm(){
 
     return (
     <div>
+    <SubsBar/>
         <div className="postPage-container">
 
         <div className="the-post">
@@ -85,7 +87,7 @@ function EditForm(){
         <form className="CommentForm" onSubmit={handleSubmit}>
             <label className="noteForms">
             <textarea
-                    id='comment'
+                    className='comment'
                     type="textarea"
                     // value={comment?.content}
                     value={content}
@@ -93,7 +95,7 @@ function EditForm(){
                     // placeholder={comment?.content}
             >{comment?.content}</textarea>
             </label>
-            <button id="submit" type="submit">Submit</button>
+            <button className="comment-submit" type="submit">Submit</button>
         </form>
     </div>
     )

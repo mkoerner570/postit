@@ -8,6 +8,7 @@ import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import EditPost  from "./editpost"
+import SubsBar from "./subsbar";
 
 function GetPost(){
     const Id = useParams()
@@ -51,10 +52,10 @@ function GetPost(){
         if (sessionUser.id === posts?.user_id) {
       userCheck =
     <div>
-        <button className="comment-delete" onClick={()=>{handleDelete(posts.id)}}>
+        <button className="comment-submit" onClick={()=>{handleDelete(posts.id)}}>
             Delete
         </button>
-        <button className="comment-edit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
+        <button className="comment-submit" onClick={() => showForm === false ? setShowForm(true) : setShowForm(false) }>
             Edit
         </button>
         {showForm && ( <EditPost id={posts.id} form={showForm}/>)}
@@ -71,7 +72,7 @@ function GetPost(){
     return(
 
         <div className="postPage-container">
-
+        <SubsBar/>
         <div className="the-post">
             <div className="details">
                 <div className="Post-V">

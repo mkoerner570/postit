@@ -53,12 +53,13 @@ function CommentForm({post_id}) {
         <div>
             <button
             id="splashlinkbuttons"
+            className="comment-submit"
             onClick={(e) => {
                 e.preventDefault()
                 handleDelete()
             }}
             >
-                Delete comment
+                Delete
             </button>
             {/* <button className="comment-edit" onClick={() =>
                 showForm === false ? setShowForm(true) : setShowForm(false)
@@ -66,7 +67,7 @@ function CommentForm({post_id}) {
                 Edit
             </button>
             {showForm && ( <EditForm id={commentID}/>)} */}
-            <NavLink to={`/post/${id}/comment/${commentID}/edit`}exact={true} contents={content}> Edit </NavLink>
+            <NavLink className="comment-submit" to={`/post/${id}/comment/${commentID}/edit`}exact={true} contents={content}> Edit </NavLink>
         </div>
         )
         }

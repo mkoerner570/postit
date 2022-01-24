@@ -191,6 +191,15 @@ li{
     margin-bottom: 10px; */
     border-color:rgba(255, 255, 255, 0)
 }
+.post-input{
+    background-color: rgb(120, 120, 120);
+    color:white;
+    /* border: 1px solid grey;
+    display: flex;
+    margin-bottom: 10px; */
+    border-color:rgba(255, 255, 255, 0);
+    width:250px
+}
 .search-button{
     background-color: rgb(81, 81, 81);
     border-color: rgba(255, 255, 255, 0);
@@ -337,4 +346,12 @@ li{
 .required{
     color: tomato;
     padding: 4px;
+}
+
+.subs{
+    align-items: center;
+    justify-content: center;
+    border-color: white;
+    background-color: rgb(81, 81, 81);
+    margin: 0px;
 }

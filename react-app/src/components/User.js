@@ -5,6 +5,7 @@ import { GetAllPosts,DeleteAPost } from "../store/posts";
 import {GetAllComments} from "../store/comments"
 import {NavLink} from "react-router-dom"
 import EditPost  from "./editpost"
+import SubsBar from './subsbar';
 
 function User() {
   const [user, setUser] = useState({});
@@ -70,7 +71,7 @@ function User() {
 
   return (
     <div>
-
+    <SubsBar/>
     <div className="user-posts">
       {user_posts?.map(post => {
         return <div className="postContainer">
@@ -81,7 +82,7 @@ function User() {
                 <img className="the-photos" alt="" src={post.body}/>
               </NavLink>
             </div>
-            <button className="comment-delete" onClick={()=>{
+            <button className="comment-submit" onClick={()=>{
               dispatch(DeleteAPost(post.id));
               history.push(`/users/${currentId}`)
             }}>
