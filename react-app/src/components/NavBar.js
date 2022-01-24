@@ -85,9 +85,9 @@ const NavBar = () => {
         </Link>
       </div>
       <ul>
-        {/* <li className="search">
+        <li className="search">
           <Search/>
-        </li> */}
+        </li>
         <li>
           {demo}
         </li>

@@ -9,7 +9,7 @@ const PLUS_VOTE_POST = 'session/PlusVotePost'
 const MINUS_VOTE_POST = 'session/MinusVotePost'
 const PLUS_VOTE_ONE_POST = 'session/PlusVoteOnePost'
 const MINUS_VOTE_ONE_POST = 'session/MinusVoteOnePost'
-const SEARCH_POSTS = 'session/SearchPosts'
+// const SEARCH_POSTS = 'session/SearchPosts'
 
 const GetPosts = (data) => {
     return {
@@ -213,12 +213,12 @@ const PostReducer = (state = initialState, action) => {
     //     return {
     //         ...state, post: { ...state.post, votes: --state.post.votes }
     //     }
-    case SEARCH_POSTS:
-      console.log("the store",state)
-      newState = Object.assign({}, state);
-      console.log("the newState",newState)
-      newState.searchPost = action.payload.searchPost;
-      return newState;
+    // case SEARCH_POSTS:
+    //   console.log("the store",state)
+    //   newState = Object.assign({}, state);
+    //   console.log("the newState",newState)
+    //   newState.searchPost = action.payload.searchPost;
+    //   return newState;
     default:
       return state;
   }
