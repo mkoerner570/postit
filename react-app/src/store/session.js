@@ -79,11 +79,9 @@ export const GetTheUsers = () => async (dispatch) =>{
   const response = await fetch('/api/users/all')
   if (response.ok) {
     const allUsers = await response.json()
-    // console.log("+++++++++",allUsers)
     dispatch(getUsers(allUsers));
   }
 }
-
 
 export const signUp = (username, email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
@@ -111,7 +109,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
-// export const initialState = { users: [] };
+
 export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
@@ -121,9 +119,6 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     case ALL_USERS:
       newState = Object.assign({}, state);
-      // console.log("------", action.users)
-      // console.log("_______",newState)
-      // action.users.forEach( user => newState.users[action.user.id] = action.user);
       return newState;
     default:
       return state;

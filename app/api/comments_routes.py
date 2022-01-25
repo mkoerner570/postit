@@ -48,6 +48,7 @@ def post_comment():
 @login_required
 def delete_comment(id):
     comment = Comments.query.get(id)
+    print("++++++++",comment)
     db.session.delete(comment)
     db.session.commit()
     return comment.to_dict()

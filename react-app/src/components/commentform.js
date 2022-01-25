@@ -34,7 +34,8 @@ function CommentForm({post_id}) {
     },[dispatch])
 
     const handleDelete = async (e)=> {
-        e.preventDefault();
+        // e.preventDefault();
+
         await dispatch(DeleteAComment(id))
         history.push(`/post/${id}`)
     }
@@ -49,14 +50,21 @@ function CommentForm({post_id}) {
     function userCheck(userId,commentID,id,content){
         // console.log(sessionUser.id === userId)
         if(sessionUser.id === userId){
+            const handleDelete = async (e)=> {
+                // e.preventDefault();
+
+                await dispatch(DeleteAComment(commentID))
+                history.push(`/post/${id}`)
+            }
         return(
         <div>
             <button
+            type="submit"
             id="splashlinkbuttons"
             className="comment-submit"
             onClick={(e) => {
-                e.preventDefault()
-                handleDelete()
+                e.preventDefault(commentID)
+                handleDelete(commentID)
             }}
             >
                 Delete
@@ -127,7 +135,6 @@ function CommentForm({post_id}) {
         </form>
 
         <div>
-            <h1>Hello!</h1>
         {
                         AllComments?.map(comment => {
                             return(
@@ -157,7 +164,6 @@ function CommentForm({post_id}) {
                                         Edit
                                     </button>
                                     {showForm && ( <EditForm id={comment.id}/>)} */}
-                                    {comment.id}
                                     {userCheck(comment.user_id, comment.id,id,comment.content)}
                                 </div>
                             </div>

@@ -17,10 +17,7 @@ function GetPost(){
     const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.single.singlePost);
-    // console.log(sessionUser)
     const [showForm,setShowForm] = useState(false)
-    // console.log("this is the id", sessionUser)
-    // console.log("the single post",posts)
 
     useEffect(async () => {
        await dispatch(GetAllPosts());

@@ -28,7 +28,6 @@ export const GetOnePost = (id) => async (dispatch) =>{
 }
 
 export const GetOneComment = (id) => async (dispatch) =>{
-    console.log("the singlecomment ID", id)
     const response = await fetch(`/api/comments/${id}/single`);
 
     if (response.ok) {

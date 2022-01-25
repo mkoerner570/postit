@@ -82,9 +82,10 @@ def post_post():
 
 
 # Edit post made by the user
-@post_routes.route('/<int:id>/edit',methods=["PUT"])
+@post_routes.route('/<int:id>/post/edit',methods=["PUT"])
 @login_required
 def edit_post(id):
+    print("++++++++++++ start")
     current_post = Posts.query.get(id)
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']

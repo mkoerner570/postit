@@ -16,7 +16,6 @@ function Sub() {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
     const posts = useSelector((state) => Object.values(state.posts));
-    // const history = useHistory()
 
     useEffect(() => {
         dispatch(GetAllPosts());

@@ -43,7 +43,7 @@ function Search(){
         // history.push(`/post/${post.id}`)
     }
 
-    console.log("+++++++",post)
+    // console.log("+++++++",post)
 
     return (
         <div className="search-container">

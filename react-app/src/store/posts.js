@@ -1,7 +1,6 @@
 import { csrfFetch } from "./csrf.js";
 
 const GET_POSTS = 'session/GetPosts'
-// const GET_A_POST = 'session/GetAPost'
 const POST_A_POST = 'session/PostPost'
 const EDIT_POST = 'session/EditPost'
 const DELETE_POST = 'session/DeletePost'
@@ -9,7 +8,7 @@ const PLUS_VOTE_POST = 'session/PlusVotePost'
 const MINUS_VOTE_POST = 'session/MinusVotePost'
 const PLUS_VOTE_ONE_POST = 'session/PlusVoteOnePost'
 const MINUS_VOTE_ONE_POST = 'session/MinusVoteOnePost'
-// const SEARCH_POSTS = 'session/SearchPosts'
+const PUT_A_POST = 'session/PutAPost'
 
 const GetPosts = (data) => {
     return {
@@ -18,14 +17,6 @@ const GetPosts = (data) => {
     };
 };
 
-// const GetAPost = (post) => {
-//     return {
-//       type:GET_A_POST,
-//       payload: post,
-//     };
-// };
-
-
 const PostPost = (data) => {
     return {
       type:POST_A_POST,
@@ -33,10 +24,17 @@ const PostPost = (data) => {
     }
 }
 
-const EditPost = (post) => {
+const PutAPost = (data) => {
+  return{
+    type: PUT_A_POST,
+    data,
+  }
+}
+
+const EditPost = (data) => {
     return {
       type: EDIT_POST,
-      post,
+      data,
     };
 };
 
@@ -55,19 +53,9 @@ export const GetAllPosts = () => async (dispatch) => {
     }
 };
 
-// export const GetOnePost = (id) => async (dispatch) =>{
-//     const response = await fetch(`/api/posts/${id}/one`);
-
-//     if (response.ok) {
-//       const post = await response.json();
-//       dispatch(GetAPost(post));
-//     }
-// }
-
 export const AddAPost = (form, body, sub) => async (dispatch) => {
     const formData = new FormData()
     const sub_id = parseInt(sub)
-    console.log("the sub", sub_id)
     formData.append("body", body)
     formData.append('title', form.title)
     formData.append('sub_id', sub_id)
@@ -76,18 +64,17 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
         method: "POST",
         body: formData,
     });
-    // console.log("the response",response)
     if (response.ok) {
       const post = await response.json()
       dispatch(PostPost(post))
     }
 }
 
-export const EditAPost = (input, id) => async (dispatch) => {
-
-    const response = await csrfFetch(`/api/${id}/edit`, {
+export const EditAPost = (title, id) => async (dispatch) => {
+    console.log("The store",title,id)
+    const response = await csrfFetch(`/api/${id}/post/edit`, {
       method: "PUT",
-      body: JSON.stringify(input),
+      body: JSON.stringify(title),
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
@@ -96,14 +83,24 @@ export const EditAPost = (input, id) => async (dispatch) => {
     }
 };
 
+export const PutPost = (title,id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/${id}/post/edit`, {
+    method: "PUT",
+    body: JSON.stringify(title),
+    headers: { "Content-Type": "application/json" },
+  });
+  if(response.ok){
+    const EditedPost = await response.json();
+    dispatch(PutAPost(EditedPost))
+  }
+}
+
 export const DeleteAPost = (id) => async (dispatch) => {
-    console.log("the delete,", id)
     let newID = parseInt(id)
     console.log(newID)
     const response = await fetch(`/api/destroy/${newID}`, {
       method: "DELETE",
     });
-    console.log("the response",response)
     if (response.ok) {
       dispatch(DeletePost(newID));
     }
@@ -137,40 +134,16 @@ export const MinusVoteOnePost = (id) => {
   }
 }
 
-// export const searchPosts = (string) => {
-//   return {
-//       type: SEARCH_POSTS,
-//       payload: string
-//   }
-// }
-
-// export const GetSearchPost = (title) => async (dispatch) =>{
-//   const response = await fetch(`/api/posts/search/${title}`);
-
-//   if (response.ok) {
-//     const post = await response.json();
-//     dispatch(searchPosts(post));
-//   }
-// }
-
-// export const initialState = { posts: [],singlePost:[] };
 export const initialState = {};
 const PostReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_POSTS:
       newState = Object.assign({}, state);
-      // newState.posts = action.payload.post;
-      // return newState;
       Object.values(action.payload.post).forEach(obj => {
         newState[obj.id] = obj;
       })
-      // console.log("+++++++",newState)
       return newState;
-    // case GET_A_POST:
-    //   newState = Object.assign({}, state);
-    //   newState.singlePost = action.payload.singlePost;
-    //   return newState;
     case DELETE_POST:
       newState = Object.assign({}, state);
       delete newState[action.id];
@@ -179,13 +152,14 @@ const PostReducer = (state = initialState, action) => {
     case POST_A_POST:
       newState={...state}
       newState[action.data.id] = action.data.id
-      // const PostList = newState.posts.map(post => newState[post])
-      // PostList.push(action.posts)
       return newState;
     case EDIT_POST:
-      // console.log("+++++++",action)
       newState = Object.assign({},state)
-      newState[action.post.id] = action.post
+      newState[action.data.id] = action.data
+      return newState
+    case PUT_A_POST:
+      newState = Object.assign({},state)
+      newState[action.data.id] = action.data
       return newState
     //   case PLUS_VOTE_POST:
     //     return {
@@ -213,12 +187,6 @@ const PostReducer = (state = initialState, action) => {
     //     return {
     //         ...state, post: { ...state.post, votes: --state.post.votes }
     //     }
-    // case SEARCH_POSTS:
-    //   console.log("the store",state)
-    //   newState = Object.assign({}, state);
-    //   console.log("the newState",newState)
-    //   newState.searchPost = action.payload.searchPost;
-    //   return newState;
     default:
       return state;
   }
