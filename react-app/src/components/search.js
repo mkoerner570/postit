@@ -13,6 +13,8 @@ function Search(){
     const post = useSelector((state) => state.search.searchPost);
     const history = useHistory()
 
+    // console.log(post.id)
+
     useEffect(async () => {
         await dispatch(GetAllPosts());
     }, [dispatch]);
@@ -24,9 +26,16 @@ function Search(){
     let errors = []
     const submitHandler = async (e) => {
         e.preventDefault()
-        await dispatch(GetSearchPost(searchTitle))
-        console.log(searchTitle)
+        dispatch(GetSearchPost(searchTitle))
         console.log(post)
+        if(post){
+            setSearchTitle("")
+            history.push(`/post/${post.id}`)
+        }
+        else{
+            setSearchTitle("")
+            history.push('/noresults')
+        }
         // const search = await dispatch(GetSearchPost(searchTitle))
         // console.log(search === true)
 
@@ -41,7 +50,14 @@ function Search(){
         //     }
         // }
         // history.push(`/post/${post.id}`)
+        // if(!item){
+        //     history.push('/noresults')
+        // }
     }
+
+    // useEffect(async () => {
+    //     history.push(`/post/${post.id}`)
+    // },[submitHandler])
 
     // console.log("+++++++",post)
 
@@ -58,7 +74,7 @@ function Search(){
                     name="searchString"
                     value={searchTitle}
                     placeholder="Search Posts"
-                    onChange={searchHandler}
+                    onChange={(e) => setSearchTitle(e.target.value)}
                     required={true}
                     className="input"
                 />

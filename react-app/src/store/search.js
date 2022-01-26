@@ -1,11 +1,19 @@
 import { csrfFetch } from "./csrf.js";
 
 const SEARCH_POSTS = 'session/SearchPosts'
+const CLEAR_POST = 'session/ClearPost'
 
-export const searchPosts = (string) => {
+export const SearchPosts = (string) => {
     return {
         type: SEARCH_POSTS,
         payload: string
+    }
+}
+
+export const ClearPost = (id) => {
+    return{
+        type: CLEAR_POST,
+        id
     }
 }
 
@@ -14,7 +22,7 @@ export const GetSearchPost = (title) => async (dispatch) =>{
 
     if (response.ok) {
       const post = await response.json();
-      dispatch(searchPosts(post));
+      dispatch(SearchPosts(post));
     }
 }
 
@@ -25,6 +33,11 @@ const SearcReducer = (state = initialState, action) =>{
         case SEARCH_POSTS:
             newState = Object.assign({},state);
             newState.searchPost = action.payload.searchPost;
+            return newState;
+        case CLEAR_POST:
+            newState = Object.assign({}, state);
+            delete newState[action.id]
+            delete newState.searchPost;
             return newState;
         default:
             return state;

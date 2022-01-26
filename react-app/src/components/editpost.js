@@ -25,7 +25,8 @@ function EditPost({Id},form){
         await dispatch(PutPost(payload, ids))
         // await dispatch(GetOnePost(parseInt(id.id)))
         // setShowForm = false
-        history.push(`/users/${user}`);
+        // history.push(`/users/${user}`);
+        window.location.reload(true)
     }
 
 

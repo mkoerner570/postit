@@ -7,6 +7,7 @@ import {GetOnePost} from "../store/single"
 import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ClearPost } from "../store/search";
 import EditPost  from "./editpost"
 import SubsBar from "./subsbar";
 
@@ -25,6 +26,10 @@ function GetPost(){
 
     useEffect(async ()=>{
         await dispatch(GetOnePost(parseInt(Id.id)))
+    },[dispatch])
+
+    useEffect(async ()=>{
+        await dispatch(ClearPost(parseInt(Id.id)))
     },[dispatch])
 
     if(!posts){
