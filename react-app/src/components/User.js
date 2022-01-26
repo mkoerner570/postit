@@ -52,7 +52,7 @@ function User() {
   let user_posts = []
   for(let i = 0; i < posts.length; i++){
     if(posts[i].user_id === currentId){
-      user_posts.push(posts[i])
+      user_posts.unshift(posts[i])
     }
   }
 
