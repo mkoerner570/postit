@@ -48,7 +48,6 @@ function CommentForm({post_id}) {
     }
 
     function userCheck(userId,commentID,id,content){
-        // console.log(sessionUser.id === userId)
         if(sessionUser.id === userId){
             const handleDelete = async (e)=> {
                 // e.preventDefault();
@@ -138,7 +137,6 @@ function CommentForm({post_id}) {
         {
                         AllComments?.map(comment => {
                             return(
-                            // console.log("in the map",comment)
                             // let index = 0
                             // index++
                              <div className="comments">

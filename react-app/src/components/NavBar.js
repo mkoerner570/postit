@@ -17,8 +17,6 @@ const NavBar = () => {
   const allSubs = useSelector((state) => state.subs)
   const subs = Object.values(allSubs)
 
-  // console.log(subs)
-
   const demoLogin = async () => {
     setCredential('demo@aa.io');
     setPassword('password');

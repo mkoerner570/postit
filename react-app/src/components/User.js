@@ -63,7 +63,6 @@ function User() {
     }
   }
   // const handleDelete = async (e)=> {
-  //   console.log("the delete",id)
   //   history.push(`/users/${currentId}`)
   // }
 

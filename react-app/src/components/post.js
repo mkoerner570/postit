@@ -39,7 +39,6 @@ function GetPost(){
 
     const handleDelete =async (e)=> {
         // e.preventDefault();
-        // console.log("delete")
         if(posts.user_id === sessionUser.id){
             await dispatch(DeleteAPost(Id.id))
             history.push(`/`)
@@ -70,7 +69,6 @@ function GetPost(){
         return null
     }
 
-    // console.log("this is the post", posts)
     return(
 
         <div className="postPage-container">

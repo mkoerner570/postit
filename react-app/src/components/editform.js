@@ -15,7 +15,6 @@ function EditForm(){
     const post = useSelector((state) => state.single.singlePost)
     const [content, setContent] = useState(comment?.content)
     // const [content, setContent] = useState("")
-    console.log(comment?.content)
 
     useEffect(async ()=>{
         await dispatch(GetOnePost(post?.id))
@@ -28,7 +27,6 @@ function EditForm(){
     }, [dispatch])
 
     useEffect(async()=>{
-        console.log("++++++",comment?.content)
         setContent(comment?.content)
     },[dispatch,comment])
 

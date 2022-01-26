@@ -22,7 +22,6 @@ function Main(){
 
     const dispatch = useDispatch()
 
-    // console.log("the users", posts)
     useEffect(() => {
         dispatch(GetAllPosts());
     }, [dispatch]);
@@ -45,13 +44,12 @@ function Main(){
 
     // const MinusPostHandler = (post_id,sessionUser) => {
     //     if (sessionUser) {
-    //         console.log(dispatch(MinusVoteOnePost(post_id)))
     //     }
     //     else
     //         history.push(`/login`)
     // }
     let allPosts = []
-    for(let i = 0; i < posts.length-1; i++){
+    for(let i = 0; i < posts.length; i++){
         allPosts.unshift(posts[i])
     }
 
@@ -71,7 +69,6 @@ function Main(){
             <div className="posts" >
                 {
                     allPosts?.map(post =>{
-                        // {console.log(post)}
                         return <div className="postContainer">
                             {/* <div className="votes">
                                 <button className="plusOne"onClick={() => {PlusPostHandler(post.id,sessionUser)}}>

@@ -11,13 +11,11 @@ comment_routes = Blueprint('comments', __name__)
 @comment_routes.route("/posts/<int:id>/comments")
 def get_comments(id):
     postComments = Comments.query.filter(Comments.post_id == id).all()
-    print(postComments)
     return {'allComments':[comment.to_dict() for comment in postComments]}
 
 # Get one comment from the database
 @comment_routes.route("/comments/<int:id>/single")
 def single_comment(id):
-    print("this is the single post", id)
     singleComment = Comments.query.filter(Comments.id == id).first()
     return {'singleComment':singleComment.to_dict()}
 
@@ -48,7 +46,6 @@ def post_comment():
 @login_required
 def delete_comment(id):
     comment = Comments.query.get(id)
-    print("++++++++",comment)
     db.session.delete(comment)
     db.session.commit()
     return comment.to_dict()

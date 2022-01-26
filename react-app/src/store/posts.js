@@ -59,7 +59,6 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
     formData.append("body", body)
     formData.append('title', form.title)
     formData.append('sub_id', sub_id)
-    console.log("the form data,",formData)
     const response = await fetch(`/api/add`, {
         method: "POST",
         body: formData,
@@ -71,7 +70,6 @@ export const AddAPost = (form, body, sub) => async (dispatch) => {
 }
 
 export const EditAPost = (title, id) => async (dispatch) => {
-    console.log("The store",title,id)
     const response = await csrfFetch(`/api/${id}/post/edit`, {
       method: "PUT",
       body: JSON.stringify(title),
@@ -97,7 +95,6 @@ export const PutPost = (title,id) => async (dispatch) => {
 
 export const DeleteAPost = (id) => async (dispatch) => {
     let newID = parseInt(id)
-    console.log(newID)
     const response = await fetch(`/api/destroy/${newID}`, {
       method: "DELETE",
     });

@@ -70,14 +70,13 @@ function PostForm({}){
                     {Object.keys(subs).map(function(sub,keyname,keyindex){
                         return(
                             <option value={subs[keyname].id}>
-                                {subs[keyname].name}, {subs[keyname].id}
+                                {subs[keyname].name}
                             </option>
                         )
                     })}
                 </select>
                 {/* <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}required={true}>
                     {Object.keys(subs).map(function(keyname,keyindex) {
-                        // console.log("...........",keyindex)
                         return(
                             <option value={keyindex}>
                                 {subs[keyindex]}

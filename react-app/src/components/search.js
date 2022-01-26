@@ -13,8 +13,6 @@ function Search(){
     const post = useSelector((state) => state.search.searchPost);
     const history = useHistory()
 
-    // console.log(post.id)
-
     useEffect(async () => {
         await dispatch(GetAllPosts());
     }, [dispatch]);
@@ -27,7 +25,6 @@ function Search(){
     const submitHandler = async (e) => {
         e.preventDefault()
         dispatch(GetSearchPost(searchTitle))
-        console.log(post)
         if(post){
             setSearchTitle("")
             history.push(`/post/${post.id}`)
@@ -37,7 +34,6 @@ function Search(){
             history.push('/noresults')
         }
         // const search = await dispatch(GetSearchPost(searchTitle))
-        // console.log(search === true)
 
         // for( let i = 0; i<posts.length; i++ ){
         //     if(searchTitle === posts[i].title.toLowerCase()){
@@ -58,8 +54,6 @@ function Search(){
     // useEffect(async () => {
     //     history.push(`/post/${post.id}`)
     // },[submitHandler])
-
-    // console.log("+++++++",post)
 
     return (
         <div className="search-container">

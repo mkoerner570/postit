@@ -42,7 +42,6 @@ function Sub() {
             <div className="posts" >
                 {
                     subposts?.map(post =>{
-                        // {console.log(post)}
                         return <div className="postContainer">
                             {/* <div className="votes">
                                 <button className="plusOne"onClick={() => {PlusPostHandler(post.id,sessionUser)}}>

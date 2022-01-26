@@ -45,7 +45,6 @@ def post_post():
     )
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print("+++++++++,",PostForm())
     post = request.files["body"]
 
     post.filename = get_unique_filename(post.filename)
@@ -63,7 +62,6 @@ def post_post():
 
     user = current_user.id
     if form.validate_on_submit():
-        # print("++++++++++++++++", form.data)
         data = form.data
         new_post = Posts(
             user_id = user,
@@ -85,7 +83,6 @@ def post_post():
 @post_routes.route('/<int:id>/post/edit',methods=["PUT"])
 @login_required
 def edit_post(id):
-    print("++++++++++++start")
     current_post = Posts.query.get(id)
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
