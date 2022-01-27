@@ -27,7 +27,7 @@ function Search({posts}){
             setSearchTitle(searchedFor)
         }
     }
-    let value = ""
+
     const submitHandler = async (e) => {
         e.preventDefault()
         if(searchTitle.length === 0){
@@ -35,7 +35,6 @@ function Search({posts}){
         } else {
             history.push({
                 pathname:'/results',
-                search:'?query=abc',
                 state:{results:searchTitle}})
                 setSearchTitle("")
         }
@@ -51,7 +50,6 @@ function Search({posts}){
                     name="searchString"
                     placeholder="Search Posts"
                     onChange={searchHandler}
-                    // value={value}
                     required={true}
                     className="input"
                 />
