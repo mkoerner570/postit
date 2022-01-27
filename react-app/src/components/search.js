@@ -21,9 +21,14 @@ function Search({posts}){
     const searchHandler = (e) => {
         const search = e.target.value;
         const searchedFor = allPosts.filter((data) => {
-            return data.title.includes(search)
+            return data.title.includes(search.toLowerCase())
         })
-        setSearchTitle(searchedFor)
+        if(search === ""){
+            setSearchTitle([])
+        } else {
+            setSearchTitle(searchedFor)
+        }
+        console.log(searchTitle.length)
     }
 
     let errors = []
@@ -58,6 +63,8 @@ function Search({posts}){
     }
 
 
+
+
     return (
         <div className="search-container">
             <div>
@@ -78,12 +85,14 @@ function Search({posts}){
                 </button>
                 {searchTitle.length > 0 && (
                     <div className="results">
-                        {allPosts.map((post) => {
+                        {searchTitle.map((post) => {
                             return(
+                                <ul>
                                 <NavLink className="search-title" to={`/post/${post.id}`}>
-                                    {post.title}
                                     <img className="search-photo" alt="" src={post.body}/>
+                                    {post.title}
                                 </NavLink>
+                                </ul>
                             )
                         })}
                     </div>

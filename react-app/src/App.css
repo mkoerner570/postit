@@ -100,6 +100,7 @@ li{
     left: 0;
     right: 0;
     margin-top: 5px;
+    z-index: 2;
 }
 
 .©{
@@ -263,6 +264,7 @@ li{
 }
 
 .logout{
+    position: sticky;
     color: white;
     background-color: rgba(255, 255, 255, 0);
     border-color: rgba(255, 255, 255, 0);
@@ -352,6 +354,7 @@ li{
 }
 
 .subs{
+
     align-items: center;
     justify-content: center;
     border-color: white;
@@ -361,15 +364,28 @@ li{
 
 
 .results{
-    width:200px;
+    position: absolute;
+    width:211px;
     background-color: gray;
-    align-items: flex-start;
-    justify-content: center;
-    z-index: 111;
+    /* align-items: flex-start; */
+    /* justify-content: center; */
+    z-index: 1;
+    height: 150px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 .search-title{
-    width:100px
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width:50%;
+    height: 50px;
 }
 .search-photo{
-    width:50px
+    align-items: flex-start;
+    width:50%
+}
+
+.the-nav{
+    position: relative;
 }

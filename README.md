@@ -34,6 +34,8 @@ Alembic is used in Postit to help data migrate data.
 ### AWS S3
 To handle uploading images to Postit, Amazon Web Services S3 was used.
 
+![Post](https://imgur.com/RnXtWLP)
+
 ## Getting started
 
 1. Clone this repository (only this branch)
