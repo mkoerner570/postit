@@ -11,7 +11,7 @@ function Search({posts}){
     const dispatch = useDispatch()
     const history = useHistory()
     const allPosts = Object.values(posts)
-
+    let value;
     useEffect(async () => {
         await dispatch(GetAllPosts());
     }, [dispatch]);
@@ -33,11 +33,14 @@ function Search({posts}){
         if(searchTitle.length === 0){
             history.push('/noresults')
         } else {
+            value=""
             history.push({
                 pathname:'/results',
                 state:{results:searchTitle}})
-                setSearchTitle("")
+            setSearchTitle("")
+            value=""
         }
+        value=""
     }
 
 
@@ -50,6 +53,7 @@ function Search({posts}){
                     name="searchString"
                     placeholder="Search Posts"
                     onChange={searchHandler}
+                    value={value}
                     required={true}
                     className="input"
                 />
