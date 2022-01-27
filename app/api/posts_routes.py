@@ -49,10 +49,6 @@ def post_post():
 
     post.filename = get_unique_filename(post.filename)
     s3.upload_fileobj(post, 'imagesclone', post.filename,
-                                # ExtraArgs={
-                                #     'ACL': 'public-read',
-                                #     'ContentType': post.content_type
-                                # }
                                 )
     response = s3.generate_presigned_url('get_object',
                                                 Params={'Bucket': 'imagesclone',
@@ -67,7 +63,6 @@ def post_post():
             user_id = user,
             body = url_image,
             title = data["title"],
-            # post_id = data["post_id"],
             sub_id = data["sub_id"],
             votes = 0
         )
