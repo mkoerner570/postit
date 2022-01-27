@@ -2,37 +2,43 @@ import React, {useState,useEffect} from "react";
 import { GetAllPosts } from "../store/posts";
 import { GetSearchPost } from "../store/search";
 import { useDispatch } from "react-redux"
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 
-function Search(){
-    const [searchTitle,setSearchTitle] = useState('')
+function Search({posts}){
+    const [searchTitle,setSearchTitle] = useState([])
     // const [errors, setErrors] = useState([]);
     const dispatch = useDispatch()
-    const post = useSelector((state) => state.search.searchPost);
+    // const post = useSelector((state) => state.search.searchPost);
     const history = useHistory()
+    const allPosts = Object.values(posts)
 
     useEffect(async () => {
         await dispatch(GetAllPosts());
     }, [dispatch]);
 
     const searchHandler = (e) => {
-        setSearchTitle(e.target.value)
+        const search = e.target.value;
+        const searchedFor = allPosts.filter((data) => {
+            return data.title.includes(search)
+        })
+        setSearchTitle(searchedFor)
     }
 
     let errors = []
     const submitHandler = async (e) => {
         e.preventDefault()
-        dispatch(GetSearchPost(searchTitle))
-        if(post){
-            setSearchTitle("")
-            history.push(`/post/${post.id}`)
-        }
-        else{
-            setSearchTitle("")
-            history.push('/noresults')
-        }
+        let item = dispatch(GetSearchPost(searchTitle))
+        console.log(item)
+        // if(post){
+        //     setSearchTitle("")
+        //     history.push(`/post/${post.id}`)
+        // }
+        // else{
+        //     setSearchTitle("")
+        //     history.push('/noresults')
+        // }
         // const search = await dispatch(GetSearchPost(searchTitle))
 
         // for( let i = 0; i<posts.length; i++ ){
@@ -51,13 +57,9 @@ function Search(){
         // }
     }
 
-    // useEffect(async () => {
-    //     history.push(`/post/${post.id}`)
-    // },[submitHandler])
 
     return (
         <div className="search-container">
-            <form >
             <div>
                 {errors.map((error) => (
                     <div>{error}</div>
@@ -66,16 +68,26 @@ function Search(){
                 <input
                     type="text"
                     name="searchString"
-                    value={searchTitle}
                     placeholder="Search Posts"
-                    onChange={(e) => setSearchTitle(e.target.value)}
+                    onChange={searchHandler}
                     required={true}
                     className="input"
                 />
                 <button onClick={submitHandler} className="search-button">
                     <i class="fa fa-search">Search</i>
                 </button>
-            </form>
+                {searchTitle.length > 0 && (
+                    <div className="results">
+                        {allPosts.map((post) => {
+                            return(
+                                <NavLink className="search-title" to={`/post/${post.id}`}>
+                                    {post.title}
+                                    <img className="search-photo" alt="" src={post.body}/>
+                                </NavLink>
+                            )
+                        })}
+                    </div>
+                )}
         </div>
 
     )

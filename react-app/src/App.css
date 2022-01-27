@@ -140,6 +140,7 @@ li{
     justify-content: center;
     align-items: center;
     border: 2px solid white;
+    z-index: 0;
 }
 .PostForm {
 
@@ -176,7 +177,9 @@ li{
     width: 150px;
     margin-top: 10px;
 }
-
+.search-containter{
+    position: fixed;
+}
 .search{
     /* margin: 10px; */
     margin-left: 10px;
@@ -354,4 +357,19 @@ li{
     border-color: white;
     background-color: rgb(81, 81, 81);
     margin: 0px;
+}
+
+
+.results{
+    width:200px;
+    background-color: gray;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 111;
+}
+.search-title{
+    width:100px
+}
+.search-photo{
+    width:50px
 }

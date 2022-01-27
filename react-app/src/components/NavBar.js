@@ -15,6 +15,7 @@ const NavBar = () => {
   const { userId }  = useParams();
   const sessionUser = useSelector((state) => state.session.user);
   const allSubs = useSelector((state) => state.subs)
+  const posts = useSelector((state) => state.posts)
   const subs = Object.values(allSubs)
 
   const demoLogin = async () => {
@@ -82,10 +83,11 @@ const NavBar = () => {
            PostIt
         </Link>
       </div>
+
       <ul>
-        {/* <li className="search">
-          <Search/>
-        </li> */}
+        <li className="search">
+          <Search posts={posts}/>
+        </li>
         <li>
           {demo}
         </li>
@@ -106,6 +108,7 @@ const NavBar = () => {
           <SubsBar/>
         </li> */}
       </ul>
+
 
       </div>
     </nav>
