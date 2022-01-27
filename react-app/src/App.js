@@ -16,6 +16,7 @@ import Footer from './components/footer';
 import './App.css'
 import NoPage from './components/noresults';
 import EditForm from './components/editform';
+import Results from './components/results';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,6 +61,9 @@ function App() {
         </Route>
         <Route path='/noresults'>
           <NoPage />
+        </Route>
+        <Route path='/results'>
+          <Results />
         </Route>
         <Route path='/sub/:id/:name'>
           <Sub />
