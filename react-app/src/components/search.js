@@ -8,9 +8,7 @@ import { useSelector } from "react-redux";
 
 function Search({posts}){
     const [searchTitle,setSearchTitle] = useState([])
-    // const [errors, setErrors] = useState([]);
     const dispatch = useDispatch()
-    // const post = useSelector((state) => state.search.searchPost);
     const history = useHistory()
     const allPosts = Object.values(posts)
 
@@ -28,38 +26,19 @@ function Search({posts}){
         } else {
             setSearchTitle(searchedFor)
         }
-        console.log(searchTitle.length)
     }
-
-    let errors = []
+    let value = ""
     const submitHandler = async (e) => {
         e.preventDefault()
-        let item = dispatch(GetSearchPost(searchTitle))
-        console.log(item)
-        // if(post){
-        //     setSearchTitle("")
-        //     history.push(`/post/${post.id}`)
-        // }
-        // else{
-        //     setSearchTitle("")
-        //     history.push('/noresults')
-        // }
-        // const search = await dispatch(GetSearchPost(searchTitle))
-
-        // for( let i = 0; i<posts.length; i++ ){
-        //     if(searchTitle === posts[i].title.toLowerCase()){
-        //         setSearchTitle("")
-        //         history.push(`/post/${post[i].id}`)
-        //     }
-        //     else{
-        //         setSearchTitle("")
-        //         history.push('/noresults')
-        //     }
-        // }
-        // history.push(`/post/${post.id}`)
-        // if(!item){
-        //     history.push('/noresults')
-        // }
+        if(searchTitle.length === 0){
+            history.push('/noresults')
+        } else {
+            history.push({
+                pathname:'/results',
+                search:'?query=abc',
+                state:{results:searchTitle}})
+                setSearchTitle("")
+        }
     }
 
 
@@ -67,16 +46,12 @@ function Search({posts}){
 
     return (
         <div className="search-container">
-            <div>
-                {errors.map((error) => (
-                    <div>{error}</div>
-                ))}
-            </div>
                 <input
                     type="text"
                     name="searchString"
                     placeholder="Search Posts"
                     onChange={searchHandler}
+                    // value={value}
                     required={true}
                     className="input"
                 />
