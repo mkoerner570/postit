@@ -19,7 +19,7 @@ function Search({posts}){
     const searchHandler = (e) => {
         const search = e.target.value;
         const searchedFor = allPosts.filter((data) => {
-            return data.title.includes(search.toLowerCase())
+            return data.title.includes(search)
         })
         if(search === ""){
             setSearchTitle([])
