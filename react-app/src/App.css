@@ -378,14 +378,25 @@ li{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    /* padding: 5px;
+    margin: 5px; */
     width:50%;
     height: 50px;
 }
 .search-photo{
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 5px 5px 5px;
+    /* margin: 5px; */
     width:50%
 }
 
 .the-nav{
     position: relative;
+}
+
+.results-box{
+    border: solid 1px;
+    width:209px;
+    height: 80px;
 }
