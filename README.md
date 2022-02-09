@@ -14,6 +14,16 @@ PostIt is a clone of the popular website Reddit. It is a fullstack app for peopl
    * Alembic
    * AWS S3
 
+## Upcoming Features
+What is coming next for PostIt is as following:
+   * The ability to upvote/downvote posts.
+   * The ability to upvote/downvote comments.
+   * User's will be able to create their own subreddits.
+      * As a creator, they will be able to set rules and remove posts/comments which violates those rules.
+      * Creators will be able to assign moderator roles, moderators would have the same remove abilities as creators.
+   * Users will be able to see other user profiles and their posts.
+   * The ability to leave or join any subreaddt the user wants.
+
 
 ## Frontend
 ### React
