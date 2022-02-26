@@ -85,9 +85,9 @@ const NavBar = () => {
       </div>
 
       <ul className='the-nav'>
-        {/* <li className="search">
+        <li className="search">
           <Search posts={posts}/>
-        </li> */}
+        </li>
         <li>
           {demo}
         </li>
