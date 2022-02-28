@@ -6,7 +6,7 @@ import { useHistory,useParams } from "react-router";
 import Search from "./search";
 import {NavLink} from "react-router-dom"
 // import { PlusVotePost,MinusVotePost,PlusVoteOnePost,MinusVoteOnePost } from "../store/posts"
-import {DeleteAPost} from "../store/posts"
+import {DeleteAPost, PlusPost} from "../store/posts"
 import {GetTheUsers} from "../store/session"
 import SubsBar from './subsbar';
 
@@ -35,12 +35,12 @@ function Main(){
     }, [dispatch]);
 
 
-    // const PlusPostHandler = (post_id,sessionUser) => {
-    //     if (sessionUser) {
-    //         dispatch(PlusVoteOnePost(post_id))}
-    //     else
-    //         history.push(`/login`)
-    // }
+    const PlusPostHandler = (post_id,sessionUser) => {
+        if (sessionUser) {
+            dispatch(PlusPost(post_id))}
+        else
+            history.push(`/login`)
+    }
 
     // const MinusPostHandler = (post_id,sessionUser) => {
     //     if (sessionUser) {
@@ -70,14 +70,14 @@ function Main(){
                 {
                     allPosts?.map(post =>{
                         return <div className="postContainer">
-                            {/* <div className="votes">
+                            <div className="votes">
                                 <button className="plusOne"onClick={() => {PlusPostHandler(post.id,sessionUser)}}>
                                     <i class="fa fa-angle-up">up</i>
                                 </button>
-                                <button className="minusOne"onClick={() => {MinusPostHandler(post.id,sessionUser)}}>
+                                {/* <button className="minusOne"onClick={() => {MinusPostHandler(post.id,sessionUser)}}>
                                     <i class="fa fa-angle-down">down</i>
-                                </button>
-                            </div> */}
+                                </button> */}
+                            </div>
 
                             <div>
                                 <div>

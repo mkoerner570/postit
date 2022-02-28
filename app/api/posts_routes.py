@@ -5,6 +5,7 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import PostForm
 from app.forms import EditPostForm
+from app.forms import VotePostForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_images import (
     allowed_file, get_unique_filename)
@@ -98,3 +99,18 @@ def delete_post(id):
     db.session.delete(post)
     db.session.commit()
     return post.to_dict()
+
+
+@post_routes.route('/postplus/<int:id>', methods=["PUT"])
+@login_required
+def up_a_post(id):
+    print("starting the upvote...........................")
+    post = Posts.query.get(id)
+    form = VotePostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        post.votes += 1
+        db.session.commit()
+        return post.to_dict()
+    else:
+        return form.errors

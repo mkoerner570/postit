@@ -131,6 +131,18 @@ export const MinusVoteOnePost = (id) => {
   }
 }
 
+export const PlusPost = (id) => async (dispatch) => {
+  console.log("the id",id)
+  const response = await csrfFetch(`/api/postplus/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+  });
+  if(response.ok){
+    const VotedPost = await response.json();
+    dispatch(PlusVoteOnePost(VotedPost))
+  }
+}
+
 export const initialState = {};
 const PostReducer = (state = initialState, action) => {
   let newState;
@@ -158,15 +170,15 @@ const PostReducer = (state = initialState, action) => {
       newState = Object.assign({},state)
       newState[action.data.id] = action.data
       return newState
-    //   case PLUS_VOTE_POST:
-    //     return {
-    //         ...state,
-    //         posts: state.posts.map(post => {
-    //             if (action.payload === post.id)
-    //                 return { ...post, votes: ++post.votes }
-    //             else return { ...post }
-    //         })
-    //     }
+    case PLUS_VOTE_POST:
+      return {
+            ...state,
+            posts: state.posts.map(post => {
+                if (action.payload === post.id)
+                    return { ...post, votes: ++post.votes }
+                else return { ...post }
+            })
+        }
     // case MINUS_VOTE_POST:
     //     return {
     //         ...state,

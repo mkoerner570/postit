@@ -24,3 +24,6 @@ class EditPostForm(FlaskForm):
     title=StringField("Title")
     # body=FileField("Body")
     submit=SubmitField("Submit")
+
+class VotePostForm(FlaskForm):
+    votes=IntegerField("Votes")
