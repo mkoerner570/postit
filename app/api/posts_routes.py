@@ -105,11 +105,13 @@ def delete_post(id):
 @login_required
 def up_a_post(id):
     print("starting the upvote...........................")
+    print(id)
     post = Posts.query.get(id)
+    print("the post.............", post.votes + 1)
     form = VotePostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        post.votes += 1
+        post.votes = post.votes + 1
         db.session.commit()
         return post.to_dict()
     else:
