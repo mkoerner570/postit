@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom';
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { AddAComment, GetAllComments, DeleteAComment } from "../store/comments"
+import { AddAComment, GetAllComments, DeleteAComment,PlusComment,MinusComment } from "../store/comments"
 import {PlusCommentHandler, MinusCommentHandler} from "../utils/utilities"
 import EditForm from "./editform.js"
 
@@ -20,6 +20,26 @@ function CommentForm({post_id}) {
     const sessionUser = useSelector((state) => state.session.user);
     const postComments = Object.values(comments)
     let id = parseInt(postId.id)
+
+    const PlusCommentHandler = (id,sessionUser) => {
+        const dispatch = useDispatch()
+        const history = useHistory()
+        if (sessionUser) {
+            dispatch(PlusComment(post_id))}
+        else
+            history.push(`/login`)
+
+    }
+
+    const MinusCommentHandler = (id,sessionUser) => {
+        const dispatch = useDispatch()
+        const history = useHistory()
+        if (sessionUser) {
+            dispatch(MinusComment(post_id))
+        }
+        else
+            history.push(`/login`)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

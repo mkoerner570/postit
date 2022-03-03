@@ -99,6 +99,28 @@ export const DeleteAComment = (id) => async (dispatch) => {
     }
 };
 
+export const PlusComment = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/commentplus/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+  });
+  if(response.ok){
+    const voteComment = await response.json()
+    dispatch(PlusVoteComment(voteComment))
+  }
+}
+
+export const MinusComment = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/commentminus/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+  });
+  if(response.ok){
+    const voteComment = await response.json()
+    dispatch(PlusVoteComment(voteComment))
+  }
+}
+
 export const initialState = {  };
 const CommentReducer = (state = initialState, action) => {
   let newState;
@@ -119,22 +141,22 @@ const CommentReducer = (state = initialState, action) => {
       newState = Object.assign({},state)
       newState[action.comment.id] = action.comment
       return newState
-    // case PLUS_COMMENT:
-    //     return {
-    //           ...state, comments: state.comments.map(comment => {
-    //               if (action.payload === comment.id)
-    //                   return { ...comment, votes: ++comment.votes }
-    //               else return { ...comment }
-    //           })
-    //       }
-    // case MINUS_COMMENT:
-    //   return {
-    //           ...state, comments: state.comments.map(comment => {
-    //               if (action.payload === comment.id)
-    //                   return { ...comment, votes: --comment.votes }
-    //               else return { ...comment }
-    //           })
-    //       }
+    case PLUS_COMMENT:
+        return {
+              ...state, comments: state.comments.map(comment => {
+                  if (action.payload === comment.id)
+                      return { ...comment, votes: ++comment.votes }
+                  else return { ...comment }
+              })
+          }
+    case MINUS_COMMENT:
+      return {
+              ...state, comments: state.comments.map(comment => {
+                  if (action.payload === comment.id)
+                      return { ...comment, votes: --comment.votes }
+                  else return { ...comment }
+              })
+          }
     default:
       return state;
   }
