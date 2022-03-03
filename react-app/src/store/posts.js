@@ -132,7 +132,6 @@ export const MinusVoteOnePost = (id) => {
 }
 
 export const PlusPost = (id) => async (dispatch) => {
-  console.log(typeof id )
   const response = await csrfFetch(`/api/postplus/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -140,6 +139,17 @@ export const PlusPost = (id) => async (dispatch) => {
   if(response.ok){
     const VotedPost = await response.json();
     dispatch(PlusVoteOnePost(VotedPost))
+  }
+}
+
+export const MinusPost = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/postminus/${id}`, {
+    method:"PUT",
+    headers: { "Content-Type": "application/json" },
+  });
+  if(response.ok){
+    const VotedPost = await response.json();
+    dispatch(MinusVoteOnePost(VotedPost))
   }
 }
 
@@ -179,15 +189,15 @@ const PostReducer = (state = initialState, action) => {
                 else return { ...post }
             })
         }
-    // case MINUS_VOTE_POST:
-    //     return {
-    //         ...state,
-    //         posts: state.posts.map(post => {
-    //             if (action.payload === post.id)
-    //                 return { ...post, votes: --post.votes }
-    //             else return { ...post }
-    //         })
-    //     }
+    case MINUS_VOTE_POST:
+        return {
+            ...state,
+            posts: state.posts.map(post => {
+                if (action.payload === post.id)
+                    return { ...post, votes: --post.votes }
+                else return { ...post }
+            })
+        }
     // case PLUS_VOTE_ONE_POST:
     //     return {
     //         ...state, post: { ...state.post, votes: ++state.post.votes }

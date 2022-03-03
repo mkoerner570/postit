@@ -109,3 +109,10 @@ def up_a_post(id):
     db.session.commit()
     return post.to_dict()
 
+@post_routes.route('/postminus/<int:id>', methods=["PUT"])
+@login_required
+def down_a_post(id):
+    post = Posts.query.get(id)
+    post.votes -= 1
+    db.session.commit()
+    return post.to_dict()
