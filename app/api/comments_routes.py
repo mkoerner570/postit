@@ -65,3 +65,20 @@ def edit_comment(id):
         return comment.to_dict()
     else:
         return form.errors
+
+
+@post_routes.route('/commentplus/<int:id>', methods=["PUT"])
+@login_required
+def up_a_comment(id):
+    comment = Comments.query.get(id)
+    comment.votes += 1
+    db.session.commit()
+    return comment.to_dict()
+
+@post_routes.route('/commentminus/<int:id>', methods=["PUT"])
+@login_required
+def down_a_comment(id):
+    comment = Comments.query.get(id)
+    comment.votes -= 1
+    db.session.commit()
+    return comment.to_dict()
