@@ -26,4 +26,4 @@ class EditPostForm(FlaskForm):
     submit=SubmitField("Submit")
 
 class VotePostForm(FlaskForm):
-    votes=IntegerField("Votes")
+    votes=IntegerField("Vote")

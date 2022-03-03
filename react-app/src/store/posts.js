@@ -132,7 +132,7 @@ export const MinusVoteOnePost = (id) => {
 }
 
 export const PlusPost = (id) => async (dispatch) => {
-  console.log("the id",id)
+  console.log(typeof id )
   const response = await csrfFetch(`/api/postplus/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
