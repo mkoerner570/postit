@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import CommentForm from "./commentform";
-import { PlusVoteOnePost, DeleteAPost, GetAllPosts } from "../store/posts";
+import { PlusVoteOnePost, DeleteAPost, GetAllPosts, PlusPost, MinusPost } from "../store/posts";
 import {GetOnePost} from "../store/single"
-import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
+// import {PlusPostHandler, MinusPostHandler } from "../utils/utilities"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ClearPost } from "../store/search";
@@ -34,6 +34,21 @@ function GetPost(){
 
     if(!posts){
         return null
+    }
+
+    const PlusPostHandler = (post_id,sessionUser) => {
+        if (sessionUser) {
+            dispatch(PlusPost(post_id))}
+        else
+            history.push(`/login`)
+    }
+
+    const MinusPostHandler = (post_id,sessionUser) => {
+        if (sessionUser) {
+            dispatch(MinusPost(post_id))
+        }
+        else
+            history.push(`/login`)
     }
 
 
@@ -77,12 +92,13 @@ function GetPost(){
             <div className="details">
                 <div className="Post-V">
                     <div className="votes">
-                        <div className="plusOne" onClick={() => {PlusPostHandler(Id)}}>
-                            <i class="fa fa-angle-up"></i>
-                        </div>
-                        <div className="minusOne" onClick={() => {MinusPostHandler(Id)}}>
-                            <i class="fa fa-angle-down"></i>
-                        </div>
+                        <button className="plusOne" onClick={() => {PlusPostHandler(Id)}}>
+                            <i class="fa fa-angle-up">Up</i>
+                        </button>
+                        {posts?.votes}
+                        <button className="minusOne" onClick={() => {MinusPostHandler(Id)}}>
+                            <i class="fa fa-angle-down">Down</i>
+                        </button>
                     </div>
 
                 </div>
