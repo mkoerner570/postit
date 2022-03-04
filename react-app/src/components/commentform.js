@@ -22,8 +22,9 @@ function CommentForm({post_id}) {
     let id = parseInt(postId.id)
 
     const PlusCommentHandler = (id,user) => {
+        console.log("the id on the form", id)
         if (user) {
-            dispatch(PlusComment(post_id))}
+            dispatch(PlusComment(id))}
         else
             history.push(`/login`)
 
@@ -131,11 +132,11 @@ function CommentForm({post_id}) {
                             // index++
                              <div className="comments">
                                 <div>
-                                    <button className="plusOne"onClick={() => {PlusCommentHandler(postId,sessionUser)}}>
+                                    <button className="plusOne"onClick={() => {PlusCommentHandler(comment.id,sessionUser)}}>
                                         <i class="fa fa-angle-up">up</i>
                                     </button>
                                       <div className="comment-info">Votes: {comment.votes}</div>
-                                    <button className="minusOne"onClick={() => {MinusCommentHandler(postId,sessionUser)}}>
+                                    <button className="minusOne"onClick={() => {MinusCommentHandler(comment.id,sessionUser)}}>
                                         <i class="fa fa-angle-down">down</i>
                                     </button>
                                 </div>

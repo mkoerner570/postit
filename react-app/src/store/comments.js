@@ -142,22 +142,22 @@ const CommentReducer = (state = initialState, action) => {
       newState = Object.assign({},state)
       newState[action.comment.id] = action.comment
       return newState
-    case PLUS_COMMENT:
-        return {
-              ...state, comments: state.comments.map(comment => {
-                  if (action.payload === comment.id)
-                      return { ...comment, votes: ++comment.votes }
-                  else return { ...comment }
-              })
-          }
-    case MINUS_COMMENT:
-      return {
-              ...state, comments: state.comments.map(comment => {
-                  if (action.payload === comment.id)
-                      return { ...comment, votes: --comment.votes }
-                  else return { ...comment }
-              })
-          }
+    // case PLUS_COMMENT:
+    //     return {
+    //           ...state, comments: state.comments.map(comment => {
+    //               if (action.payload === comment.id)
+    //                   return { ...comment, votes: ++comment.votes }
+    //               else return { ...comment }
+    //           })
+    //       }
+    // case MINUS_COMMENT:
+    //   return {
+    //           ...state, comments: state.comments.map(comment => {
+    //               if (action.payload === comment.id)
+    //                   return { ...comment, votes: --comment.votes }
+    //               else return { ...comment }
+    //           })
+    //       }
     default:
       return state;
   }
