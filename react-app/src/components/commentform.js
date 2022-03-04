@@ -21,21 +21,17 @@ function CommentForm({post_id}) {
     const postComments = Object.values(comments)
     let id = parseInt(postId.id)
 
-    const PlusCommentHandler = (id,sessionUser) => {
-        const dispatch = useDispatch()
-        const history = useHistory()
-        if (sessionUser) {
+    const PlusCommentHandler = (id,user) => {
+        if (user) {
             dispatch(PlusComment(post_id))}
         else
             history.push(`/login`)
 
     }
 
-    const MinusCommentHandler = (id,sessionUser) => {
-        const dispatch = useDispatch()
-        const history = useHistory()
-        if (sessionUser) {
-            dispatch(MinusComment(post_id))
+    const MinusCommentHandler = (id,user) => {
+        if (user) {
+            dispatch(MinusComment(id))
         }
         else
             history.push(`/login`)
@@ -103,32 +99,6 @@ function CommentForm({post_id}) {
     if(!sessionUser){
         history.push('/login')
     }
-    // else {
-    // if (sessionUser.id === AllComments?.user_id) {
-    //   userCheck =
-    // <div>
-    //     <button
-    //     id="splashlinkbuttons"
-    //     onClick={(e) => {
-    //         e.preventDefault()
-    //         handleDelete()
-    //     }}
-    //     >
-    //         Delete comment
-    //     </button>
-    //     <button className="comment-edit" onClick={() =>
-    //         showForm === false ? setShowForm(true) : setShowForm(false)
-    //         }>
-    //         Edit
-    //     </button>
-    //     {showForm && ( <EditForm id={id}/>)}
-    // </div>
-    // }
-    // }
-    // let otherCheck = false;
-    // if (sessionUser.id === comments?.user_id) {
-    //   otherCheck = true
-    // }
 
     if(postComments){
     return (
@@ -160,14 +130,15 @@ function CommentForm({post_id}) {
                             // let index = 0
                             // index++
                              <div className="comments">
-                                {/* <div>
-                                    <div className="plusOne"onClick={() => {PlusCommentHandler(postId)}}>
+                                <div>
+                                    <button className="plusOne"onClick={() => {PlusCommentHandler(postId,sessionUser)}}>
                                         <i class="fa fa-angle-up">up</i>
-                                    </div>
-                                    <div className="minusOne"onClick={() => {MinusCommentHandler(postId)}}>
+                                    </button>
+                                      <div className="comment-info">Votes: {comment.votes}</div>
+                                    <button className="minusOne"onClick={() => {MinusCommentHandler(postId,sessionUser)}}>
                                         <i class="fa fa-angle-down">down</i>
-                                    </div>
-                                </div> */}
+                                    </button>
+                                </div>
 
                                 <div>
                                     <div>{comment.content}</div>

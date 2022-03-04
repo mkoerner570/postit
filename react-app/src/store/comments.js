@@ -100,6 +100,7 @@ export const DeleteAComment = (id) => async (dispatch) => {
 };
 
 export const PlusComment = (id) => async (dispatch) => {
+  console.log("the id,", id)
   const response = await csrfFetch(`/api/commentplus/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
