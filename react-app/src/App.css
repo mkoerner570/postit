@@ -405,3 +405,21 @@ li{
     display: flex;
     flex-direction: column;
 }
+
+.plusOne{
+    height: 45px;
+    color: rgb(255, 213, 0);
+    background-color: #ffffff00;
+    border-color: rgba(0, 0, 0, 0);
+}
+.minusOne{
+    height: 45px;
+    color: rgb(255, 213, 0);
+    background-color: #ffffff00;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.the-votes{
+    padding-left: 10px;
+    padding-top: 5px;
+}

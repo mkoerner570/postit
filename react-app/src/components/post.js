@@ -93,11 +93,11 @@ function GetPost(){
                 <div className="Post-V">
                     <div className="votes">
                         <button className="plusOne" onClick={() => {PlusPostHandler(Id)}}>
-                            <i class="fa fa-angle-up">Up</i>
+                            <h5 class="arrow up">{String.fromCharCode(11014)}</h5>
                         </button>
-                        {posts?.votes}
+                            <p className="the-votes">{posts?.votes}</p>
                         <button className="minusOne" onClick={() => {MinusPostHandler(Id)}}>
-                            <i class="fa fa-angle-down">Down</i>
+                            <h5 class="arrow down">{String.fromCharCode(11015)}</h5>
                         </button>
                     </div>
 
