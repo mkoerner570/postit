@@ -135,7 +135,7 @@ function CommentForm({post_id}) {
                                     <button className="plusOne"onClick={() => {PlusCommentHandler(comment.id,sessionUser)}}>
                                         <i class="fa fa-angle-up">up</i>
                                     </button>
-                                      <div className="comment-info">Votes: {comment.votes}</div>
+                                      <div className="comment-info">{comment.votes}</div>
                                     <button className="minusOne"onClick={() => {MinusCommentHandler(comment.id,sessionUser)}}>
                                         <i class="fa fa-angle-down">down</i>
                                     </button>

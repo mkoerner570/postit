@@ -102,10 +102,10 @@ function GetPost(){
                     </div>
 
                 </div>
-                    <div className="post-title">{posts?.title} </div>
-                </div>
+            </div>
 
-                <div>
+                <div className="Post">
+                    <div className="post-title">{posts?.title} </div>
                     <img className="post-body" alt="" src={posts.body}/>
                     <div className="post-info">
                         {/* Posted By: {posts.user_id} on subreadit:

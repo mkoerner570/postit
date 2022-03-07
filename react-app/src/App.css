@@ -246,7 +246,7 @@ li{
     margin-left: 75px;
     padding : 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .comment-edit{
@@ -283,7 +283,7 @@ li{
     color:#ffffff;
     width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin:5px;
     margin-top: 10px;
 }
@@ -399,4 +399,9 @@ li{
     border: solid 1px;
     width:209px;
     height: 80px;
+}
+
+.votes{
+    display: flex;
+    flex-direction: column;
 }
