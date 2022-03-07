@@ -37,15 +37,20 @@ function GetPost(){
     }
 
     const PlusPostHandler = (post_id,sessionUser) => {
+        window.location.reload(false)
         if (sessionUser) {
-            dispatch(PlusPost(post_id))}
+            dispatch(PlusPost(post_id))
+            window.location.reload(true)
+        }
         else
             history.push(`/login`)
     }
 
     const MinusPostHandler = (post_id,sessionUser) => {
+        window.location.reload(false)
         if (sessionUser) {
             dispatch(MinusPost(post_id))
+            window.location.reload(true)
         }
         else
             history.push(`/login`)

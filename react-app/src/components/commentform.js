@@ -22,17 +22,21 @@ function CommentForm({post_id}) {
     let id = parseInt(postId.id)
 
     const PlusCommentHandler = (id,user) => {
-        console.log("the id on the form", id)
+        window.location.reload(false)
         if (user) {
-            dispatch(PlusComment(id))}
+            dispatch(PlusComment(id))
+            window.location.reload(true)
+        }
         else
             history.push(`/login`)
 
     }
 
     const MinusCommentHandler = (id,user) => {
+        window.location.reload(false)
         if (user) {
             dispatch(MinusComment(id))
+            window.location.reload(true)
         }
         else
             history.push(`/login`)
