@@ -27,8 +27,9 @@ function CommentForm({post_id}) {
             dispatch(PlusComment(id))
             window.location.reload(true)
         }
-        else
+        else{
             history.push(`/login`)
+        }
 
     }
 
@@ -38,8 +39,9 @@ function CommentForm({post_id}) {
             dispatch(MinusComment(id))
             window.location.reload(true)
         }
-        else
+        else{
             history.push(`/login`)
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -55,7 +57,7 @@ function CommentForm({post_id}) {
     },[dispatch])
 
     const handleDelete = async (e)=> {
-        // e.preventDefault();
+        e.preventDefault();
 
         await dispatch(DeleteAComment(id))
         history.push(`/post/${id}`)
@@ -71,7 +73,7 @@ function CommentForm({post_id}) {
     function userCheck(userId,commentID,id,content){
         if(sessionUser.id === userId){
             const handleDelete = async (e)=> {
-                // e.preventDefault();
+                e.preventDefault();
 
                 await dispatch(DeleteAComment(commentID))
                 history.push(`/post/${id}`)

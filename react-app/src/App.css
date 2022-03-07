@@ -136,7 +136,7 @@ li{
     /* padding : 5px; */
     /* font-size: 2rem; 20px */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* flex-direction: column; */
     justify-content: center;
     align-items: center;

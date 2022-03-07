@@ -42,8 +42,9 @@ function GetPost(){
             dispatch(PlusPost(post_id))
             window.location.reload(true)
         }
-        else
+        else{
             history.push(`/login`)
+        }
     }
 
     const MinusPostHandler = (post_id,sessionUser) => {
@@ -52,8 +53,9 @@ function GetPost(){
             dispatch(MinusPost(post_id))
             window.location.reload(true)
         }
-        else
+        else{
             history.push(`/login`)
+        }
     }
 
 
@@ -62,6 +64,9 @@ function GetPost(){
         if(posts.user_id === sessionUser.id){
             await dispatch(DeleteAPost(Id.id))
             history.push(`/`)
+        }
+        else{
+            history.push(`/login`)
         }
         // await dispatch(DeleteAPost(Id.id))
         // history.push(`/`)
