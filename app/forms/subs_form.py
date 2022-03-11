@@ -5,6 +5,8 @@ from app.models import User
 
 class SubsForm(FlaskForm):
     title=StringField("Title")
+    submit=SubmitField("Submit")
 
 class EditSubsForm(FlaskForm):
-    
+    title=StringField("Title")
+    submit=SubmitField("Submit")
